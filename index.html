@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitizenConnect - Civic Issue Reporting</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-city"></i>
+                    <span>CitizenConnect</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">View Map</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Log In</button>
+                    <button class="btn btn-primary">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Report Local Issues, See Real Change</h1>
+            <p>CitizenConnect empowers communities to report civic issues directly to local authorities. Together we can make our neighborhoods better places to live.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary btn-large">Report an Issue</button>
+                <button class="btn btn-outline btn-large">View Issues Map</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>How CitizenConnect Works</h2>
+                <p>Our platform makes it easy to report issues and track their resolution</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Pinpoint Location</h3>
+                    <p>Automatically tag your location or drag a pin on the map to show exactly where the issue is.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Add Photos</h3>
+                    <p>Upload photos to help authorities understand the problem better and prioritize issues.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Track Progress</h3>
+                    <p>Follow your reported issues through each stage of the resolution process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Report an Issue</h2>
+                <p>Reporting a civic issue is simple and takes just a few minutes</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Create your free account in less than a minute</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Locate</h3>
+                    <p>Find the issue location on our interactive map</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Describe</h3>
+                    <p>Add details and photos of the problem</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Submit</h3>
+                    <p>Send your report to the relevant authorities</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Report Section -->
+    <section class="report-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Report an Issue</h2>
+                <p>Help your community by reporting problems that need attention</p>
+            </div>
+            <div class="report-form">
+                <form>
+                    <div class="form-group">
+                        <label for="issue-type">Issue Type</label>
+                        <select class="form-control" id="issue-type">
+                            <option value="">Select issue type</option>
+                            <option value="pothole">Pothole</option>
+                            <option value="streetlight">Malfunctioning Streetlight</option>
+                            <option value="trash">Overflowing Trash Bin</option>
+                            <option value="graffiti">Graffiti</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" placeholder="Please describe the issue in detail"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Upload Photo</label>
+                        <input type="file" class="form-control" id="photo">
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter address or use current location">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Report</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Issues Map</h2>
+                <p>See reported issues in your neighborhood</p>
+            </div>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <p>Interactive map showing reported issues</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Preview -->
+    <section class="dashboard-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Administrative Dashboard</h2>
+                <p>Municipal staff can manage and prioritize reported issues</p>
+            </div>
+            <div class="dashboard-tabs">
+                <div class="tab active">All Issues</div>
+                <div class="tab">Reported</div>
+                <div class="tab">In Progress</div>
+                <div class="tab">Resolved</div>
+            </div>
+            <div class="issues-grid">
+                <div class="issue-card">
+                    <div class="issue-image">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="issue-content">
+                        <span class="issue-status status-reported">Reported</span>
+                        <h3>Pothole on Main St</h3>
+                        <p>Large pothole near the intersection with Oak Avenue</p>
+                        <p><small>Reported 2 days ago</small></p>
+                    </div>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-image">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="issue-content">
+                        <span class="issue-status status-in-progress">In Progress</span>
+                        <h3>Streetlight Out</h3>
+                        <p>Light pole #452 not working on Park Street</p>
+                        <p><small>Reported 5 days ago</small></p>
+                    </div>
+                </div>
+                <div class="issue-card">
+                    <div class="issue-image">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="issue-content">
+                        <span class="issue-status status-resolved">Resolved</span>
+                        <h3>Overflowing Bin</h3>
+                        <p>Trash bin overflowing at City Park entrance</p>
+                        <p><small>Resolved yesterday</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CitizenConnect</h3>
+                    <p>Empowering communities to work with local governments for better neighborhoods.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Report Issue</a></li>
+                        <li><a href="#">Issues Map</a></li>
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> support@citizenconnect.org</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Civic Center, City Hall</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 CitizenConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple tab functionality for dashboard preview
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Here you would typically show the corresponding content
+                    // For this demo, we're just toggling the tab style
+                });
+            });
+        });
+    </script>
+</body>
+</html>
