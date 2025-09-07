@@ -3,1775 +3,792 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samadhan Setu - Report Local Issues</title>
+    <title>Login | Samadhan Setu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <style>
-        :root {
-            --primary: #3498db;
-            --secondary: #2ecc71;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-            --grey: #7f8c8d;
-            --bg-color: #f5f7fa;
-            --text-color: #333;
-            --card-bg: white;
-            --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
-            --footer-bg: #2c3e50;
-            --section-bg: white;
-            --section-alt-bg: #f8f9fa;
-        }
-
-        .dark-mode {
-            --bg-color: #1a1a1a;
-            --text-color: #f0f0f0;
-            --card-bg: #2d2d2d;
-            --header-bg: linear-gradient(135deg, #2c3e50, #1a1a1a);
-            --footer-bg: #1a1a1a;
-            --section-bg: #2d2d2d;
-            --section-alt-bg: #252525;
-            --grey: #aaa;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: background-color 0.3s, color 0.3s;
         }
-        
+
+        :root {
+            --primary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --container-bg: #fff;
+            --border-color: #e0e0e0;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --input-focus: #4a6cf7;
+        }
+
+        .dark-mode {
+            --primary-color: #3498db;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --border-color: #444;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --input-focus: #6c87ff;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
         }
-        
+
         .container {
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
             width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
+            max-width: 420px;
+            padding: 35px;
+            transition: background-color 0.3s;
         }
-        
-        header {
-            background: var(--header-bg);
-            color: white;
-            padding: 0.5rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
         }
-        
-        .header-content {
+
+        .logo h1 {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+
+        .logo p {
+            color: #777;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .input-with-icon input {
+            padding-left: 45px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border 0.3s;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+        }
+
+        .form-control:focus {
+            border-color: var(--input-focus);
+            outline: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+        }
+
+        .options {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: nowrap;
-            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 14px;
         }
-        
-        .logo {
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2982bd;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .separator:not(:empty)::before {
+            margin-right: .75em;
+        }
+
+        .separator:not(:empty)::after {
+            margin-left: .75em;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dark-mode .social-btn:hover {
+            background-color: #2a2a2a;
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .signup-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* Enhanced Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .language-btn {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-        
-        .logo i {
-            font-size: 1.5rem;
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 0.8rem;
-            align-items: center;
-            flex-wrap: nowrap;
-            margin: 0 5px;
-        }
-        
-        nav a {
-            color: white;
-            text-decoration: none;
+            padding: 10px 15px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            font-size: 14px;
             font-weight: 500;
-            transition: opacity 0.3s;
-            font-size: 0.9rem;
-            white-space: nowrap;
         }
-        
-        nav a:hover {
-            opacity: 0.8;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 0.6rem;
-            align-items: center;
-            flex-wrap: nowrap;
-            flex-shrink: 0;
-        }
-        
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .auth-buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-shrink: 0;
-        }
-        
-        .header-report-btn {
-            padding: 0.4rem 0.9rem;
-            border-radius: 4px;
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            white-space: nowrap;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        
-        .header-report-btn:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-        }
-        
-        .language-selector {
-            position: relative;
-            flex-shrink: 0;
-        }
-        
-        .language-btn {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s;
-            font-weight: 500;
-            white-space: nowrap;
-            font-size: 0.9rem;
-        }
-        
+
         .language-btn:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background-color: rgba(52, 152, 219, 0.1);
         }
-        
-        .indian-flag {
-            width: 20px;
-            height: 14px;
-            background: linear-gradient(to bottom, #ff9933 33%, white 33%, white 66%, #138808 66%);
-            position: relative;
-            border: 1px solid #ccc;
+
+        .language-btn i {
+            font-size: 18px;
+            transition: transform 0.3s;
         }
-        
-        .indian-flag::after {
-            content: "•";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #000080;
-            font-size: 6px;
+
+        .language-btn.active i {
+            transform: rotate(180deg);
         }
-        
+
         .language-dropdown {
             position: absolute;
             top: 100%;
-            right: 0;
-            background: var(--card-bg);
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            width: 170px;
-            display: none;
-            z-index: 101;
-            margin-top: 0.4rem;
-            overflow: hidden;
+            left: 0;
+            width: 200px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 5px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 100;
         }
-        
-        .language-dropdown.show {
-            display: block;
+
+        .language-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
-        
+
         .language-option {
-            padding: 0.7rem 0.9rem;
-            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            transition: background 0.3s;
-            color: var(--text-color);
-            font-weight: 500;
-            font-size: 0.9rem;
+            gap: 12px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
-        
+
+        .language-option:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .language-option:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
         .language-option:hover {
-            background: var(--section-alt-bg);
+            background-color: rgba(52, 152, 219, 0.1);
         }
-        
+
         .language-option.active {
-            background: var(--section-alt-bg);
+            background-color: rgba(52, 152, 219, 0.15);
             font-weight: 600;
-            color: var(--primary);
         }
-        
-        .btn {
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .btn-outline:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: white;
-            transition: all 0.4s ease;
-            z-index: -1;
-        }
-        
-        .btn-outline:hover:before {
-            left: 0;
-        }
-        
-        .btn-outline:hover {
-            color: var(--primary);
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .btn-primary:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background-color: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-primary:hover:after {
-            height: 100%;
-        }
-        
-        .btn-secondary {
-            background-color: var(--secondary);
-            color: white;
-        }
-        
-        .btn-danger {
-            background-color: var(--danger);
-            color: white;
-        }
-        
-        .hero {
-            padding: 3.5rem 0;
-            text-align: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&h=600&q=60') center/cover no-repeat;
-            color: white;
-            position: relative;
-            margin-bottom: 0;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 2.7rem;
-            margin-bottom: 1.2rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .report-btn-large {
-            padding: 0.9rem 2.2rem;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0 auto;
-        }
-        
-        .report-btn-large:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .curved-divider {
-            height: 90px;
-            background: linear-gradient(to bottom right, var(--primary) 49%, var(--bg-color) 50%);
-            margin-bottom: 3.5rem;
-        }
-        
-        .features {
-            padding: 4rem 0;
-            background-color: var(--section-bg);
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--text-color);
-            font-size: 2.2rem;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--grey);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.2rem;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .workflow-section {
-            padding: 4rem 0;
-            background-color: var(--section-alt-bg);
-            position: relative;
-        }
-        
-        .workflow-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top right, var(--section-alt-bg) 49%, var(--section-bg) 50%);
-        }
-        
-        .workflow-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .workflow-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            text-align: center;
-        }
-        
-        .workflow-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .workflow-card-header {
-            background: var(--primary);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        
-        .step-icon {
-            font-size: 2.5rem;
-            color: white;
-        }
-        
-        .workflow-card-body {
-            padding: 1.5rem;
-        }
-        
-        .workflow-card-body ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-        
-        .workflow-card-body li {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-        
-        .workflow-card-body li i {
-            color: var(--primary);
-            margin-top: 0.2rem;
-        }
-        
-        .workflow-card-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--section-alt-bg);
-            text-align: center;
-        }
-        
-        .reporting-steps {
-            padding: 4rem 0;
-            background: linear-gradient(to bottom, var(--section-alt-bg), var(--section-bg));
-        }
-        
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-        
-        .step-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .step-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            color: white;
+
+        .language-flag {
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        
-        .step-icon-small {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .step-card h3 {
-            margin-bottom: 1rem;
-            color: var(--text-color);
-        }
-        
-        .step-card p {
-            color: var(--grey);
-        }
-        
-        .map-section {
-            padding: 4rem 0;
-            background-color: var(--section-bg);
-            position: relative;
-        }
-        
-        .map-section::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top right, var(--section-bg) 49%, var(--bg-color) 50%);
-        }
-        
-        #map {
-            height: 500px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .map-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-        
-        .location-badge {
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .reports-container {
-            padding: 4rem 0;
-            background-color: var(--bg-color);
-            position: relative;
-        }
-        
-        .reports-container::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top right, var(--bg-color) 49%, var(--section-bg) 50%);
-        }
-        
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-select {
-            padding: 0.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--grey);
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-        
-        .reports-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .report-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .report-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .report-image {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .report-image img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
         }
-        
-        .report-card:hover .report-image img {
-            transform: scale(1.05);
+
+        .language-name {
+            flex: 1;
+            font-size: 14px;
         }
-        
-        .report-content {
-            padding: 1.5rem;
+
+        .language-check {
+            color: var(--primary-color);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s;
         }
-        
-        .report-status {
-            display: inline-block;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+
+        .language-option.active .language-check {
+            opacity: 1;
         }
-        
-        .status-new {
-            background-color: #ffeaa7;
-            color: #d35400;
-        }
-        
-        .status-progress {
-            background-color: #81ecec;
-            color: #00cec9;
-        }
-        
-        .status-resolved {
-            background-color: #55efc4;
-            color: #00b894;
-        }
-        
-        .report-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-        
-        .report-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--grey);
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            width: 90%;
-            max-width: 600px;
-            padding: 2rem;
-            position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-            color: var(--text-color);
-        }
-        
-        .close-modal {
+
+        /* Input type toggle */
+        .input-type-toggle {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
-            color: var(--grey);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--grey);
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 500;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 4px 8px;
             border-radius: 4px;
-            font-size: 1rem;
-            background-color: var(--section-bg);
-            color: var(--text-color);
+            transition: background-color 0.3s;
         }
-        
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .other-issue-type {
-            display: none;
-            margin-top: 0.5rem;
-        }
-        
-        .voice-note-container {
-            margin-top: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .voice-record-btn {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--section-alt-bg);
-            border: 1px solid var(--grey);
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s;
-            color: var(--text-color);
-        }
-        
-        .voice-record-btn:hover {
-            background: var(--grey);
-        }
-        
-        .voice-record-btn.recording {
-            background: var(--danger);
-            color: white;
-        }
-        
-        .voice-playback {
-            display: none;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .voice-timer {
-            font-size: 0.9rem;
-            color: var(--grey);
-        }
-        
-        footer {
-            background-color: var(--footer-bg);
-            color: white;
-            padding: 3rem 0 2rem;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-links a {
-            color: #ddd;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .social-icons a {
-            color: white;
-            font-size: 1.5rem;
-        }
-        
-        .copyright {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        @media (max-width: 1100px) {
-            nav ul {
-                gap: 0.6rem;
-            }
-            
-            nav a {
-                font-size: 0.85rem;
-            }
-            
-            .header-report-btn {
-                padding: 0.35rem 0.8rem;
-                font-size: 0.85rem;
-            }
-            
-            .language-btn {
-                padding: 0.35rem 0.7rem;
-                font-size: 0.85rem;
-            }
-            
-            .btn {
-                padding: 0.35rem 0.7rem;
-                font-size: 0.85rem;
-            }
-        }
-        
-        @media (max-width: 992px) {
-            .header-content {
-                flex-direction: column;
-                gap: 0.8rem;
-            }
-            
-            nav ul {
-                justify-content: center;
-                gap: 0.8rem;
-            }
-            
-            .header-actions {
-                justify-content: center;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .header-content {
-                gap: 0.8rem;
-            }
 
-            nav ul {
-                gap: 0.7rem;
-            }
-
-            .header-actions {
-                gap: 0.6rem;
-            }
-
-            .auth-buttons {
-                gap: 0.4rem;
-            }
-            
-            .features-grid, .reports-grid, .workflow-cards, .steps-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .map-title {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-            
-            .filters {
-                flex-direction: column;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-            }
+        .input-type-toggle:hover {
+            background: rgba(52, 152, 219, 0.2);
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 1.1rem;
+            .container {
+                padding: 25px;
             }
-
-            nav ul {
-                gap: 0.5rem;
+            
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
-
-            nav a {
-                font-size: 0.8rem;
-            }
-
-            .language-btn, .header-report-btn, .btn {
-                padding: 0.3rem 0.6rem;
-                font-size: 0.8rem;
-            }
-
+            
             .theme-toggle {
-                width: 32px;
-                height: 32px;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
             }
             
-            .hero h1 {
-                font-size: 1.8rem;
+            .language-selector {
+                top: 10px;
+                left: 10px;
             }
             
-            .header-content {
-                gap: 0.6rem;
+            .language-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .language-dropdown {
+                width: 180px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-city"></i>
-                    <span class="translate" data-key="title">Samadhan Setu</span>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#" class="translate" data-key="home">HOME</a></li>
-                        <li><a href="#how-it-works" class="translate" data-key="reports">REPORTS</a></li>
-                        <li><a href="#map" class="translate" data-key="viewMap">VIEW MAP</a></li>
-                        <li><a href="#" class="translate" data-key="dashboard">DASHBOARD</a></li>
-                        <li><a href="#" class="translate" data-key="cityOfficials">FOR CITY OFFICIAL</a></li>
-                    </ul>
-                </nav>
-                <div class="header-actions">
-                    <div class="language-selector">
-                        <button class="language-btn">
-                            <div class="indian-flag"></div> <span class="translate" data-key="language">English</span>
-                        </button>
-                        <div class="language-dropdown" id="languageDropdown">
-                            <div class="language-option active" data-lang="en">
-                                <i class="fas fa-check"></i> English
-                            </div>
-                            <div class="language-option" data-lang="hi">
-                                <span>हिन्दी (Hindi)</span>
-                            </div>
-                            <div class="language-option" data-lang="ta">
-                                <span>தமிழ் (Tamil)</span>
-                            </div>
-                            <div class="language-option" data-lang="te">
-                                <span>తెలుగు (Telugu)</span>
-                            </div>
-                            <div class="language-option" data-lang="ml">
-                                <span>മലയാളം (Malayalam)</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="header-report-btn">
-                        <i class="fas fa-bullhorn"></i> <span class="translate" data-key="reportCivicIssue">Report Civic Issue</span>
-                    </button>
-                    <div class="auth-buttons">
-                        <button class="btn btn-outline translate" data-key="login">Login</button>
-                        <button class="btn btn-primary translate" data-key="signUp">Sign Up</button>
-                    </div>
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                </div>
-            </div>
+    <!-- Enhanced Language Selector -->
+    <div class="language-selector" id="languageSelector">
+        <div class="language-btn" id="languageBtn">
+            <i class="fas fa-globe"></i>
+            <span id="currentLanguage">English</span>
+            <i class="fas fa-chevron-down"></i>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="translate" data-key="heroTitle">Your Voice For A Better Change </h1>
-                <p class="translate" data-key="heroText">See an issue? Report local issues like potholes, broken streetlights, and graffiti directly to your local government.Track its progress fron submission to resolution. Let's build a smarter city together.</p>
-                <button class="report-btn-large" id="reportIssueBtn">
-                    <i class="fas fa-plus-circle"></i> <span class="translate" data-key="reportCivicIssueHere">Report Civic Issues Here</span>
-                </button>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" data-lang="en">
+                <img src="https://flagcdn.com/w40/gb.png" srcset="https://flagcdn.com/w80/gb.png 2x" width="40" alt="English" class="language-flag">
+                <span class="language-name">English</span>
+                <i class="fas fa-check language-check"></i>
             </div>
-        </div>
-    </section>
-
-    <div class="curved-divider"></div>
-
-    <!-- How the System Works -->
-    <section class="workflow-section" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title translate" data-key="howItWorks">How Samadhan Setu Works</h2>
-            <p class="section-subtitle translate" data-key="howItWorksSubtitle">Our simple three-step process makes reporting civic issues quick and effective</p>
-            <div class="workflow-cards">
-                <div class="workflow-card">
-                    <div class="workflow-card-header translate" data-key="step1">
-                        <div class="step-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        1. See & Snap
-                    </div>
-                    <div class="workflow-card-body">
-                        <p class="translate" data-key="step1Desc">Spot an issue in your community that needs attention from local authorities.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step1Point1">Take a clear photo of the issue</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step1Point2">Note the exact location</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step1Point3">Provide a brief description</span></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="workflow-card">
-                    <div class="workflow-card-header translate" data-key="step2">
-                        <div class="step-icon">
-                            <i class="fas fa-route"></i>
-                        </div>
-                        2. We Route
-                    </div>
-                    <div class="workflow-card-body">
-                        <p class="translate" data-key="step2Desc">Our system automatically directs your report to the appropriate department.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step2Point1">AI-powered categorization</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step2Point2">Geographic routing to local teams</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step2Point3">Priority assignment based on severity</span></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="workflow-card">
-                    <div class="workflow-card-header translate" data-key="step3">
-                        <div class="step-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        3. You Track
-                    </div>
-                    <div class="workflow-card-body">
-                        <p class="translate" data-key="step3Desc">Follow your report's progress from submission to resolution.</p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step3Point1">Real-time status updates</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step3Point2">Estimated resolution times</span></li>
-                            <li><i class="fas fa-check-circle"></i> <span class="translate" data-key="step3Point3">Notifications when resolved</span></li>
-                        </ul>
-                    </div>
-                    <div class="workflow-card-footer">
-                        <button class="btn btn-primary translate" data-key="trackReports">Track Your Reports</button>
-                    </div>
-                </div>
+            <div class="language-option" data-lang="hi">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Hindi" class="language-flag">
+                <span class="language-name">Hindi</span>
+                <i class="fas fa-check language-check"></i>
             </div>
-        </div>
-    </section>
-
-    <!-- How to Report Section -->
-    <section class="reporting-steps">
-        <div class="container">
-            <h2 class="section-title translate" data-key="howToReport">How to Report an Issue</h2>
-            <p class="section-subtitle translate" data-key="howToReportSubtitle">Follow these simple steps to report civic issues in your area</p>
-            <div class="steps-container">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <div class="step-icon-small">
-                        <i class="fas fa-user-plus"></i>
-                    </div>
-                    <h3 class="translate" data-key="reportStep1">Login / Sign Up</h3>
-                    <p class="translate" data-key="reportStep1Desc">Create an account or login to your existing Samadhan Setu account to get started.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <div class="step-icon-small">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <h3 class="translate" data-key="reportStep2">Locate Your Issue</h3>
-                    <p class="translate" data-key="reportStep2Desc">Find the exact location on our map or allow us to automatically detect your location.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <div class="step-icon-small">
-                        <i class="fas fa-edit"></i>
-                    </div>
-                    <h3 class="translate" data-key="reportStep3">Describe the Problem</h3>
-                    <p class="translate" data-key="reportStep3Desc">Provide details about the issue, add photos, and categorize it properly.</p>
-                </div>
-                <div class="step-card">
-                    <div class="step-number">4</div>
-                    <div class="step-icon-small">
-                        <i class="fas fa-paper-plane"></i>
-                    </div>
-                    <h3 class="translate" data-key="reportStep4">Submit Your Report</h3>
-                    <p class="translate" data-key="reportStep4Desc">Review and submit your report. You'll receive a tracking number for follow-up.</p>
-                </div>
+            <div class="language-option" data-lang="te">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Telugu" class="language-flag">
+                <span class="language-name">Telugu</span>
+                <i class="fas fa-check language-check"></i>
             </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <button class="report-btn-large" id="reportIssueBtn2">
-                    <i class="fas fa-plus-circle"></i> <span class="translate" data-key="reportIssueNow">Report an Issue Now</span>
-                </button>
+            <div class="language-option" data-lang="ta">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Tamil" class="language-flag">
+                <span class="language-name">Tamil</span>
+                <i class="fas fa-check language-check"></i>
             </div>
-        </div>
-    </section>
-
-    <!-- Map Section -->
-    <section class="map-section" id="map">
-        <div class="container">
-            <div class="map-title">
-                <h2 class="section-title translate" data-key="currentIssues">Current Issues in Bhopal</h2>
-                <div class="location-badge">
-                    <i class="fas fa-map-pin"></i> <span class="translate" data-key="bhopalLocation">Bhopal, Madhya Pradesh</span>
-                </div>
+            <div class="language-option" data-lang="ml">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Malayalam" class="language-flag">
+                <span class="language-name">Malayalam</span>
+                <i class="fas fa-check language-check"></i>
             </div>
-            <div id="map"></div>
-        </div>
-    </section>
-
-    <!-- Reports Section -->
-    <section class="reports-container" id="reports">
-        <div class="container">
-            <h2 class="section-title translate" data-key="recentIssues">Recently Reported Issues in Bhopal</h2>
-            <p class="section-subtitle translate" data-key="recentIssuesSubtitle">These are some of the recent issues reported by citizens in your area</p>
-            
-            <div class="filters">
-                <select class="filter-select">
-                    <option class="translate" data-key="allCategories">All Categories</option>
-                    <option class="translate" data-key="potholes">Potholes</option>
-                    <option class="translate" data-key="streetlights">Streetlights</option>
-                    <option class="translate" data-key="graffiti">Graffiti</option>
-                    <option class="translate" data-key="trash">Trash</option>
-                    <option class="translate" data-key="waterSupply">Water Supply</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option class="translate" data-key="allStatuses">All Statuses</option>
-                    <option class="translate" data-key="new">New</option>
-                    <option class="translate" data-key="inProgress">In Progress</option>
-                    <option class="translate" data-key="resolved">Resolved</option>
-                </select>
-                
-                <select class="filter-select">
-                    <option class="translate" data-key="sortNewest">Sort by Newest</option>
-                    <option class="translate" data-key="sortOldest">Sort by Oldest</option>
-                    <option class="translate" data-key="sortPriority">Sort by Priority</option>
-                </select>
-            </div>
-            
-            <div class="reports-grid">
-                <!-- Sample Report Cards -->
-                <div class="report-card">
-                    <div class="report-image">
-                        <img src="https://images.unsplash.com/photo-1542222123-01f495263a67?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=60" alt="Pothole report">
-                    </div>
-                    <div class="report-content">
-                        <span class="report-status status-new translate" data-key="new">New</span>
-                        <h3 class="report-title translate" data-key="potholeTitle">Large Pothole on Hoshangabad Road</h3>
-                        <p class="translate" data-key="potholeDesc">Deep pothole near Habibganj area, causing traffic issues during peak hours.</p>
-                        <div class="report-meta">
-                            <span><i class="fas fa-user"></i> <span class="translate" data-key="reporter1">Rajesh K.</span></span>
-                            <span><i class="fas fa-clock"></i> <span class="translate" data-key="time1">2 hours ago</span></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="report-card">
-                    <div class="report-image">
-                        <img src="https://images.unsplash.com/photo-1517400508447-f8dd5186e3f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=60" alt="Graffiti report">
-                    </div>
-                    <div class="report-content">
-                        <span class="report-status status-progress translate" data-key="inProgress">In Progress</span>
-                        <h3 class="report-title translate" data-key="graffitiTitle">Graffiti in TT Nagar Park</h3>
-                        <p class="translate" data-key="graffitiDesc">Extensive graffiti on walls and playground equipment in TT Nagar Park.</p>
-                        <div class="report-meta">
-                            <span><i class="fas fa-user"></i> <span class="translate" data-key="reporter2">Priya M.</span></span>
-                            <span><i class="fas fa-clock"></i> <span class="translate" data-key="time2">1 day ago</span></span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="report-card">
-                    <div class="report-image">
-                        <img src="https://images.unsplash.com/photo-1589656384667-54a6f4b5c7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=60" alt="Streetlight report">
-                    </div>
-                    <div class="report-content">
-                        <span class="report-status status-resolved translate" data-key="resolved">Resolved</span>
-                        <h3 class="report-title translate" data-key="streetlightTitle">Broken Streetlight in MP Nagar</h3>
-                        <p class="translate" data-key="streetlightDesc">Streetlight has been out for three days, making the area dark and unsafe at night.</p>
-                        <div class="report-meta">
-                            <span><i class="fas fa-user"></i> <span class="translate" data-key="reporter3">Amit S.</span></span>
-                            <span><i class="fas fa-clock"></i> <span class="translate" data-key="time3">5 days ago</span></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Report Modal -->
-    <div class="modal" id="reportModal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2 class="translate" data-key="reportNewIssue">Report a New Issue</h2>
-            <form id="reportForm">
-                <div class="form-group">
-                    <label for="issueType" class="translate" data-key="issueType">Issue Type</label>
-                    <select class="form-control" id="issueType" required>
-                        <option value="" class="translate" data-key="selectIssueType">Select an issue type</option>
-                        <option value="pothole" class="translate" data-key="potholeOption">Pothole</option>
-                        <option value="streetlight" class="translate" data-key="streetlightOption">Streetlight</option>
-                        <option value="graffiti" class="translate" data-key="graffitiOption">Graffiti</option>
-                        <option value="trash" class="translate" data-key="trashOption">Trash Accumulation</option>
-                        <option value="water" class="translate" data-key="waterOption">Water Supply Issue</option>
-                        <option value="other" class="translate" data-key="otherOption">Other</option>
-                    </select>
-                    <div class="other-issue-type" id="otherIssueType">
-                        <input type="text" class="form-control" placeholder="Please specify the issue type">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="issueLocation" class="translate" data-key="issueLocation">Location</label>
-                    <input type="text" class="form-control" id="issueLocation" placeholder="Enter address or drag the map marker" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="issueDescription" class="translate" data-key="issueDescription">Description</label>
-                    <textarea class="form-control" id="issueDescription" placeholder="Please describe the issue in detail" required></textarea>
-                    
-                    <div class="voice-note-container">
-                        <label class="translate" data-key="addVoiceNote">Add Voice Note (Optional)</label>
-                        <button type="button" class="voice-record-btn" id="voiceRecordBtn">
-                            <i class="fas fa-microphone"></i> <span class="translate" data-key="startRecording">Start Recording</span>
-                        </button>
-                        <div class="voice-playback" id="voicePlayback">
-                            <audio controls></audio>
-                            <span class="voice-timer">00:00</span>
-                            <button type="button" class="btn btn-danger" id="deleteRecording">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="issuePhoto" class="translate" data-key="uploadPhoto">Upload Photo</label>
-                    <input type="file" class="form-control" id="issuePhoto" accept="image/*">
-                </div>
-                
-                <button type="submit" class="btn btn-secondary" style="width: 100%; padding: 1rem;" data-key="submitReport">Submit Report</button>
-            </form>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="translate" data-key="title">Samadhan Setu</h3>
-                    <p class="translate" data-key="footerDesc">A platform for citizens to report local issues and for governments to efficiently manage them.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <h1 data-translate="app_name">Samadhan Setu</h1>
+            <p data-translate="sign_in_message">Sign in to access your account</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="emailOrPhone" data-translate="email_phone_label">Email or Phone Number</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-user" id="inputIcon"></i>
+                    <input type="text" id="emailOrPhone" class="form-control" placeholder="Enter your email or phone number" data-translate-placeholder="email_phone_placeholder">
+                    <span class="input-type-toggle" id="inputTypeToggle">Phone</span>
                 </div>
-                
-                <div class="footer-section">
-                    <h3 class="translate" data-key="quickLinks">Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" class="translate" data-key="home">Home</a></li>
-                        <li><a href="#how-it-works" class="translate" data-key="reports">Reports</a></li>
-                        <li><a href="#map" class="translate" data-key="viewMap">View Map</a></li>
-                        <li><a href="#" class="translate" data-key="dashboard">Dashboard</a></li>
-                        <li><a href="#" class="translate" data-key="cityOfficials">For City Officials</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 class="translate" data-key="contactInfo">Contact Info</h3>
-                    <ul class="footer-links">
-                        <li><i class="fas fa-map-marker-alt"></i> <span class="translate" data-key="footerAddress">123 Civic Center, Bhopal</span></li>
-                        <li><i class="fas fa-phone"></i> (0755) 123-4567</li>
-                        <li><i class="fas fa-envelope"></i> bhopal@samadhansetu.org</li>
-                    </ul>
-                </div>
+                <div class="error-message" id="emailError" data-translate="email_error">Please enter a valid email address</div>
+                <div class="error-message" id="phoneError" data-translate="phone_error">Please enter a valid phone number</div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Samadhan Setu. <span class="translate" data-key="rightsReserved">All rights reserved.</span></p>
+
+            <div class="form-group">
+                <label for="password" data-translate="password_label">Password</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" data-translate-placeholder="password_placeholder">
+                    <span class="toggle-password" id="togglePassword">
+                        <i class="far fa-eye"></i>
+                    </span>
+                </div>
+                <div class="error-message" id="passwordError" data-translate="password_error">Password must be at least 8 characters</div>
+            </div>
+
+            <div class="options">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember" data-translate="remember_me">Remember me</label>
+                </div>
+                <a href="#" class="forgot-password" data-translate="forgot_password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn" data-translate="sign_in_button">Sign In</button>
+        </form>
+
+        <div class="separator" data-translate="or_separator">Or continue with</div>
+
+        <div class="social-login">
+            <div class="social-btn">
+                <i class="fab fa-google"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-twitter"></i>
             </div>
         </div>
-    </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <div class="signup-link">
+            <span data-translate="no_account">Don't have an account?</span> <a href="#" data-translate="sign_up_link">Sign up</a>
+        </div>
+    </div>
+
     <script>
-        // Language translation data
+        // Translation data
         const translations = {
             en: {
-                title: "Samadhan Setu",
-                home: "HOME",
-                reports: "REPORTS",
-                viewMap: "VIEW MAP",
-                dashboard: "DASHBOARD",
-                cityOfficials: "For City Officials",
-                language: "English",
-                reportCivicIssue: "Report Civic Issue",
-                login: "Login",
-                signUp: "Sign Up",
-                heroTitle: "Make Your Community Better",
-                heroText: "Report local issues like potholes, broken streetlights, and graffiti directly to your local government",
-                reportCivicIssueHere: "Report Civic Issues Here",
-                howItWorks: "How Samadhan Setu Works",
-                howItWorksSubtitle: "Our simple three-step process makes reporting civic issues quick and effective",
-                step1: "1. See & Snap",
-                step1Desc: "Spot an issue in your community that needs attention from local authorities.",
-                step1Point1: "Take a clear photo of the issue",
-                step1Point2: "Note the exact location",
-                step1Point3: "Provide a brief description",
-                step2: "2. We Route",
-                step2Desc: "Our system automatically directs your report to the appropriate department.",
-                step2Point1: "AI-powered categorization",
-                step2Point2: "Geographic routing to local teams",
-                step2Point3: "Priority assignment based on severity",
-                step3: "3. You Track",
-                step3Desc: "Follow your report's progress from submission to resolution.",
-                step3Point1: "Real-time status updates",
-                step3Point2: "Estimated resolution times",
-                step3Point3: "Notifications when resolved",
-                trackReports: "Track Your Reports",
-                howToReport: "How to Report an Issue",
-                howToReportSubtitle: "Follow these simple steps to report civic issues in your area",
-                reportStep1: "Login / Sign Up",
-                reportStep1Desc: "Create an account or login to your existing Samadhan Setu account to get started.",
-                reportStep2: "Locate Your Issue",
-                reportStep2Desc: "Find the exact location on our map or allow us to automatically detect your location.",
-                reportStep3: "Describe the Problem",
-                reportStep3Desc: "Provide details about the issue, add photos, and categorize it properly.",
-                reportStep4: "Submit Your Report",
-                reportStep4Desc: "Review and submit your report. You'll receive a tracking number for follow-up.",
-                reportIssueNow: "Report an Issue Now",
-                currentIssues: "Current Issues in Bhopal",
-                bhopalLocation: "Bhopal, Madhya Pradesh",
-                recentIssues: "Recently Reported Issues in Bhopal",
-                recentIssuesSubtitle: "These are some of the recent issues reported by citizens in your area",
-                allCategories: "All Categories",
-                potholes: "Potholes",
-                streetlights: "Streetlights",
-                graffiti: "Graffiti",
-                trash: "Trash",
-                waterSupply: "Water Supply",
-                allStatuses: "All Statuses",
-                new: "New",
-                inProgress: "In Progress",
-                resolved: "Resolved",
-                sortNewest: "Sort by Newest",
-                sortOldest: "Sort by Oldest",
-                sortPriority: "Sort by Priority",
-                potholeTitle: "Large Pothole on Hoshangabad Road",
-                potholeDesc: "Deep pothole near Habibganj area, causing traffic issues during peak hours.",
-                graffitiTitle: "Graffiti in TT Nagar Park",
-                graffitiDesc: "Extensive graffiti on walls and playground equipment in TT Nagar Park.",
-                streetlightTitle: "Broken Streetlight in MP Nagar",
-                streetlightDesc: "Streetlight has been out for three days, making the area dark and unsafe at night.",
-                reporter1: "Rajesh K.",
-                time1: "2 hours ago",
-                reporter2: "Priya M.",
-                time2: "1 day ago",
-                reporter3: "Amit S.",
-                time3: "5 days ago",
-                reportNewIssue: "Report a New Issue",
-                issueType: "Issue Type",
-                selectIssueType: "Select an issue type",
-                potholeOption: "Pothole",
-                streetlightOption: "Streetlight",
-                graffitiOption: "Graffiti",
-                trashOption: "Trash Accumulation",
-                waterOption: "Water Supply Issue",
-                otherOption: "Other",
-                issueLocation: "Location",
-                issueDescription: "Description",
-                addVoiceNote: "Add Voice Note (Optional)",
-                startRecording: "Start Recording",
-                uploadPhoto: "Upload Photo",
-                submitReport: "Submit Report",
-                footerDesc: "A platform for citizens to report local issues and for governments to efficiently manage them.",
-                quickLinks: "Quick Links",
-                contactInfo: "Contact Info",
-                footerAddress: "123 Civic Center, Bhopal",
-                rightsReserved: "All rights reserved."
+                app_name: "Samadhan Setu",
+                sign_in_message: "Sign in to access your account",
+                email_phone_label: "Email or Phone Number",
+                email_phone_placeholder: "Enter your email or phone number",
+                email_error: "Please enter a valid email address",
+                phone_error: "Please enter a valid phone number",
+                password_label: "Password",
+                password_placeholder: "Enter your password",
+                password_error: "Password must be at least 8 characters",
+                remember_me: "Remember me",
+                forgot_password: "Forgot Password?",
+                sign_in_button: "Sign In",
+                or_separator: "Or continue with",
+                no_account: "Don't have an account?",
+                sign_up_link: "Sign up",
+                login_success: "Login successful! (This is just a demo)"
             },
             hi: {
-                title: "समाधान सेतु",
-                home: "होम",
-                reports: "रिपोर्ट्स",
-                viewMap: "मानचित्र देखें",
-                dashboard: "डैशबोर्ड",
-                cityOfficials: "शहर अधिकारियों के लिए",
-                language: "हिंदी",
-                reportCivicIssue: "नागरिक मुद्दा रिपोर्ट करें",
-                login: "लॉगिन",
-                signUp: "साइन अप",
-                heroTitle: "अपने समुदाय को बेहतर बनाएं",
-                heroText: "स्थानीय सरकार को सीधे गड्ढे, टूटी स्ट्रीटलाइट और graffiti जैसे स्थानीय मुद्दों की रिपोर्ट करें",
-                reportCivicIssueHere: "यहां नागरिक मुद्दों की रिपोर्ट करें",
-                howItWorks: "समाधान सेतु कैसे काम करता है",
-                howItWorksSubtitle: "रिपोर्टिंग नागरिक मुद्दों को हमारी सरल तीन-चरणीय प्रक्रिया त्वरित और प्रभावी बनाती है",
-                step1: "1. देखें और फोटो लें",
-                step1Desc: "अपने समुद्ध में एक मुद्दा देखें जिस पर स्थानीय अधिकारियों का ध्यान देने की आवश्यकता है।",
-                step1Point1: "मुद्दे की एक स्पष्ट फोटो लें",
-                step1Point2: "सटीक स्थान नोट करें",
-                step1Point3: "एक संक्षिप्त विवरण प्रदान करें",
-                step2: "2. हम रूट करते हैं",
-                step2Desc: "हमारी प्रणाली स्वचालित रूप से आपकी रिपोर्ट को उपयुक्त विभाग में भेजती है।",
-                step2Point1: "AI-संचालित वर्गीकरण",
-                step2Point2: "स्थानीय टीमों को भौगोलिक रूटिंग",
-                step2Point3: "गंभीरता के आधार पर प्राथमिकता असाइनमेंट",
-                step3: "3. आप ट्रैक करें",
-                step3Desc: "सबमिशन से रेजोल्यूशन तक अपनी रिपोर्ट की प्रगति का पालन करें。",
-                step3Point1: "रीयल-टाइम स्टेट्स अपडेट",
-                step3Point2: "अनुमानित समाधान समय",
-                step3Point3: "हल होने पर सूचनाएं",
-                trackReports: "अपनी रिपोर्ट्स ट्रैक करें",
-                howToReport: "मुद्दा कैसे रिपोर्ट करें",
-                howToReportSubtitle: "अपने क्षेत्र में नागरिक मुद्दों की रिपोर्ट करने के लिए इन सरल चरणों का पालन करें",
-                reportStep1: "लॉगिन / साइन अप",
-                reportStep1Desc: "शुरुआत करने के लिए एक अकाउंट बनाएं या अपने मौजूदा समाधान सेतु अकाउंट में लॉगिन करें。",
-                reportStep2: "अपना मुद्दा लोकेट करें",
-                reportStep2Desc: "हमारे मानचित्र पर सटीक स्थान खोजें या हमें अपना स्थान स्वचालित रूप से डिटेक्ट करने दें。",
-                reportStep3: "समस्या का वर्णन करें",
-                reportStep3Desc: "मुद्दे के बारे में विवरण प्रदान करें, फोटो जोड़ें और इसे ठीक से वर्गीकृत करें。",
-                reportStep4: "अपनी रिपोर्ट सबमिट करें",
-                reportStep4Desc: "अपनी रिपोर्ट की समीक्षा करें और सबमिट करें। फॉलो-अप के लिए आपको एक ट्रैकिंग नंबर प्राप्त होगा。",
-                reportIssueNow: "अभी मुद्दा रिपोर्ट करें",
-                currentIssues: "भोपाल में वर्तमान मुद्दे",
-                bhopalLocation: "भोपाल, मध्य प्रदेश",
-                recentIssues: "भोपाल में हाल ही में रिपोर्ट किए गए मुद्दे",
-                recentIssuesSubtitle: "ये आपके क्षेत्र के नागरिकों द्वारा रिपोर्ट किए गए कुछ हाल के मुद्दे हैं",
-                allCategories: "सभी श्रेणियां",
-                potholes: "गड्ढे",
-                streetlights: "स्ट्रीटलाइट",
-                graffiti: " graffiti",
-                trash: "कचरा",
-                waterSupply: "जल आपूर्ति",
-                allStatuses: "सभी स्टेटस",
-                new: "नया",
-                inProgress: "प्रगति पर",
-                resolved: "हल",
-                sortNewest: "नवीनतम के अनुसार क्रमबद्ध करें",
-                sortOldest: "सबसे पुराने के अनुसार क्रमबद्ध करें",
-                sortPriority: "प्राथमिकता के अनुसार क्रमबद्ध करें",
-                potholeTitle: "होशंगाबाद रोड पर बड़ा गड्ढा",
-                potholeDesc: "हबीबगंज क्षेत्र के पास गहरा गड्ढा, जिससे पीक आवर्स में ट्रैफिक की समस्या हो रही है।",
-                graffitiTitle: "टीटी नगर पार्क में graffiti",
-                graffitiDesc: "टीटी नगर पार्क में दीवारों और प्लेग्राउंड उपकरणों पर व्यापक graffiti।",
-                streetlightTitle: "एमपी नगर में टूटी स्ट्रीटलाइट",
-                streetlightDesc: "तीन दिनों से स्ट्रीटलाइट बंद है, जिससे रात में यह इलाका अंधेरा और असुरक्षित हो गया है।",
-                reporter1: "राजेश क.",
-                time1: "2 घंटे पहले",
-                reporter2: "प्रिया एम.",
-                time2: "1 दिन पहले",
-                reporter3: "अमित एस.",
-                time3: "5 दिन पहले",
-                reportNewIssue: "एक नया मुद्दा रिपोर्ट करें",
-                issueType: "मुद्दे का प्रकार",
-                selectIssueType: "एक मुद्दे का प्रकार चुनें",
-                potholeOption: "गड्ढा",
-                streetlightOption: "स्ट्रीटलाइट",
-                graffitiOption: " graffiti",
-                trashOption: "कचरा जमाव",
-                waterOption: "जल आपूर्ति समस्या",
-                otherOption: "अन्य",
-                issueLocation: "स्थान",
-                issueDescription: "विवरण",
-                addVoiceNote: "वॉइस नोट जोड़ें (वैकल्पिक)",
-                startRecording: "रिकॉर्डिंग शुरू करें",
-                uploadPhoto: "फोटो अपलोड करें",
-                submitReport: "रिपोर्ट सबमिट करें",
-                footerDesc: "नागरिकों के लिए स्थानीय मुद्दों की रिपोर्ट करने और सरकारों के लिए उन्हें कुशलतापूर्वक प्रबंधित करने के लिए एक प्लेटफॉर्म।",
-                quickLinks: "त्वरित लिंक",
-                contactInfo: "संपर्क जानकारी",
-                footerAddress: "123 सिविक सेंटर, भोपाल",
-                rightsReserved: "सर्वाधिकार सुरक्षित।"
+                app_name: "समाधान सेतु",
+                sign_in_message: "अपने खाते तक पहुंचने के लिए साइन इन करें",
+                email_phone_label: "ईमेल या फोन नंबर",
+                email_phone_placeholder: "अपना ईमेल या फोन नंबर दर्ज करें",
+                email_error: "कृपया एक वैध ईमेल पता दर्ज करें",
+                phone_error: "कृपया एक वैध फोन नंबर दर्ज करें",
+                password_label: "पासवर्ड",
+                password_placeholder: "अपना पासवर्ड दर्ज करें",
+                password_error: "पासवर्ड कम से कम 8 वर्णों का होना चाहिए",
+                remember_me: "मुझे याद रखें",
+                forgot_password: "पासवर्ड भूल गए?",
+                sign_in_button: "साइन इन करें",
+                or_separator: "या के साथ जारी रखें",
+                no_account: "खाता नहीं है?",
+                sign_up_link: "साइन अप करें",
+                login_success: "लॉगिन सफल! (यह सिर्फ एक डेमो है)"
             },
-            // Other languages would be added here similarly
+            te: {
+                app_name: "సమాధానం సేతు",
+                sign_in_message: "మీ ఖాతాకు ప్రవేశించడానికి సైన్ ఇన్ చేయండి",
+                email_phone_label: "ఇమెయిల్ లేదా ఫోన్ నంబర్",
+                email_phone_placeholder: "మీ ఇమెయిల్ లేదా ఫోన్ నంబర్ నమోదు చేయండి",
+                email_error: "దయచేసి సరైన ఇమెయిల్ చిరునామాను నమోదు చేయండి",
+                phone_error: "దయచేసి సరైన ఫోన్ నంబర్ నమోదు చేయండి",
+                password_label: "పాస్వర్డ్",
+                password_placeholder: "మీ పాస్వర్డ్ నమోదు చేయండి",
+                password_error: "పాస్వర్డ్ కనీసం 8 అక్షరాలుగా ఉండాలి",
+                remember_me: "నన్ను గుర్తు ఉంచు",
+                forgot_password: "పాస్వర్డ్ మర్చిపోయారా?",
+                sign_in_button: "సైన్ ఇన్",
+                or_separator: "లేదా కొనసాగించండి",
+                no_account: "ఖాతా లేదా?",
+                sign_up_link: "సైన్ అప్",
+                login_success: "లాగిన్ విజయవంతమైంది! (ఇది కేవలం డెమో)"
+            },
             ta: {
-                title: "சமாதானம் சேது",
-                home: "முகப்பு",
-                reports: "புகார்கள்",
-                viewMap: "வரைபடத்தைக் காண்க",
-                dashboard: "டாஷ்போர்டு",
-                cityOfficials: "நகர அதிகாரிகளுக்கு",
-                language: "தமிழ்",
-                reportCivicIssue: "குடிமைப் பிரச்சினையைப் புகாரளிக்க",
-                login: "உள்நுழைக",
-                signUp: "பதிவு செய்க",
-                heroTitle: "உங்கள் சமூகத்தை மேம்படுத்துங்கள்",
-                heroText: "தள்ளாடும் சாலைகள், அறிகுறியற்ற தெரு விளக்குகள் மற்றும் சுவர் ஓவியங்கள் போன்ற உள்ளூர் பிரச்சினைகளை நேரடியாக உங்கள் உள்ளூர் அரசுக்கு புகாரளிக்கவும்",
-                reportCivicIssueHere: "குடிமைப் பிரச்சினைகளை இங்கே புகாரளிக்கவும்",
-                howItWorks: "சமாதானம் சேது எவ்வாறு செயல்படுகிறது",
-                howItWorksSubtitle: "குடிமைப் பிரச்சினைகளைப் புகாரளிப்பதை விரைவானதும் திறமையானதுமாக மாற்றும் எங்களது எளிய மூன்று-படி செயல்முறை",
-                step1: "1. பார்த்து படம் எடுக்கவும்",
-                step1Desc: "உங்கள் சமூகத்தில் உள்ளூர் அதிகாரிகள் கவனம் செலுத்த வேண்டிய ஒரு பிரச்சினையைக் கண்டறியவும்.",
-                step1Point1: "பிரச்சினையின் தெளிவான படத்தை எடுக்கவும்",
-                step1Point2: "சரியான இடத்தைக் குறிக்கவும்",
-                step1Point3: "சுருக்கமான விளக்கத்தை வழங்கவும்",
-                step2: "2. நாங்கள் வழிநடத்துகிறோம்",
-                step2Desc: "எங்கள் அமைப்பு உங்கள் புகாரை தானாகவே பொருத்தமான துறைக்கு அனுப்பும்.",
-                step2Point1: "AI-இயக்கப்பட்ட வகைப்பாடு",
-                step2Point2: "புவியியல் ரூட்டிங் உள்ளூர் குழுக்களுக்கு",
-                step2Point3: "தீவிரத்தின் அடிப்படையில் முன்னுரிமை ஒதுக்கீடு",
-                step3: "3. நீங்கள் கண்காணிக்கவும்",
-                step3Desc: "சமர்ப்பிப்பிலிருந்து தீர்வு வரை உங்கள் புகாரின் முன்னேற்றத்தைப் பின்தொடரவும்.",
-                step3Point1: "நிகழ்நேர நிலைமை புதுப்பிப்புகள்",
-                step3Point2: "மதிப்பிடப்பட்ட தீர்வு நேரங்கள்",
-                step3Point3: "தீர்க்கப்பட்டபோது அறிவிப்புகள்",
-                trackReports: "உங்கள் புகார்களைக் கண்காணிக்கவும்",
-                howToReport: "ஒரு பிரச்சினையை如何报告",
-                howToReportSubtitle: "உங்கள் பகுதியில் குடிமைப் பிரச்சினைகளைப் புகாரளிக்க இந்த எளிய படிகளைப் பின்பற்றவும்",
-                reportStep1: "உள்நுழை / பதிவு செய்க",
-                reportStep1Desc: "தொடங்குவதற்கு ஒரு கணக்கை உருவாக்கவும் அல்லது உங்கள் இருக்கும் சமாதானம் சேது கணக்கில் உள்நுழையவும்.",
-                reportStep2: "உங்கள் பிரச்சினையை இடத்தைக் கண்டறியவும்",
-                reportStep2Desc: "எங்கள் வரைபடத்தில் சரியான இடத்தைக் கண்டறியவும் அல்லது உங்கள் இடத்தை தானாகக் கண்டறிய அனுமதிக்கவும்.",
-                reportStep3: "பிரச்சினையை விவரிக்கவும்",
-                reportStep3Desc: "பிரச்சினை பற்றிய விவரங்களை வழங்கவும், புகைப்படங்களைச் சேர்க்கவும் மற்றும் அதை சரியாக வகைப்படுத்தவும்.",
-                reportStep4: "உங்கள் புகாரை சமர்ப்பிக்கவும்",
-                reportStep4Desc: "உங்கள் புகாரை மதிப்பாய்வு செய்து சமர்ப்பிக்கவும். பின்தொடர்வதற்கு உங்களுக்கு ஒரு கண்காணிப்பு எண் கிடைக்கும்.",
-                reportIssueNow: "இப்போது ஒரு பிரச்சினையைப் புகாரளிக்கவும்",
-                currentIssues: "போபாலில் தற்போதைய பிரச்சினைகள்",
-                bhopalLocation: "போபால், மத்தியப் பிரதேசம்",
-                recentIssues: "போபாலில் சமீபத்தில் புகாரளிக்கப்பட்ட பிரச்சினைகள்",
-                recentIssuesSubtitle: "உங்கள் பகுதியில் மக்களால் புகாரளிக்கப்பட்ட சில சமீபத்திய பிரச்சினைகள் இவை",
-                allCategories: "அனைத்து வகைகள்",
-                potholes: "தள்ளாடும் சாலைகள்",
-                streetlights: "தெரு விளக்குகள்",
-                graffiti: "சுவர் ஓவியங்கள்",
-                trash: "குப்பை",
-                waterSupply: "நீர் வ supplyப்பு",
-                allStatuses: "அனைத்து நிலைகள்",
-                new: "புதிய",
-                inProgress: "முன்னேற்றத்தில்",
-                resolved: "தீர்க்கப்பட்டது",
-                sortNewest: "புதியதைக் கொண்டு வரிசைப்படுத்துக",
-                sortOldest: "பழையதைக் கொண்டு வரிசைப்படுத்துக",
-                sortPriority: "முன்னுரிமையைக் கொண்டு வரிசைப்படுத்துக",
-                potholeTitle: "ஹோஷங்காபாத் சாலையில் பெரிய தள்ளாடும் சாலை",
-                potholeDesc: "ஹபீப்கஞ்ச் பகுதிக்கு அருகிலுள்ள ஆழமான தள்ளாடும் சாலை, உச்ச நேரங்களில் ப traffic த்திருக்கும் பிரச்சினைகளை ஏற்படுத்துகிறது.",
-                graffitiTitle: "டீடீ நகர் பூங்காவில் சுவர் ஓவியங்கள்",
-                graffitiDesc: "டீடீ நகர் பூங்காவில் சுவர்கள் மற்றும் விளையாட்டு மைதான உபகரணங்களில் விரிவான சுவர் ஓவியங்கள்.",
-                streetlightTitle: "எம்பி நகரில் அறிகுறியற்ற தெரு விளக்கு",
-                streetlightDesc: "மூன்று நாட்களாக தெரு விளக்கு அணைக்கப்பட்டுள்ளது, இது இரவில் பகுதியை இருட்டாகவும் பாதுகாப்பற்றதாகவும் ஆக்குகிறது.",
-                reporter1: "ராஜேஷ் கே.",
-                time1: "2 மணி நேரம் முன்பு",
-                reporter2: "பிரியா எம்.",
-                time2: "1 நாள் முன்பு",
-                reporter3: "அமித் எஸ்.",
-                time3: "5 நாட்கள் முன்பு",
-                reportNewIssue: "ஒரு புதிய பிரச்சினையைப் புகாரளிக்கவும்",
-                issueType: "பிரச்சினை வகை",
-                selectIssueType: "ஒரு பிரச்சினை வகையைத் தேர்ந்தெடுக்கவும்",
-                potholeOption: "தள்ளாடும் சாலை",
-                streetlightOption: "தெரு விளக்கு",
-                graffitiOption: "சுவர் ஓவியம்",
-                trashOption: "குப்பை குவிப்பு",
-                waterOption: "நீர் வ supplyப்பு பிரச்சினை",
-                otherOption: "மற்றவை",
-                issueLocation: "இடம்",
-                issueDescription: "விளக்கம்",
-                addVoiceNote: "குரல் குறிப்பைச் சேர்க்கவும் (விருப்பத்தேர்வு)",
-                startRecording: "பதிவைத் தொடங்கவும்",
-                uploadPhoto: "புகைப்படத்தைப் பதிவேற்றுக",
-                submitReport: "புகாரை சமர்ப்பிக்கவும்",
-                footerDesc: "குடிமக்கள் உள்ளூர் பிரச்சினைகளைப் புகாரளிக்கவும் அரசுகள் அவற்றை திறம்பட நிர்வகிக்கவும் ஒரு தளம்.",
-                quickLinks: "விரைவு இணைப்புகள்",
-                contactInfo: "தொடர்பு தகவல்",
-                footerAddress: "123 சிவிக் சென்டர், போபால்",
-                rightsReserved: "அனைத்து உரிமைகளும் பாதுகாக்கப்பட்டவை."},
-            te: {},
-            ml: {}
+                app_name: "சமாதானம் சேது",
+                sign_in_message: "உங்கள் கணக்கில் அணுக உள்நுழைக",
+                email_phone_label: "மின்னஞ்சல் அல்லது தொலைபேசி எண்",
+                email_phone_placeholder: "உங்கள் மின்னஞ்சல் அல்லது தொலைபேசி எண்ணை உள்ளிடவும்",
+                email_error: "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+                phone_error: "சரியான தொலைபேசி எண்ணை உள்ளிடவும்",
+                password_label: "கடவுச்சொல்",
+                password_placeholder: "உங்கள் கடவுச்சொல்லை உள்ளிடவும்",
+                password_error: "கடவுச்சொல் குறைந்தது 8 எழுத்துகள் இருக்க வேண்டும்",
+                remember_me: "என்னை நினைவில் கொள்ளுங்கள்",
+                forgot_password: "கடவுச்சொல் மறந்துவிட்டீர்களா?",
+                sign_in_button: "உள்நுழைக",
+                or_separator: "அல்லது தொடரவும்",
+                no_account: "கணக்கு இல்லையா?",
+                sign_up_link: "பதிவு செய்யவும்",
+                login_success: "உள்நுழைவு வெற்றிகரமாக உள்ளது! (இது ஒரு டெமோ மட்டுமே)"
+            },
+            ml: {
+                app_name: "സമാധാനം സേതു",
+                sign_in_message: "നിങ്ങളുടെ അക്കൗണ്ട് ആക്‌സസ് ചെയ്യാൻ സൈൻ ഇൻ ചെയ്യുക",
+                email_phone_label: "ഇമെയിൽ അല്ലെങ്കിൽ ഫോൺ നമ്പർ",
+                email_phone_placeholder: "നിങ്ങളുടെ ഇമെയിൽ അല്ലെങ്കിൽ ഫോൺ നമ്പർ നൽകുക",
+                email_error: "ദയവായി ഒരു സാധുതയുള്ള ഇമെയിൽ വിലാസം നൽകുക",
+                phone_error: "ദയവായി ഒരു സാധുതയുള്ള ഫോൺ നമ്പർ നൽകുക",
+                password_label: "പാസ്‌വേഡ്",
+                password_placeholder: "നിങ്ങളുടെ പാസ്‌വേഡ് നൽകുക",
+                password_error: "പാസ്‌വേഡ് കുറഞ്ഞത് 8 അക്ഷരങ്ങൾ ആയിരിക്കണം",
+                remember_me: "എന്നെ ഓർക്കുക",
+                forgot_password: "പാസ്‌വേഡ് മറന്നോ?",
+                sign_in_button: "സൈൻ ഇൻ",
+                or_separator: "അല്ലെങ്കിൽ തുടരുക",
+                no_account: "അക്കൗണ്ട് ഇല്ലേ?",
+                sign_up_link: "സൈൻ അപ്പ്",
+                login_success: "ലോഗിൻ വിജയകരമാണ്! (ഇത് ഒരു ഡെമോ മാത്രമാണ്)"
+            }
         };
 
-        // Set default language
-        let currentLang = 'en';
+        // Language display names
+        const languageNames = {
+            en: "English",
+            hi: "Hindi",
+            te: "Telugu",
+            ta: "Tamil",
+            ml: "Malayalam"
+        };
 
-        // Function to change language
-        function changeLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.translate').forEach(element => {
-                const key = element.getAttribute('data-key');
-                if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
-                }
-            });
-            
-            // Update language button text
-            const langText = lang === 'en' ? 'English' : 
-                            lang === 'hi' ? 'हिन्दी' : 
-                            lang === 'ta' ? 'தமிழ்' : 
-                            lang === 'te' ? 'తెలుగు' : 'മലയാളം';
-            document.querySelector('.language-btn span').textContent = langText;
-        }
+        // RTL languages
+        const rtlLanguages = [];
 
-        // Initialize map for Bhopal
-        function initMap() {
-            // Bhopal coordinates: 23.2599° N, 77.4126° E
-            const map = L.map('map').setView([23.2599, 77.4126], 12);
-            
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
-            
-            // Add sample markers for Bhopal
-            const potholeMarker = L.marker([23.2456, 77.4004])
-                .addTo(map)
-                .bindPopup('<strong>Pothole on Hoshangabad Road</strong><br>Reported 2 hours ago<br><em>Status: New</em>')
-                .openPopup();
-                
-            const graffitiMarker = L.marker([23.2432, 77.4320])
-                .addTo(map)
-                .bindPopup('<strong>Graffiti in TT Nagar Park</strong><br>Reported 1 day ago<br><em>Status: In Progress</em>');
-                
-            const streetlightMarker = L.marker([23.2350, 77.4315])
-                .addTo(map)
-                .bindPopup('<strong>Broken Streetlight in MP Nagar</strong><br>Reported 5 days ago<br><em>Status: Resolved</em>');
-                
-            L.marker([23.2750, 77.4350])
-                .addTo(map)
-                .bindPopup('<strong>Waterlogging in Shahpura</strong><br>Reported 3 days ago<br><em>Status: In Progress</em>');
-                
-            L.marker([23.2200, 77.4015])
-                .addTo(map)
-                .bindPopup('<strong>Garbage Pileup in Bairagarh</strong><br>Reported 1 day ago<br><em>Status: New</em>');
-                
-            // Add click events to markers to highlight corresponding cards
-            potholeMarker.on('click', () => {
-                highlightReportCard(0);
-            });
-            
-            graffitiMarker.on('click', () => {
-                highlightReportCard(1);
-            });
-            
-            streetlightMarker.on('click', () => {
-                highlightReportCard(2);
-            });
-        }
-        
-        // Function to highlight report card when marker is clicked
-        function highlightReportCard(index) {
-            const reportCards = document.querySelectorAll('.report-card');
-            reportCards.forEach(card => card.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)');
-            
-            if (reportCards[index]) {
-                reportCards[index].style.boxShadow = '0 0 0 3px var(--primary), 0 5px 15px rgba(0, 0, 0, 0.2)';
-                
-                // Scroll to the report card
-                reportCards[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
-
-        // Dark mode toggle functionality
+        // DOM Elements
         const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const loginForm = document.getElementById('loginForm');
+        const emailOrPhoneInput = document.getElementById('emailOrPhone');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+        const passwordError = document.getElementById('passwordError');
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguage = document.getElementById('currentLanguage');
+        const languageOptions = document.querySelectorAll('.language-option');
+        const inputTypeToggle = document.getElementById('inputTypeToggle');
+        const inputIcon = document.getElementById('inputIcon');
         
-        // Check for saved theme preference or respect OS preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
+        // Set initial language based on browser preference or default to English
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+        currentLanguage.textContent = languageNames[currentLang];
         
+        // Input type state (true for email, false for phone)
+        let isEmailInput = true;
+
+        // Theme Toggle
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
         });
 
-        // Language selector functionality
-        const languageBtn = document.querySelector('.language-btn');
-        const languageDropdown = document.getElementById('languageDropdown');
-        const languageOptions = document.querySelectorAll('.language-option');
-        
-        languageBtn.addEventListener('click', () => {
-            languageDropdown.classList.toggle('show');
+        // Toggle Password Visibility
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            if (type === 'text') {
+                togglePassword.innerHTML = '<i class="far fa-eye-slash"></i>';
+            } else {
+                togglePassword.innerHTML = '<i class="far fa-eye"></i>';
+            }
         });
-        
+
+        // Toggle input type between email and phone
+        inputTypeToggle.addEventListener('click', () => {
+            isEmailInput = !isEmailInput;
+            
+            if (isEmailInput) {
+                inputTypeToggle.textContent = "Phone";
+                inputIcon.className = "fas fa-user";
+                emailOrPhoneInput.setAttribute("placeholder", "Enter your email");
+                emailOrPhoneInput.type = "text";
+                emailOrPhoneInput.value = "";
+            } else {
+                inputTypeToggle.textContent = "Email";
+                inputIcon.className = "fas fa-phone";
+                emailOrPhoneInput.setAttribute("placeholder", "Enter your phone number");
+                emailOrPhoneInput.type = "tel";
+                emailOrPhoneInput.value = "";
+            }
+            
+            // Update placeholder text based on current language
+            const placeholderKey = isEmailInput ? "email_phone_placeholder" : "phone_placeholder";
+            if (translations[currentLang][placeholderKey]) {
+                emailOrPhoneInput.setAttribute("placeholder", translations[currentLang][placeholderKey]);
+            }
+            
+            // Clear any existing errors
+            emailError.style.display = 'none';
+            phoneError.style.display = 'none';
+        });
+
+        // Form Validation
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let isValid = true;
+            
+            // Email or phone validation based on current input type
+            if (isEmailInput) {
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailOrPhoneInput.value)) {
+                    emailError.style.display = 'block';
+                    phoneError.style.display = 'none';
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                }
+            } else {
+                // Phone validation (simple version)
+                const phoneRegex = /^[+]?[0-9]{8,15}$/;
+                if (!phoneRegex.test(emailOrPhoneInput.value.replace(/\s/g, ''))) {
+                    phoneError.style.display = 'block';
+                    emailError.style.display = 'none';
+                    isValid = false;
+                } else {
+                    phoneError.style.display = 'none';
+                }
+            }
+            
+            // Password validation
+            if (passwordInput.value.length < 8) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+            
+            if (isValid) {
+                // Simulate form submission
+                const submitBtn = loginForm.querySelector('button');
+                submitBtn.innerHTML = 'Signing in...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert(translations[currentLang].login_success);
+                    submitBtn.innerHTML = translations[currentLang].sign_in_button;
+                    submitBtn.disabled = false;
+                    loginForm.reset();
+                }, 1500);
+            }
+        });
+
+        // Clear error messages when user starts typing
+        emailOrPhoneInput.addEventListener('input', () => {
+            emailError.style.display = 'none';
+            phoneError.style.display = 'none';
+            
+            // Auto-detect input type if user starts with numbers
+            if (/^[0-9+]/.test(emailOrPhoneInput.value) && isEmailInput) {
+                inputTypeToggle.click();
+            }
+            // Auto-detect input type if user starts with letters
+            else if (/^[a-zA-Z]/.test(emailOrPhoneInput.value) && !isEmailInput) {
+                inputTypeToggle.click();
+            }
+        });
+
+        passwordInput.addEventListener('input', () => {
+            passwordError.style.display = 'none';
+        });
+
+        // Language dropdown toggle
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+            languageBtn.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!languageSelector.contains(e.target)) {
+                languageDropdown.classList.remove('active');
+                languageBtn.classList.remove('active');
+            }
+        });
+
+        // Language selection
         languageOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const lang = option.getAttribute('data-lang');
@@ -1780,159 +797,67 @@
                 languageOptions.forEach(opt => opt.classList.remove('active'));
                 option.classList.add('active');
                 
-                // Change language
-                changeLanguage(lang);
+                // Update current language display
+                currentLanguage.textContent = languageNames[lang];
                 
                 // Close dropdown
-                languageDropdown.classList.remove('show');
+                languageDropdown.classList.remove('active');
+                languageBtn.classList.remove('active');
+                
+                // Change language
+                changeLanguage(lang);
             });
         });
-        
-        // Close language dropdown when clicking outside
-        window.addEventListener('click', (e) => {
-            if (!e.target.matches('.language-btn') && !e.target.closest('.language-dropdown')) {
-                languageDropdown.classList.remove('show');
-            }
-        });
-        
-        // Modal functionality
-        const modal = document.getElementById('reportModal');
-        const reportBtn = document.getElementById('reportIssueBtn');
-        const reportBtn2 = document.getElementById('reportIssueBtn2');
-        const headerReportBtn = document.querySelector('.header-report-btn');
-        const closeBtn = document.querySelector('.close-modal');
-        
-        // Function to open modal
-        function openModal() {
-            modal.style.display = 'flex';
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang);
+            
+            // Update all text elements
+            translatePage(lang);
         }
-        
-        // Add event listeners to all report buttons
-        reportBtn.addEventListener('click', openModal);
-        reportBtn2.addEventListener('click', openModal);
-        headerReportBtn.addEventListener('click', openModal);
-        
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-        
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
+
+        // Function to translate the page
+        function translatePage(lang) {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update all placeholder texts
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+            
+            // Update button text
+            const submitBtn = loginForm.querySelector('button');
+            submitBtn.textContent = translations[lang].sign_in_button;
+            
+            // Update input placeholder based on current type
+            const placeholderKey = isEmailInput ? "email_phone_placeholder" : "phone_placeholder";
+            if (translations[lang][placeholderKey]) {
+                emailOrPhoneInput.setAttribute("placeholder", translations[lang][placeholderKey]);
             }
-        });
+        }
+
+        // Initialize translation on page load
+        translatePage(currentLang);
         
-        // Show/hide other issue type field
-        const issueTypeSelect = document.getElementById('issueType');
-        const otherIssueType = document.getElementById('otherIssueType');
-        
-        issueTypeSelect.addEventListener('change', function() {
-            if (this.value === 'other') {
-                otherIssueType.style.display = 'block';
+        // Mark the current language as active in the dropdown
+        document.querySelectorAll('.language-option').forEach(option => {
+            if (option.getAttribute('data-lang') === currentLang) {
+                option.classList.add('active');
             } else {
-                otherIssueType.style.display = 'none';
+                option.classList.remove('active');
             }
         });
-        
-        // Voice recording functionality
-        const voiceRecordBtn = document.getElementById('voiceRecordBtn');
-        const voicePlayback = document.getElementById('voicePlayback');
-        const voiceAudio = voicePlayback.querySelector('audio');
-        const voiceTimer = voicePlayback.querySelector('.voice-timer');
-        const deleteRecordingBtn = document.getElementById('deleteRecording');
-        
-        let mediaRecorder;
-        let audioChunks = [];
-        let recording = false;
-        let timerInterval;
-        let seconds = 0;
-        
-        // Check if browser supports audio recording
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            voiceRecordBtn.addEventListener('click', toggleRecording);
-        } else {
-            voiceRecordBtn.disabled = true;
-            voiceRecordBtn.innerHTML = '<i class="fas fa-microphone-slash"></i> Recording not supported';
-        }
-        
-        function toggleRecording() {
-            if (recording) {
-                stopRecording();
-            } else {
-                startRecording();
-            }
-        }
-        
-        function startRecording() {
-            navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(stream => {
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-                    
-                    mediaRecorder.ondataavailable = event => {
-                        audioChunks.push(event.data);
-                    };
-                    
-                    mediaRecorder.onstop = () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        voiceAudio.src = audioUrl;
-                        voicePlayback.style.display = 'flex';
-                    };
-                    
-                    mediaRecorder.start();
-                    recording = true;
-                    voiceRecordBtn.innerHTML = '<i class="fas fa-stop-circle"></i> Stop Recording';
-                    voiceRecordBtn.classList.add('recording');
-                    
-                    // Start timer
-                    seconds = 0;
-                    timerInterval = setInterval(updateTimer, 1000);
-                })
-                .catch(error => {
-                    console.error('Error accessing microphone:', error);
-                    alert('Unable to access microphone. Please check your permissions.');
-                });
-        }
-        
-        function stopRecording() {
-            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-                mediaRecorder.stop();
-                recording = false;
-                voiceRecordBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Recording';
-                voiceRecordBtn.classList.remove('recoring');
-                
-                // Stop timer
-                clearInterval(timerInterval);
-            }
-        }
-        
-        function updateTimer() {
-            seconds++;
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            voiceTimer.textContent = `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-        
-        deleteRecordingBtn.addEventListener('click', () => {
-            voicePlayback.style.display = 'none';
-            voiceAudio.src = '';
-            voiceTimer.textContent = '00:00';
-            seconds = 0;
-        });
-        
-        // Form submission
-        document.getElementById('reportForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your report! It has been submitted for review.');
-            modal.style.display = 'none';
-            this.reset();
-            voicePlayback.style.display = 'none';
-            otherIssueType.style.display = 'none';
-        });
-        
-        // Initialize map when page loads
-        window.onload = initMap;
     </script>
 </body>
 </html>
