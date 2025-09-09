@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Your Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #6c87ff;
+            --text-color: #333;
+            --bg-color: #f5f8ff;
+            --container-bg: #fff;
+            --border-color: #e0e0e0;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --input-focus: #4a6cf7;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+        }
+
+        .dark-mode {
+            --primary-color: #3498db;
+            --secondary-color: #8aa4ff;
+            --text-color: #f5f5f5;
+            --bg-color: #121212;
+            --container-bg: #1e1e1e;
+            --border-color: #444;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --input-focus: #6c87ff;
+        }
+
+        [dir="rtl"] {
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 480px;
+            padding: 35px;
+            transition: background-color 0.3s;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+
+        .logo p {
+            color: #777;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 4px;
+            width: 100%;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            height: 4px;
+            width: 0%;
+            background-color: var(--primary-color);
+            z-index: 1;
+            transition: width 0.5s ease;
+        }
+
+        .step {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #777;
+            position: relative;
+            z-index: 2;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .step.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .step-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 8px;
+            font-size: 12px;
+            color: #777;
+            white-space: nowrap;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        [dir="rtl"] .input-with-icon i {
+            left: auto;
+            right: 15px;
+        }
+
+        .input-with-icon input, .input-with-icon select {
+            padding-left: 45px;
+        }
+
+        [dir="rtl"] .input-with-icon input, 
+        [dir="rtl"] .input-with-icon select {
+            padding-left: 15px;
+            padding-right: 45px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border 0.3s;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+        }
+
+        .form-control:focus {
+            border-color: var(--input-focus);
+            outline: none;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+        }
+
+        [dir="rtl"] .toggle-password {
+            right: auto;
+            left: 15px;
+        }
+
+        .password-strength {
+            height: 5px;
+            margin-top: 8px;
+            border-radius: 3px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s, background-color 0.3s;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        [dir="rtl"] .terms {
+            flex-direction: row-reverse;
+        }
+
+        .terms input {
+            margin-top: 3px;
+            margin-right: 10px;
+        }
+
+        [dir="rtl"] .terms input {
+            margin-right: 0;
+            margin-left: 10px;
+        }
+
+        .terms a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 14px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            flex: 1;
+        }
+
+        .btn:hover {
+            background-color: #2982bd;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .separator:not(:empty)::before {
+            margin-right: .75em;
+        }
+
+        .separator:not(:empty)::after {
+            margin-left: .75em;
+        }
+
+        [dir="rtl"] .separator:not(:empty)::before {
+            margin-right: 0;
+            margin-left: .75em;
+        }
+
+        [dir="rtl"] .separator:not(:empty)::after {
+            margin-left: 0;
+            margin-right: .75em;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dark-mode .social-btn:hover {
+            background-color: #2a2a2a;
+        }
+
+        .login-link {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .login-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: var(--success-color);
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        /* ========== LANGUAGE SELECTOR STYLES ========== */
+        /* Enhanced Language Selector */
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+        }
+
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .language-btn:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .language-btn i {
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .language-btn.active i {
+            transform: rotate(180deg);
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background: var(--container-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-top: 5px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            z-index: 100;
+        }
+
+        .language-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .language-option:first-child {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .language-option:last-child {
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .language-option:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .language-option.active {
+            background-color: rgba(52, 152, 219, 0.15);
+            font-weight: 600;
+        }
+
+        .language-flag {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .language-name {
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .language-check {
+            color: var(--primary-color);
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .language-option.active .language-check {
+            opacity: 1;
+        }
+        /* ========== END LANGUAGE SELECTOR STYLES ========== */
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .language-selector {
+                top: 10px;
+                left: 10px;
+            }
+            
+            .language-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .language-dropdown {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== LANGUAGE SELECTOR MARKUP ========== -->
+    <div class="language-selector" id="languageSelector">
+        <div class="language-btn" id="languageBtn">
+            <i class="fas fa-globe"></i>
+            <span id="currentLanguage">English</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" data-lang="en">
+                <img src="https://flagcdn.com/w40/gb.png" srcset="https://flagcdn.com/w80/gb.png 2x" width="40" alt="English" class="language-flag">
+                <span class="language-name">English</span>
+                <i class="fas fa-check language-check"></i>
+            </div>
+            <div class="language-option" data-lang="hi">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Hindi" class="language-flag">
+                <span class="language-name">हिन्दी (Hindi)</span>
+                <i class="fas fa-check language-check"></i>
+            </div>
+            <div class="language-option" data-lang="te">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Telugu" class="language-flag">
+                <span class="language-name">తెలుగు (Telugu)</span>
+                <i class="fas fa-check language-check"></i>
+            </div>
+            <div class="language-option" data-lang="ta">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Tamil" class="language-flag">
+                <span class="language-name">தமிழ் (Tamil)</span>
+                <i class="fas fa-check language-check"></i>
+            </div>
+            <div class="language-option" data-lang="ml">
+                <img src="https://flagcdn.com/w40/in.png" srcset="https://flagcdn.com/w80/in.png 2x" width="40" alt="Malayalam" class="language-flag">
+                <span class="language-name">മലയാളം (Malayalam)</span>
+                <i class="fas fa-check language-check"></i>
+            </div>
+        </div>
+    </div>
+    <!-- ========== END LANGUAGE SELECTOR MARKUP ========== -->
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <h1 data-translate="app_name">Samadhan Setu</h1>
+            <p data-translate="sign_up_message">Create your account in a few simple steps</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="step active" id="step1">
+                1
+                <span class="step-label" data-translate="step1_label">Account</span>
+            </div>
+            <div class="step" id="step2">
+                2
+                <span class="step-label" data-translate="step2_label">Profile</span>
+            </div>
+            <div class="step" id="step3">
+                3
+                <span class="step-label" data-translate="step3_label">Finish</span>
+            </div>
+        </div>
+
+        <form id="signupForm">
+            <!-- Step 1: Account Details -->
+            <div class="form-step active" id="step1-form">
+                <div class="form-group">
+                    <label for="email" data-translate="email_label">Email Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" class="form-control" placeholder="Enter your email" data-translate-placeholder="email_placeholder">
+                    </div>
+                    <div class="error-message" id="emailError" data-translate="email_error">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" data-translate="password_label">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" class="form-control" placeholder="Create a password" data-translate-placeholder="password_placeholder">
+                        <span class="toggle-password" id="togglePassword">
+                            <i class="far fa-eye"></i>
+                        </span>
+                    </div>
+                    <div class="password-strength">
+                        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+                    </div>
+                    <div class="error-message" id="passwordError" data-translate="password_error">Password must be at least 8 characters with letters and numbers</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" data-translate="confirm_password_label">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm your password" data-translate-placeholder="confirm_password_placeholder">
+                    </div>
+                    <div class="error-message" id="confirmPasswordError" data-translate="confirm_password_error">Passwords do not match</div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn" id="nextToStep2" data-translate="next_button">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Profile Information -->
+            <div class="form-step" id="step2-form">
+                <div class="form-group">
+                    <label for="fullName" data-translate="fullname_label">Full Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" data-translate-placeholder="fullname_placeholder">
+                    </div>
+                    <div class="error-message" id="nameError" data-translate="name_error">Please enter your name</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" data-translate="username_label">Username</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-at"></i>
+                        <input type="text" id="username" class="form-control" placeholder="Choose a username" data-translate-placeholder="username_placeholder">
+                    </div>
+                    <div class="error-message" id="usernameError" data-translate="username_error">Username must be at least 3 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="post" data-translate="post_label">Post/Position</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-briefcase"></i>
+                        <select id="post" class="form-control">
+                            <option value="" data-translate="select_post">Select your post</option>
+                            <option value="officer" data-translate="post_officer">Officer</option>
+                            <option value="manager" data-translate="post_manager">Manager</option>
+                            <option value="engineer" data-translate="post_engineer">Engineer</option>
+                            <option value="analyst" data-translate="post_analyst">Analyst</option>
+                            <option value="other" data-translate="post_other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" data-translate="phone_label">Phone Number (Optional)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" data-translate-placeholder="phone_placeholder">
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline" id="backToStep1" data-translate="back_button">Back</button>
+                    <button type="button" class="btn" id="nextToStep3" data-translate="next_button">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Terms and Finish -->
+            <div class="form-step" id="step3-form">
+                <div class="form-group">
+                    <label for="birthdate" data-translate="birthdate_label">Date of Birth</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-calendar"></i>
+                        <input type="date" id="birthdate" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="howHeard" data-translate="how_heard_label">How did you hear about us?</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-bullhorn"></i>
+                        <select id="howHeard" class="form-control">
+                            <option value="" data-translate="select_option">Select an option</option>
+                            <option value="search" data-translate="search_engine">Search Engine</option>
+                            <option value="social" data-translate="social_media">Social Media</option>
+                            <option value="friend" data-translate="friend">Friend or Colleague</option>
+                            <option value="ad" data-translate="advertisement">Advertisement</option>
+                            <option value="other" data-translate="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms">
+                    <label for="terms" data-translate="terms_text">I agree to the <a href="#" data-translate="terms_link">Terms of Service</a> and <a href="#" data-translate="privacy_link">Privacy Policy</a></label>
+                </div>
+                <div class="error-message" id="termsError" data-translate="terms_error">You must accept the terms and conditions</div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline" id="backToStep2" data-translate="back_button">Back</button>
+                    <button type="submit" class="btn" id="submitForm" data-translate="create_account_button">Create Account</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> <span data-translate="success_message">Your account has been created successfully!</span>
+        </div>
+
+        <div class="separator" data-translate="or_separator">Or sign up with</div>
+
+        <div class="social-login">
+            <div class="social-btn">
+                <i class="fab fa-google"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="social-btn">
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+
+        <div class="login-link">
+            <span data-translate="has_account">Already have an account?</span> <a href="http://127.0.0.1:5500/sih-frontend/loginforcityo.html" target="blank" data-translate="login_link">Log in</a>
+        </div>
+    </div>
+
+    <script>
+        // ========== TRANSLATION DATA ==========
+        const translations = {
+            en: {
+                app_name: "Samadhan Setu",
+                sign_up_message: "Create your account in a few simple steps",
+                step1_label: "Account",
+                step2_label: "Profile",
+                step3_label: "Finish",
+                email_label: "Email Address",
+                email_placeholder: "Enter your email",
+                email_error: "Please enter a valid email address",
+                password_label: "Password",
+                password_placeholder: "Create a password",
+                password_error: "Password must be at least 8 characters with letters and numbers",
+                confirm_password_label: "Confirm Password",
+                confirm_password_placeholder: "Confirm your password",
+                confirm_password_error: "Passwords do not match",
+                fullname_label: "Full Name",
+                fullname_placeholder: "Enter your full name",
+                name_error: "Please enter your name",
+                username_label: "Username",
+                username_placeholder: "Choose a username",
+                username_error: "Username must be at least 3 characters",
+                post_label: "Post/Position",
+                select_post: "Select your post",
+                post_officer: "Officer",
+                post_manager: "Manager",
+                post_engineer: "Engineer",
+                post_analyst: "Analyst",
+                post_other: "Other",
+                phone_label: "Phone Number (Optional)",
+                phone_placeholder: "Enter your phone number",
+                birthdate_label: "Date of Birth",
+                how_heard_label: "How did you hear about us?",
+                select_option: "Select an option",
+                search_engine: "Search Engine",
+                social_media: "Social Media",
+                friend: "Friend or Colleague",
+                advertisement: "Advertisement",
+                other: "Other",
+                terms_text: "I agree to the Terms of Service and Privacy Policy",
+                terms_link: "Terms of Service",
+                privacy_link: "Privacy Policy",
+                terms_error: "You must accept the terms and conditions",
+                next_button: "Next",
+                back_button: "Back",
+                create_account_button: "Create Account",
+                success_message: "Your account has been created successfully!",
+                or_separator: "Or sign up with",
+                has_account: "Already have an account?",
+                login_link: "Log in"
+            },
+            hi: {
+                app_name: "समाधान सेतु",
+                sign_up_message: "कुछ सरल चरणों में अपना खाता बनाएं",
+                step1_label: "खाता",
+                step2_label: "प्रोफाइल",
+                step3_label: "समाप्त",
+                email_label: "ईमेल पता",
+                email_placeholder: "अपना ईमेल दर्ज करें",
+                email_error: "कृपया एक वैध ईमेल पता दर्ज करें",
+                password_label: "पासवर्ड",
+                password_placeholder: "एक पासवर्ड बनाएं",
+                password_error: "पासवर्ड कम से कम 8 वर्णों का होना चाहिए जिसमें अक्षर और संख्याएं हों",
+                confirm_password_label: "पासवर्ड की पुष्टि करें",
+                confirm_password_placeholder: "अपने पासवर्ड की पुष्टि करें",
+                confirm_password_error: "पासवर्ड मेल नहीं खाते",
+                fullname_label: "पूरा नाम",
+                fullname_placeholder: "अपना पूरा नाम दर्ज करें",
+                name_error: "कृपया अपना नाम दर्ज करें",
+                username_label: "उपयोगकर्ता नाम",
+                username_placeholder: "एक उपयोगकर्ता नाम चुनें",
+                username_error: "उपयोगकर्ता नाम कम से कम 3 वर्णों का होना चाहिए",
+                post_label: "पद/पोजिशन",
+                select_post: "अपना पद चुनें",
+                post_officer: "अधिकारी",
+                post_manager: "प्रबंधक",
+                post_engineer: "इंजीनियर",
+                post_analyst: "विश्लेषक",
+                post_other: "अन्य",
+                phone_label: "फोन नंबर (वैकल्पिक)",
+                phone_placeholder: "अपना फोन नंबर दर्ज करें",
+                birthdate_label: "जन्म तिथि",
+                how_heard_label: "आपने हमारे बारे में कैसे सुना?",
+                select_option: "एक विकल्प चुनें",
+                search_engine: "सर्च इंजन",
+                social_media: "सोशल मीडिया",
+                friend: "मित्र या सहयोगी",
+                advertisement: "विज्ञापन",
+                other: "अन्य",
+                terms_text: "मैं सेवा की शर्तों और गोपनीयता नीति से सहमत हूं",
+                terms_link: "सेवा की शर्तें",
+                privacy_link: "गोपनीयता नीति",
+                terms_error: "आपको नियम और शर्तों को स्वीकार करना होगा",
+                next_button: "अगला",
+                back_button: "पिछला",
+                create_account_button: "खाता बनाएं",
+                success_message: "आपका खाता सफलतापूर्वक बनाया गया है!",
+                or_separator: "या के साथ साइन अप करें",
+                has_account: "क्या आपके पास पहले से एक खाता है?",
+                login_link: "लॉग इन"
+            },
+            te: {
+                app_name: "సమాధానం సేతు",
+                sign_up_message: "కొన్ని సరళమైన దశల్లో మీ ఖాతాను సృష్టించండి",
+                step1_label: "ఖాతా",
+                step2_label: "ప్రొఫైల్",
+                step3_label: "పూర్తి",
+                email_label: "ఇమెయిల్ చిరునామా",
+                email_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
+                email_error: "దయచేసి సరైన ఇమెయిల్ చిరునామాను నమోదు చేయండి",
+                password_label: "పాస్వర్డ్",
+                password_placeholder: "పాస్వర్డ్ సృష్టించండి",
+                password_error: "పాస్వర్డ్ కనీసం 8 అక్షరాలతో అక్షరాలు మరియు సంఖ్యలతో ఉండాలి",
+                confirm_password_label: "పాస్వర్డ్ నిర్ధారించండి",
+                confirm_password_placeholder: "మీ పాస్వర్డ్ నిర్ధారించండి",
+                confirm_password_error: "పాస్వర్డ్లు సరిపోలడం లేదు",
+                fullname_label: "పూర్తి పేరు",
+                fullname_placeholder: "మీ పూర్తి పేరు నమోదు చేయండి",
+                name_error: "దయచేసి మీ పేరు నमోదు చేయండి",
+                username_label: "వినియోగదారు పేరు",
+                username_placeholder: "వినియోగదారు పేరు ఎంచుకోండి",
+                username_error: "వినియోగదారు పేరు కనీసం 3 అక్షరాలు ఉండాలి",
+                post_label: "పోస్ట్/స్థానం",
+                select_post: "మీ పోస్ట్ ఎంచుకోండి",
+                post_officer: "అధికారి",
+                post_manager: "మేనేజర్",
+                post_engineer: "ఇంజనీర్",
+                post_analyst: "విశ్లేషకుడు",
+                post_other: "ఇతర",
+                phone_label: "ఫోన్ నంబర్ (ఐచ్ఛికం)",
+                phone_placeholder: "మీ ఫోన్ నంబర్ నమోదు చేయండి",
+                birthdate_label: "పుట్టిన తేదీ",
+                how_heard_label: "మీరు మా గురించి ఎలా విన్నారు?",
+                select_option: "ఒక ఎంపికను ఎంచుకోండి",
+                search_engine: "శోధన ఇంజిన్",
+                social_media: "సోషల్ మీడియా",
+                friend: "స్నేహితుడు లేదా సహోద్యోగి",
+                advertisement: "ప్రకటన",
+                other: "ఇతర",
+                terms_text: "నేను సేవా నిబంధనలు మరియు గోప్యతా విధానాన్ని అంగీకరిస్తున్నాను",
+                terms_link: "సేవా నిబంధనలు",
+                privacy_link: "గోప్యతా విధానం",
+                terms_error: "మీరు నిబంధనలు మరియు షరతులను అంగీకరించాలి",
+                next_button: "తదుపరి",
+                back_button: "వెనుక",
+                create_account_button: "ఖాతా సృష్టించండి",
+                success_message: "మీ ఖాతా విజయవంతంగా సృష్టించబడింది!",
+                or_separator: "లేదా దీనితో సైన్ అప్ చేయండి",
+                has_account: "ఇప్పటికే ఖాతా ఉందా?",
+                login_link: "లాగిన్"
+            },
+            ta: {
+                app_name: "சமாதானம் சேது",
+                sign_up_message: "உங்கள் கணக்கை சில எளிய படிகளில் உருவாக்கவும்",
+                step1_label: "கணக்கு",
+                step2_label: "சுயவிவரம்",
+                step3_label: "முடிக்க",
+                email_label: "மின்னஞ்சல் முகவரி",
+                email_placeholder: "உங்கள் மின்னஞ்சலை உள்ளிடவும்",
+                email_error: "சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+                password_label: "கடவுச்சொல்",
+                password_placeholder: "கடவுச்சொல்லை உருவாக்கவும்",
+                password_error: "கடவுச்சொல் குறைந்தது 8 எழுத்துகள் மற்றும் எண்களுடன் இருக்க வேண்டும்",
+                confirm_password_label: "கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+                confirm_password_placeholder: "உங்கள் கடவுச்சொல்லை உறுதிப்படுத்தவும்",
+                confirm_password_error: "கடவுச்சொற்கள் பொருந்தவில்லை",
+                fullname_label: "முழு பெயர்",
+                fullname_placeholder: "உங்கள் முழு பெயரை உள்ளிடவும்",
+                name_error: "உங்கள் பெயரை உள்ளிடவும்",
+                username_label: "பயனர்பெயர்",
+                username_placeholder: "பயனர்பெயரைத் தேர்ந்தெடுக்கவும்",
+                username_error: "பயனர்பெயர் குறைந்தது 3 எழுத்துகளாக இருக்க வேண்டும்",
+                post_label: "பதவி/இடம்",
+                select_post: "உங்கள் பதவியைத் தேர்ந்தெடுக்கவும்",
+                post_officer: "அதிகாரி",
+                post_manager: "மேலாளர்",
+                post_engineer: "பொறியாளர்",
+                post_analyst: "பகுப்பாய்வாளர்",
+                post_other: "மற்றவை",
+                phone_label: "தொலைபேசி எண் (விருப்பத்தேர்வு)",
+                phone_placeholder: "உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்",
+                birthdate_label: "பிறந்த தேதி",
+                how_heard_label: "எங்களைப் பற்றி எப்படி அறிந்தீர்கள்?",
+                select_option: "ஒரு விருப்பத்தைத் தேர்ந்தெடுக்கவும்",
+                search_engine: "தேடுபொறி",
+                social_media: "சமூக ஊடகம்",
+                friend: "நண்பர் அல்லது சக ஊழியர்",
+                advertisement: "விளம்பரம்",
+                other: "மற்றவை",
+                terms_text: "சேவை விதிமுறைகள் மற்றும் தனியுரிமைக் கொள்கையை ஏற்கிறேன்",
+                terms_link: "சேவை விதிமுறைகள்",
+                privacy_link: "தனியுரிமைக் கொள்கை",
+                terms_error: "நீங்கள் விதிமுறைகள் மற்றும் நிபந்தனைகளை ஏற்க வேண்டும்",
+                next_button: "அடுத்தது",
+                back_button: "பின்னால்",
+                create_account_button: "கணக்கை உருவாக்கு",
+                success_message: "உங்கள் கணக்கு வெற்றிகரமாக உருவாக்கப்பட்டது!",
+                or_separator: "அல்லது இதனுடன் பதிவு செய்யவும்",
+                has_account: "ஏற்கனவே கணக்கு உள்ளதா?",
+                login_link: "உள்நுழைய"
+            },
+            ml: {
+                app_name: "സമാധാനം സേതു",
+                sign_up_message: "കുറച്ച് ലളിതമായ ഘട്ടങ്ങളിൽ നിങ്ങളുടെ അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+                step1_label: "അക്കൗണ്ട്",
+                step2_label: "പ്രൊഫൈൽ",
+                step3_label: "പൂർത്തിയാക്കുക",
+                email_label: "ഇമെയിൽ വിലാസം",
+                email_placeholder: "നിങ്ങളുടെ ഇമെയിൽ നൽകുക",
+                email_error: "ദയവായി ഒരു സാധുതയുള്ള ഇമെയിൽ വിലാസം നൽകുക",
+                password_label: "പാസ്‌വേഡ്",
+                password_placeholder: "ഒരു പാസ്‌വേഡ് സൃഷ്ടിക്കുക",
+                password_error: "പാസ്‌വേഡ് കുറഞ്ഞത് 8 അക്ഷരങ്ങളോടും സംഖ്യകളോടും കൂടി ഉണ്ടായിരിക്കണം",
+                confirm_password_label: "പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക",
+                confirm_password_placeholder: "നിങ്ങളുടെ പാസ്‌വേഡ് സ്ഥിരീകരിക്കുക",
+                confirm_password_error: "പാസ്‌വേഡുകൾ പൊരുത്തപ്പെടുന്നില്ല",
+                fullname_label: "പൂർണ്ണ നാമം",
+                fullname_placeholder: "നിങ്ങളുടെ പൂർണ്ണ നാമം നൽകുക",
+                name_error: "ദയവായി നിങ്ങളുടെ പേര് നൽകുക",
+                username_label: "ഉപയോക്തൃനാമം",
+                username_placeholder: "ഒരു ഉപയോക്തൃനാമം തിരഞ്ഞെടുക്കുക",
+                username_error: "ഉപയോക്തൃനാമം കുറഞ്ഞത് 3 അക്ഷരങ്ങൾ ആയിരിക്കണം",
+                post_label: "പോസ്റ്റ്/സ്ഥാനം",
+                select_post: "നിങ്ങളുടെ പോസ്റ്റ് തിരഞ്ഞെടുക്കുക",
+                post_officer: "ഉദ്യോഗസ്ഥൻ",
+                post_manager: "മാനേജർ",
+                post_engineer: "എഞ്ചിനീയർ",
+                post_analyst: "വിശകലനക്കാരൻ",
+                post_other: "മറ്റുള്ളവ",
+                phone_label: "ഫോൺ നമ്പർ (ഓപ്ഷണൽ)",
+                phone_placeholder: "നിങ്ങളുടെ ഫോൺ നമ്പർ നൽകുക",
+                birthdate_label: "ജനന തീയതി",
+                how_heard_label: "ഞങ്ങളെക്കുറിച്ച് നിങ്ങൾക്ക് എങ്ങനെ അറിഞ്ഞു?",
+                select_option: "ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക",
+                search_engine: "സെർച്ച് എഞ്ചിൻ",
+                social_media: "സോഷ്യൽ മീഡിയ",
+                friend: "സുഹൃത്ത് അല്ലെങ്കിൽ സഹപ്രവർത്തകൻ",
+                advertisement: "പരസ്യം",
+                other: "മറ്റുള്ളവ",
+                terms_text: "സേവന നിബന്ധനകളും സ്വകാര്യതാ നയവും ഞാൻ അംഗീകരിക്കുന്നു",
+                terms_link: "സേവന നിബന്ധനകൾ",
+                privacy_link: "സ്വകാര്യതാ നയം",
+                terms_error: "നിബന്ധനകളും വ്യവസ്ഥകും നിങ്ങൾ അംഗീകരിക്കണം",
+                next_button: "അടുത്തത്",
+                back_button: "പുറകെ",
+                create_account_button: "അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+                success_message: "നിങ്ങളുടെ അക്കൗണ്ട് വിജയകരമായി സൃഷ്ടിച്ചു!",
+                or_separator: "അല്ലെങ്കിൽ ഇത് ഉപയോഗിച്ച് സൈൻ അപ്പ് ചെയ്യുക",
+                has_account: "ഇതിനകം ഒരു അക്കൗണ്ട് ഉണ്ടോ?",
+                login_link: "ലോഗിൻ"
+            }
+        };
+
+        // Language display names
+        const languageNames = {
+            en: "English",
+            hi: "Hindi",
+            te: "Telugu",
+            ta: "Tamil",
+            ml: "Malayalam"
+        };
+
+        // RTL languages
+        const rtlLanguages = []; // Hindi could be added here if needed
+
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const signupForm = document.getElementById('signupForm');
+        const passwordStrengthBar = document.getElementById('passwordStrengthBar');
+        
+        // Step management elements
+        const step1 = document.getElementById('step1');
+        const step2 = document.getElementById('step2');
+        const step3 = document.getElementById('step3');
+        const step1Form = document.getElementById('step1-form');
+        const step2Form = document.getElementById('step2-form');
+        const step3Form = document.getElementById('step3-form');
+        const nextToStep2Btn = document.getElementById('nextToStep2');
+        const nextToStep3Btn = document.getElementById('nextToStep3');
+        const backToStep1Btn = document.getElementById('backToStep1');
+        const backToStep2Btn = document.getElementById('backToStep2');
+        const submitFormBtn = document.getElementById('submitForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Progress bar
+        const progressBar = document.querySelector('.progress-bar');
+
+        // ========== LANGUAGE SELECTOR ELEMENTS ==========
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        const currentLanguage = document.getElementById('currentLanguage');
+        const languageOptions = document.querySelectorAll('.language-option');
+        
+        // Set initial language based on browser preference or default to English
+        let currentLang = localStorage.getItem('preferredLang') || 'en';
+        currentLanguage.textContent = languageNames[currentLang];
+        
+        // Apply RTL if needed
+        if (rtlLanguages.includes(currentLang)) {
+            document.documentElement.setAttribute('dir', 'rtl');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+        }
+
+        // Theme Toggle
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Toggle Password Visibility
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle eye icon
+            if (type === 'text') {
+                togglePassword.innerHTML = '<i class="far fa-eye-slash"></i>';
+            } else {
+                togglePassword.innerHTML = '<i class="far fa-eye"></i>';
+            }
+        });
+
+        // Password Strength Indicator
+        passwordInput.addEventListener('input', () => {
+            const password = passwordInput.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+            
+            passwordStrengthBar.style.width = strength + '%';
+            
+            if (strength < 50) {
+                passwordStrengthBar.style.backgroundColor = '#e74c3c';
+            } else if (strength < 75) {
+                passwordStrengthBar.style.backgroundColor = '#f39c12';
+            } else {
+                passwordStrengthBar.style.backgroundColor = '#2ecc71';
+            }
+        });
+
+        // Form Steps Navigation
+        nextToStep2Btn.addEventListener('click', () => {
+            if (validateStep1()) {
+                step1.classList.add('active');
+                step2.classList.add('active');
+                step1Form.classList.remove('active');
+                step2Form.classList.add('active');
+                progressBar.style.setProperty('--progress-width', '50%');
+            }
+        });
+
+        nextToStep3Btn.addEventListener('click', () => {
+            if (validateStep2()) {
+                step2.classList.add('active');
+                step3.classList.add('active');
+                step2Form.classList.remove('active');
+                step3Form.classList.add('active');
+                progressBar.style.setProperty('--progress-width', '100%');
+            }
+        });
+
+        backToStep1Btn.addEventListener('click', () => {
+            step2.classList.remove('active');
+            step2Form.classList.remove('active');
+            step1Form.classList.add('active');
+            progressBar.style.setProperty('--progress-width', '0%');
+        });
+
+        backToStep2Btn.addEventListener('click', () => {
+            step3.classList.remove('active');
+            step3Form.classList.remove('active');
+            step2Form.classList.add('active');
+            progressBar.style.setProperty('--progress-width', '50%');
+        });
+
+        // Form Validation
+        function validateStep1() {
+            let isValid = true;
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(document.getElementById('email').value)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+            
+            // Password validation
+            const password = passwordInput.value;
+            if (password.length < 8 || !/[0-9]/.test(password) || !/[A-Za-z]/.test(password)) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+            
+            // Confirm password validation
+            if (password !== confirmPasswordInput.value) {
+                document.getElementById('confirmPasswordError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('confirmPasswordError').style.display = 'none';
+            }
+            
+            return isValid;
+        }
+
+        function validateStep2() {
+            let isValid = true;
+            
+            // Name validation
+            if (document.getElementById('fullName').value.trim().length < 2) {
+                document.getElementById('nameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+            
+            // Username validation
+            const username = document.getElementById('username').value;
+            if (username.length < 3) {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('usernameError').style.display = 'none';
+            }
+            
+            return isValid;
+        }
+
+        // Form Submission
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Terms validation
+            if (!document.getElementById('terms').checked) {
+                document.getElementById('termsError').style.display = 'block';
+                return;
+            } else {
+                document.getElementById('termsError').style.display = 'none';
+            }
+            
+            // Simulate form submission
+            submitFormBtn.innerHTML = translations[currentLang].create_account_button + '...';
+            submitFormBtn.disabled = true;
+            
+            setTimeout(() => {
+                successMessage.style.display = 'block';
+                signupForm.reset();
+                
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    submitFormBtn.innerHTML = translations[currentLang].create_account_button;
+                    submitFormBtn.disabled = false;
+                    
+                    // Reset form steps
+                    step3Form.classList.remove('active');
+                    step1Form.classList.add('active');
+                    step2.classList.remove('active');
+                    step3.classList.remove('active');
+                    step1.classList.add('active');
+                    progressBar.style.setProperty('--progress-width', '0%');
+                }, 3000);
+            }, 1500);
+        });
+
+        // Clear error messages when user starts typing
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                const errorElement = document.getElementById(input.id + 'Error');
+                if (errorElement) {
+                    errorElement.style.display = 'none';
+                }
+            });
+        });
+
+        // ========== LANGUAGE SELECTOR FUNCTIONALITY ==========
+        // Language dropdown toggle
+        languageBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            languageDropdown.classList.toggle('active');
+            languageBtn.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!languageSelector.contains(e.target)) {
+                languageDropdown.classList.remove('active');
+                languageBtn.classList.remove('active');
+            }
+        });
+
+        // Language selection
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                
+                // Update active language
+                languageOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Update current language display
+                currentLanguage.textContent = languageNames[lang];
+                
+                // Close dropdown
+                languageDropdown.classList.remove('active');
+                languageBtn.classList.remove('active');
+                
+                // Change language
+                changeLanguage(lang);
+            });
+        });
+
+        // Function to change language
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLang', lang);
+            
+            // Apply RTL if needed
+            if (rtlLanguages.includes(lang)) {
+                document.documentElement.setAttribute('dir', 'rtl');
+            } else {
+                document.documentElement.setAttribute('dir', 'ltr');
+            }
+            
+            // Update all text elements
+            translatePage(lang);
+        }
+
+        // Function to translate the page
+        function translatePage(lang) {
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update all placeholder texts
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang][key]) {
+                    element.setAttribute('placeholder', translations[lang][key]);
+                }
+            });
+            
+            // Update select options
+            document.querySelectorAll('option[data-translate]').forEach(option => {
+                const key = option.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    option.textContent = translations[lang][key];
+                }
+            });
+            
+            // Update button texts
+            nextToStep2Btn.textContent = translations[lang].next_button;
+            nextToStep3Btn.textContent = translations[lang].next_button;
+            backToStep1Btn.textContent = translations[lang].back_button;
+            backToStep2Btn.textContent = translations[lang].back_button;
+            submitFormBtn.textContent = translations[lang].create_account_button;
+        }
+
+        // Initialize translation on page load
+        translatePage(currentLang);
+        
+        // Mark the current language as active in the dropdown
+        document.querySelectorAll('.language-option').forEach(option => {
+            if (option.getAttribute('data-lang') === currentLang) {
+                option.classList.add('active');
+            } else {
+                option.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

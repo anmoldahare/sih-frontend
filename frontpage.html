@@ -86,8 +86,9 @@
             flex-shrink: 0;
         }
         
-        .logo i {
-            font-size: 1.5rem;
+        .logo img {
+            height: 50px; /* Adjust as needed for your logo */
+            width: auto;
         }
         
         nav ul {
@@ -1004,10 +1005,11 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
+          <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-city"></i>
+                    <!-- Replace with your logo image -->
+                    <img src="https://i.ibb.co/qZzvg53/Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview.png" alt="Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview" alt=" alt="Samadhan Setu Logo">
                     <span class="translate" data-key="title">Samadhan Setu</span>
                 </div>
                 <nav>
@@ -1016,7 +1018,7 @@
                         <li><a href="#how-it-works" class="translate" data-key="reports">REPORTS</a></li>
                         <li><a href="#map" class="translate" data-key="viewMap">VIEW MAP</a></li>
                         <li><a href="#" class="translate" data-key="dashboard">DASHBOARD</a></li>
-                        <li><a href="http://127.0.0.1:5500/sih-frontend/login.html" target="blank" class="translate" data-key="cityOfficials">FOR CITY OFFICIALS</a></li>
+                        <li><a href="http://127.0.0.1:5500/sih-frontend/signupforcityo.html" target="blank" class="translate" data-key="cityOfficials">FOR CITY OFFICIALS</a></li>
                     </ul>
                 </nav>
                 <div class="header-actions">
@@ -1128,7 +1130,7 @@
                         </ul>
                     </div>
                     <div class="workflow-card-footer">
-                        <button  onclick="window.open('#track')" class="btn btn-primary translate" data-key="trackReports">Track Your Reports</button>
+                        <button  onclick="window.open('#reportCards')" class="btn btn-primary translate" data-key="trackReports">Track Your Reports</button>
                     </div>
                 </div>
             </div>
@@ -1272,7 +1274,7 @@
                     </div>
                 </div>
             </div>
-        <div>id=track</div>
+        <div id="reportCards"></div>
     </section>
 
     <!-- Report Modal -->
