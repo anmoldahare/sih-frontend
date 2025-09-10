@@ -6,236 +6,8 @@
     <title>City Officials Portal - Samadhan Setu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        :root {
-            --primary: #3498db;
-            --secondary: #2c3e50;
-            --accent: #2ecc71;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --info: #1abc9c;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Header Styles */
-        .official-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.137);
-        }
-        
-        .official-header .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-        
-        .official-header .logo img {
-            height: 50px;
-            width: auto;
-        }
-        
-        /* Dashboard Cards */
-        .stats-card {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-            height: 100%;
-        }
-        
-        .stats-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .stats-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-        
-        .stats-card .count {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        
-        .stats-card .label {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-        
-        /* Priority Badges */
-        .priority-high {
-            background-color: var(--danger);
-            color: white;
-        }
-        
-        .priority-medium {
-            background-color: var(--warning);
-            color: white;
-        }
-        
-        .priority-low {
-            background-color: var(--info);
-            color: white;
-        }
-        
-        /* Status Badges */
-        .status-new {
-            background-color: #ffeaa7;
-            color: #d35400;
-        }
-        
-        .status-progress {
-            background-color: #81ecec;
-            color: #00cec9;
-        }
-        
-        .status-resolved {
-            background-color: #55efc4;
-            color: #00b894;
-        }
-        
-        /* Table Styles */
-        .issues-table {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .issues-table th {
-            background-color: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
-        
-        .issues-table tr:hover {
-            background-color: rgba(52, 152, 219, 0.05);
-        }
-        
-        /* Action Buttons */
-        
-        .btn-primary:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background-color: rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-primary:hover:after {
-            height: 100%;
-        }
-        .btn-outline:hover:before {
-            left: 0;
-        }
-        
-        .btn-outline:hover {
-            color: var(--primary);
-        }
-
-        /* Login Form */
-        .login-container {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Dashboard Sections */
-        .dashboard-section {
-            background: white;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .section-title {
-            color: #333;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--light);
-        }
-        
-        /* Map Container */
-        .map-container {
-            height: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .stats-card {
-                margin-bottom: 20px;
-            }
-            
-            .official-header .logo {
-                font-size: 1.2rem;
-            }
-            
-            .official-header .logo img {
-                height: 40px;
-            }
-        }
-        
-        /* Custom Tabs */
-        .nav-tabs .nav-link {
-            color: var(--dark);
-            font-weight: 600;
-            border: none;
-            padding: 0.8rem 1.2rem;
-        }
-        
-        .nav-tabs .nav-link.active {
-            color: rgba(0, 0, 0, 0.637);
-            border-bottom: 3px solid var(--secondary);
-            background: transparent;
-        }
-        
-        /* Analytics Chart Container */
-        .chart-container {
-            height: 300px;
-            position: relative;
-        }
-        .profile img {
-            height: 50px;
-            width: auto;
-            gap
-        }
-    </style>
+    <link rel="stylesheet" href="cityof.css">
+    <script src="cityof.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -247,6 +19,19 @@
                     <span>Samadhan Setu - City Officials Portal</span>
                 </div>
                 <div class="d-flex align-items-center">
+                                      <div class="dropdown me-3">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-globe me-1"></i> <span data-translate="language">Language</span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                            <li><a class="dropdown-item language-option" href="#" data-lang="en">English</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="hi">Hindi</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="ta">Tamil</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="te">Telugu</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="ml">Malayalam</a></li>
+                        </ul>
+                    </div>
+
                     <div class="dropdown me-3">
                         <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-circle me-1"></i> Admin User
@@ -259,11 +44,11 @@
                         </ul>
                     </div>
                     <button class="btn btn-outline-light">
-                        <i class="fas fa-bell"></i>
+                        <i class="fas fa-bell"></i> 
                         <span class="badge bg-danger ms-1">3</span>
                     </button>
-                    <div class ="profile">
-                        <img src="https://i.ibb.co/bgvNRZGw/Png-Item-1468479.png" alt=></a>
+                    <div class="profile-image ms-3">
+                        <img src="https://i.ibb.co/nMBkntWm/Png-Item-1468479.png" alt="Profile" border="0">
                     </div>
                 </div>
             </div>
@@ -489,8 +274,8 @@
                     <div class="map-container mb-4" id="issueMap">
                         <!-- Map will be loaded here -->
                         <div style="width: 100%; height: 100%; background-color: #e9ecef; display: flex; align-items: center; justify-content: center; color: #6c757d;">
-                            <i class="fas fa-map-marked-alt fa-3x me-3"></i>
-                            <span>Interactive Map Loading...</span>
+                            <i class=""></i>
+                            <span> <img src="https://i.ibb.co/nNr0Q0SM/Screenshot-2025-09-10-224636.png" alt=""></span>
                         </div>
                     </div>
                     
@@ -731,132 +516,24 @@
     </div>
 
     <!-- Footer -->
-    
+    <footer class="official-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Samadhan Setu - City Grievance Portal. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="" class="text-light me-3">Privacy Policy</a>
+                    <a href="#" class="text-light me-3">Terms of Service</a>
+                    <a href="#" class="text-light">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Initialize tooltips
-        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-            return new bootstrap.Tooltip(tooltipTriggerEl)
-        });
-        
-        // Initialize charts
-        document.addEventListener('DOMContentLoaded', function() {
-            // Category Chart
-            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
-            const categoryChart = new Chart(categoryCtx, {
-                type: 'pie',
-                data: {
-                    labels: ['Potholes', 'Streetlights', 'Garbage', 'Water Issues', 'Graffiti', 'Others'],
-                    datasets: [{
-                        data: [30, 25, 20, 15, 5, 5],
-                        backgroundColor: [
-                            '#3498db',
-                            '#f39c12',
-                            '#2ecc71',
-                            '#1abc9c',
-                            '#9b59b6',
-                            '#e74c3c'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right'
-                        }
-                    }
-                }
-            });
-            
-            // Timeline Chart
-            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
-            const timelineChart = new Chart(timelineCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                        label: 'Reports Received',
-                        data: [65, 59, 80, 81, 56, 55, 72, 78, 80, 85, 90, 95],
-                        borderColor: '#3498db',
-                        tension: 0.1,
-                        fill: false
-                    }, {
-                        label: 'Issues Resolved',
-                        data: [50, 45, 70, 75, 50, 48, 65, 70, 75, 80, 85, 88],
-                        borderColor: '#2ecc71',
-                        tension: 0.1,
-                        fill: false
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-            
-            // Performance Chart
-            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
-            const performanceChart = new Chart(performanceCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Public Works', 'Electricity', 'Water Supply', 'Sanitation', 'Parks & Rec'],
-                    datasets: [{
-                        label: 'Resolution Rate (%)',
-                        data: [85, 92, 78, 88, 95],
-                        backgroundColor: '#2ecc71'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 100
-                        }
-                    }
-                }
-            });
-            
-            // Zone Chart
-            const zoneCtx = document.getElementById('zoneChart').getContext('2d');
-            const zoneChart = new Chart(zoneCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Zone 1', 'Zone 2', 'Zone 3', 'Zone 4', 'Zone 5'],
-                    datasets: [{
-                        data: [25, 20, 15, 30, 10],
-                        backgroundColor: [
-                            '#3498db',
-                            '#f39c12',
-                            '#2ecc71',
-                            '#9b59b6',
-                            '#e74c3c'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right'
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-    
+    <script src="script.js"></script>
 </body>
 </html>
