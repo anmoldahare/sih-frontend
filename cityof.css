@@ -187,6 +187,51 @@ body {
     color: white;
 }
 
+.profile-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            display: none;
+            z-index: 1001;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+        
+        .profile-dropdown.show {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        .profile-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .profile-dropdown a:hover {
+            background: var(--section-alt-bg);
+        }
+        
+        .profile-dropdown a i {
+            width: 20px;
+            text-align: center;
+        }
 /* Login Form */
 .login-container {
     max-width: 400px;
@@ -275,12 +320,6 @@ body {
     position: relative;
 }
 
-.profile-image img {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
 
 /* Department Cards */
 .department-card {
@@ -303,3 +342,4 @@ body {
 .hindi-lang, .tamil-lang, .telugu-lang, .malayalam-lang {
     font-family: Arial, sans-serif;
 }
+

@@ -307,6 +307,7 @@ const translations = {
     }
 };
 
+
 // Initialize tooltips and language
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Bootstrap tooltips
