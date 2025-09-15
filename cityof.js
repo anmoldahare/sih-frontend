@@ -505,3 +505,64 @@ function initCharts() {
         }
     });
 }
+document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleBtn');
+            const sidebar = document.getElementById('sidebar');
+            const closeBtn = document.getElementById('closeBtn');
+            const overlay = document.getElementById('overlay');
+            const body = document.body;
+            
+            // Toggle sidebar function
+            function openSidebar() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                body.classList.add('menu-open');
+                toggleBtn.style.left = "280px";
+            }
+            
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                toggleBtn.style.left = "0";
+            }
+            
+            // Add click event to toggle button
+            toggleBtn.addEventListener('click', openSidebar);
+            
+            // Add click event to close button
+            closeBtn.addEventListener('click', closeSidebar);
+            
+            // Add click event to overlay
+            overlay.addEventListener('click', closeSidebar);
+            
+            // Add click event to menu items
+            const menuItems = document.querySelectorAll('.Menu li');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                });
+            });
+            
+            // Add click event to social icons
+            const socialIcons = document.querySelectorAll('.fa-brands');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const platform = this.classList[1].split('-')[1];
+                    alert(`Redirecting to our ${platform} page!`);
+                });
+            });
+            
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeSidebar();
+                }
+            });
+        });
+
+        
