@@ -1,27 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Samadhan Setu - User Dashboard</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Font Awesome & Remixicon CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
-
-    <!-- Leaflet CSS for Interactive Map -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
     <style>
-        /* --- Custom Properties (Color Scheme) --- */
         :root {
             --primary: #3498db;
             --secondary: #2ecc71;
             --danger: #e74c3c;
             --warning: #f39c12;
-            --dark-color: #2c3e50;
+            --dark: #2c3e50;
             --light: #ecf0f1;
             --grey: #7f8c8d;
             --bg-color: #f5f7fa;
@@ -30,10 +21,10 @@
             --header-bg: linear-gradient(135deg, #3498db, #2c3e50);
             --footer-bg: #2c3e50;
             --section-bg: white;
-            --section-alt-bg: #eff6ff;
+            --section-alt-bg:#eff6ff;
         }
 
-        [data-bs-theme="dark"] {
+        .dark-mode {
             --bg-color: #1a1a1a;
             --text-color: #f0f0f0;
             --card-bg: #2d2d2d;
@@ -42,49 +33,102 @@
             --section-bg: #2d2d2d;
             --section-alt-bg: #252525;
             --grey: #aaa;
-            --bs-body-color: var(--text-color);
-            --bs-body-bg: var(--bg-color);
-            --bs-card-bg: var(--card-bg);
-            --bs-list-group-bg: var(--card-bg);
-            --bs-list-group-border-color: var(--section-alt-bg);
-            --bs-modal-bg: var(--card-bg);
-            --bs-offcanvas-bg: linear-gradient(135deg, #2c3e50, #1a1a1a);
         }
-
-        /* --- General Styling --- */
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+        
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: background-color 0.3s, color 0.3s;
         }
-
-        /* --- Header & Navbar --- */
-        .navbar {
-            background: var(--header-bg);
-            padding: 0.5rem 1rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
         }
-        .navbar-brand {
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 0.8rem 15px; /* MODIFIED: Padding directly on header */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* ADDED: To make it work with new header structure */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo-container {
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-shrink: 0;
         }
-        .navbar-brand img { height: 50px; }
-        .navbar-nav .nav-link {
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            white-space: nowrap;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        nav {
+           flex-grow: 1;
+           display: flex;
+           justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        nav a {
             color: white;
+            text-decoration: none;
             font-weight: 500;
+            transition: opacity 0.3s;
             font-size: 0.9rem;
+            white-space: nowrap;
             padding: 0.5rem 0.8rem;
             border-radius: 4px;
         }
-        .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+        
+        nav a:hover, nav a.active {
             background: rgba(255, 255, 255, 0.2);
         }
-        .header-actions { display: flex; gap: 0.8rem; align-items: center; }
+        
+        .header-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            flex-shrink: 0;
+        }
 
         .btn-report {
             background: var(--secondary);
@@ -92,10 +136,16 @@
             border: none;
             padding: 0.6rem 1rem;
             border-radius: 20px;
-            font-weight: 600; font-size: 0.9rem;
-            display: flex; align-items: center; gap: 0.5rem;
-            transition: all 0.3s ease; white-space: nowrap;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
         }
+
         .btn-report:hover {
             background: #27ae60;
             transform: translateY(-2px);
@@ -103,883 +153,2073 @@
         }
         
         .location-selector {
-            display: flex; align-items: center;
+            display: flex;
+            align-items: center;
             background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1rem; border-radius: 20px;
-            cursor: pointer; color: white; transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
-        .location-selector:hover { background: rgba(255, 255, 255, 0.3); }
-        .location-selector i { margin-right: 8px; }
+        
+        .location-selector:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .location-selector i {
+            margin-right: 8px;
+        }
+        
+        /* Language Selector Styles */
+        .language-selector {
+            position: relative;
+        }
+        .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .language-btn .fa-caret-down {
+            transition: transform 0.3s;
+        }
+        .language-selector.open .language-btn .fa-caret-down {
+            transform: rotate(180deg);
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            display: none;
+            z-index: 101;
+            margin-top: 0.8rem;
+            overflow: hidden;
+            animation: fadeIn 0.2s ease-out;
+        }
+        .language-dropdown.show {
+            display: block;
+        }
+        .language-dropdown a {
+            display: block;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .language-dropdown a:hover {
+            background: var(--section-alt-bg);
+        }
 
         .theme-toggle {
-            background: rgba(255, 255, 255, 0.2); color: white; border: none;
-            width: 40px; height: 40px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex-shrink: 0;
         }
-        .theme-toggle:hover { background: rgba(255, 255, 255, 0.3); }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .user-profile {
+            position: relative;
+        }
+        
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
 
         .profile-img {
-            width: 38px; height: 38px; border-radius: 50%;
-            object-fit: cover; border: 2px solid white;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
         }
-        .dropdown-menu {
-            background-color: var(--card-bg);
-            border: 1px solid var(--section-alt-bg);
+        
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            display: none;
+            z-index: 101;
+            margin-top: 0.8rem;
+            overflow: hidden;
         }
-        .dropdown-item { color: var(--text-color); }
-        .dropdown-item:hover { background-color: var(--section-alt-bg); color: var(--text-color); }
         
-        .language-selector .dropdown-toggle {
-            background: rgba(255, 255, 255, 0.2);
-            color: white; border-radius: 20px;
-            padding: 0.6rem 1rem; border: none;
+        .profile-dropdown.show {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
         }
-        .language-selector .dropdown-toggle:hover { background: rgba(255, 255, 255, 0.3); }
-        .language-flag { width: 20px; height: auto; margin-right: 8px; }
         
-        /* --- Unified Offcanvas Sidebar --- */
-        .offcanvas { color: white; }
-        [data-bs-theme="light"] .offcanvas { background: linear-gradient(135deg, #1a2a6c, #b21f1f); }
-        .offcanvas-header { border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-        .offcanvas-title { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 1.5rem; }
-        .btn-close-white { filter: invert(1); }
-        .slide-menu { list-style: none; padding: 0; }
-        .slide-menu a {
-            color: white; text-decoration: none; padding: 1rem 1.5rem;
-            display: flex; align-items: center; gap: 1rem;
-            border-left: 4px solid transparent; transition: all 0.3s ease;
+        .profile-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s;
         }
-        .slide-menu a:hover, .slide-menu a.active {
-            background: rgba(255, 255, 255, 0.1);
-            border-left: 4px solid #fdbb2d;
-            transform: translateX(5px);
+        
+        .profile-dropdown a:hover {
+            background: var(--section-alt-bg);
         }
-        .sidebar-socials {
-            display: flex; justify-content: center; gap: 1rem;
-            padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .profile-dropdown a i {
+            width: 20px;
+            text-align: center;
         }
-         .sidebar-socials a { color: white; opacity: 0.8; font-size: 1.5rem; }
-         .sidebar-socials a:hover { opacity: 1; }
-
-        /* --- Main Content & Sections --- */
-        .dashboard { padding: 2rem 0; min-height: calc(100vh - 200px); }
-        .section { display: none; animation: fadeIn 0.5s ease; }
-        .section.active { display: block; }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: fadeIn 0.3s;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .close-btn {
+            color: var(--grey);
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover {
+            color: var(--danger);
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--grey);
+            border-radius: 6px;
+            background: var(--section-alt-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background: #2980b9;
+        }
+        
+        .dashboard {
+            padding: 2rem 0;
+            min-height: calc(100vh - 200px);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .section-title {
-            font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-color);
-            display: flex; align-items: center; gap: 0.8rem;
-        }
-        .section-title i { color: var(--primary); }
-
-        /* --- Reusable Components --- */
+        
         .welcome-banner {
-            background: linear-gradient(135deg, var(--primary), var(--dark-color)); color: white;
-            padding: 2rem; border-radius: 12px; margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        .stat-item {
-            text-align: center; background: rgba(255, 255, 255, 0.2);
-            padding: 1rem; border-radius: 8px; min-width: 100px;
-        }
-        .stat-value { font-size: 1.8rem; font-weight: bold; }
-        .stat-label { font-size: 0.9rem; opacity: 0.9; }
-
-        .menu-card, .report-card, .leaderboard-container, .recent-activity, .gamification-section {
-            background-color: var(--card-bg); border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .menu-card {
-            padding: 1.5rem; text-align: center; cursor: pointer; min-height: 180px;
-        }
-        .menu-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
-        .menu-icon img { width: 80px; height: 80px; }
-        .glassy-button {
-            width: 50px; height: 50px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            color: #181e70; font-size: 28px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        [data-bs-theme="dark"] .glassy-button { color: var(--light); }
-        .glassy-button:hover { transform: scale(1.1); box-shadow: 0 12px 24px rgba(0, 255, 255, 0.5); }
         
-        .gamification-section { padding: 2rem; margin-bottom: 2rem; background: var(--section-alt-bg); }
-        .badges-container { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 1rem; }
-        .badge {
-            background: var(--card-bg); border-radius: 12px;
-            padding: 1.5rem; text-align: center; min-width: 150px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        .badge-icon {
-            width: 60px; height: 60px;
-            background: linear-gradient(135deg, var(--warning), var(--danger));
-            border-radius: 50%; margin: 0 auto 1rem;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; color: white;
-        }
-        .badge.locked .badge-icon { background: var(--grey); filter: grayscale(1); }
-        
-        .recent-activity { padding: 1.5rem; }
-        .activity-item {
-            display: flex; gap: 1rem; padding: 1rem 0;
-            border-bottom: 1px solid var(--section-alt-bg);
-        }
-        .activity-item:last-child { border-bottom: none; }
-        .activity-icon {
-            width: 40px; height: 40px; background: var(--section-alt-bg);
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; color: var(--primary); flex-shrink: 0;
-        }
-        
-        .report-card { border: none; overflow: hidden; }
-        .report-card:hover { transform: translateY(-5px); }
-        .report-image img { height: 200px; width: 100%; object-fit: cover; transition: transform 0.5s; }
-        .report-card:hover .report-image img { transform: scale(1.05); }
-        .report-status {
-            display: inline-block; padding: 0.3rem 0.8rem;
-            border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+        .user-info h1 {
+            font-size: 1.8rem;
             margin-bottom: 0.5rem;
         }
-        .status-new { background-color: #ffeaa7; color: #d35400; }
-        .status-progress { background-color: #81ecec; color: #00cec9; }
-        .status-resolved { background-color: #55efc4; color: #00b894; }
-
-        .leaderboard-container { padding: 1.5rem; }
-        .leaderboard-list { list-style: none; padding: 0; }
-        .leaderboard-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid var(--section-alt-bg); }
-        .leaderboard-rank {
-            width: 30px; height: 30px; background: var(--section-alt-bg);
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-weight: bold;
-        }
-        .leaderboard-item:first-child .leaderboard-rank { background: gold; color: var(--dark-color); }
-        .leaderboard-item:nth-child(2) .leaderboard-rank { background: silver; color: var(--dark-color); }
-        .leaderboard-item:nth-child(3) .leaderboard-rank { background: #cd7f32; color: white; }
-        .leaderboard-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-        .leaderboard-points { font-weight: bold; color: var(--primary); margin-left: auto; }
         
-        #leaflet-map {
-            height: 500px;
+        .user-info p {
+            opacity: 0.9;
+        }
+        
+        .user-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        
+        
+        .gamification-section {
+            background: var(--section-alt-bg);
+            padding: 2rem;
             border-radius: 12px;
             margin-bottom: 2rem;
         }
         
-        /* --- Footer --- */
-        footer { background: var(--footer-bg); color: white; padding: 60px 0 30px; }
-        footer h3 { font-size: 1.2rem; margin-bottom: 20px; color: var(--primary); }
-        footer p, footer li, footer a { font-size: 0.95rem; color: var(--light); opacity: 0.8; }
-        footer ul { list-style: none; padding: 0; }
-        footer a { text-decoration: none; transition: all 0.3s; }
-        footer a:hover { opacity: 1; color: white; padding-left: 5px; }
-        .social-links a {
-            display: flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1); color: white;
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
-        .social-links a:hover { background: var(--primary); }
-        .copyright { text-align: center; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9rem; }
-
-        /* --- Chatbot --- */
-        .chatbot {
-            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
-            background: var(--primary); color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); z-index: 1000; transition: all 0.3s;
-        }
-        .chatbot:hover { transform: scale(1.1); }
         
-        /* --- Responsive Adjustments --- */
-         @media (max-width: 991.98px) { /* lg breakpoint */
-            .navbar-brand {
-                margin-right: auto; /* Pushes other items to the end */
-            }
-         }
-         @media (max-width: 767.98px) {
-            .location-selector span { display: none; }
-            .header-actions .btn-report, .header-actions .theme-toggle {
-                display: none;
-            }
-            .welcome-banner { flex-direction: column; text-align: center; gap: 1.5rem; }
+        .section-title i {
+            color: var(--primary);
         }
+        
+        .badges-container {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            padding: 0.5rem;
+        }
+        
+        .badge {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            min-width: 150px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .badge-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--warning), var(--danger));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .badge.locked .badge-icon {
+            background: var(--grey);
+            filter: grayscale(1);
+        }
+        
+        .badge-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge-desc {
+            font-size: 0.8rem;
+            color: var(--grey);
+        }
+        
+        .recent-activity {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--section-alt-bg);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--section-alt-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex-grow: 1;
+        }
+        
+        .activity-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .activity-desc {
+            font-size: 0.9rem;
+            color: var(--grey);
+            margin-bottom: 0.3rem;
+        }
+        
+        .activity-time {
+            font-size: 0.8rem;
+            color: var(--grey);
+        }
+        
+        .map-container {
+            height: 500px;
+            background: var(--section-alt-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        
+        .map-placeholder {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .map-placeholder i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .reports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .report-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .report-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .report-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .report-card:hover .report-image img {
+            transform: scale(1.05);
+        }
+        
+        .report-content {
+            padding: 1.5rem;
+        }
+        
+        .report-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-new {
+            background-color: #ffeaa7;
+            color: #d35400;
+        }
+        
+        .status-progress {
+            background-color: #81ecec;
+            color: #00cec9;
+        }
+        
+        .status-resolved {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+        
+        .report-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .report-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--grey);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .leaderboard-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .leaderboard-list {
+            list-style: none;
+        }
+        
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--section-alt-bg);
+        }
+        
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+        
+        .leaderboard-rank {
+            width: 30px;
+            height: 30px;
+            background: var(--section-alt-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .leaderboard-item:first-child .leaderboard-rank {
+            background: gold;
+            color: var(--dark);
+        }
+        
+        .leaderboard-item:nth-child(2) .leaderboard-rank {
+            background: silver;
+            color: var(--dark);
+        }
+        
+        .leaderboard-item:nth-child(3) .leaderboard-rank {
+            background: #cd7f32;
+            color: white;
+        }
+        
+        .leaderboard-user {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-grow: 1;
+        }
+        
+        .leaderboard-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .leaderboard-points {
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s;
+        }
+        
+        .chatbot:hover {
+            transform: scale(1.1);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 60px 0 30px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: var(--accent);
+    }
+
+    .footer-column p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--light-gray);
+    }
+
+    .footer-column ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .footer-column a {
+      color: var(--light-gray);
+      text-decoration: none;
+      transition: color 0.3s, padding-left 0.3s;
+    }
+
+    .footer-column a:hover {
+      color: white;
+      padding-left: 5px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transition: background 0.3s;
+      color: white;
+    }
+
+    .social-links a:hover {
+      background: var(--primary);
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-gray);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+        /* Responsive Styles */
+        @media (max-width: 1100px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav a {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.6rem;
+            }
+            .btn-report, .language-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .header-content {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+            nav {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .user-stats {
+                justify-content: center;
+            }
+        }
+        .logo-container img{
+            height: 60px;
+            width: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .btn-report span, .language-btn span, .location-selector span {
+                display: none; /* Hide text on small screens */
+            }
+            .language-btn {
+                 padding: 0.6rem 0.8rem;
+            }
+            .btn-report {
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                padding: 0;
+                justify-content: center;
+            }
+            .user-stats {
+                flex-wrap: wrap;
+            }
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                display: none; /* Hide logo text on smallest screens */
+            }
+            .logo-img {
+                height: 40px;
+            }
+            .location-selector {
+                padding: 0.5rem;
+            }
+        }
+        body.menu-open {
+            margin-left: 280px;
+        }
+
+        /* Toggle button on left side */
+        .toggle-btn {
+            background: #fff;
+            color: #1a2a6c;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: fixed;
+            top: 20px;
+            left: 0;
+            z-index: 98;
+        }
+
+        .toggle-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle-btn i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        /* Slidebar styles - Fixed to left edge */
+        .slidebar {
+            background: rgba(0, 0, 0, 0.95);
+            height: 100vh;
+            width: 280px;
+            padding: 30px 0;
+            position: fixed;
+            top: 0;
+            left: -280px;
+            overflow-y: auto;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+            transition: left 0.4s ease-in-out;
+            z-index: 99;
+        }
+
+        .slidebar.active {
+            left: 0;
+        }
+
+        .slidebar h1 {
+            color: white;
+            text-align: center;
+            margin: 30px 0 40px;
+            font-size: 28px;
+            padding: 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .slidebar h1:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            border-radius: 3px;
+        }
+
+        .Menu {
+            margin-bottom: 60px;
+        }
+
+        .Menu li {
+            list-style: none;
+            padding: 15px 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .Menu li:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(26, 42, 108, 0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .Menu li:hover:before {
+            left: 100%;
+        }
+
+        .Menu li:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .Menu li.active {
+            background: rgba(26, 42, 108, 0.3);
+        }
+
+        .Menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .Menu li:hover a {
+            transform: translateX(5px);
+        }
+
+        .fa-solid {
+            width: 30px;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .Menu li:hover .fa-solid {
+            color: #fdbb2d;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 0 20px;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+        }
+
+        .fa-brands {
+            color: white;
+            font-size: 22px;
+            margin: 0 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fa-brands:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+            box-shadow: 0 5px 15px rgba(178, 31, 31, 0.4);
+        }
+
+        /* Content area */
+        .content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h2 {
+            margin-bottom: 20px;
+            color: #1a2a6c;
+            font-size: 28px;
+            text-align: center;
+        }
+
+        .content p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        /* Close button for sidebar */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .close-btn:hover {
+            color: #fdbb2d;
+            transform: rotate(90deg);
+        }
+
+        /* Overlay for when menu is open */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 98;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body.menu-open {
+                margin-left: 0;
+            }
+            
+            .slidebar {
+                width: 250px;
+            }
+            
+            .toggle-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            
+            .content {
+                padding: 20px;
+                margin-top: 70px;
+            }
+            
+            .content h2 {
+                font-size: 24px;
+            }
+            
+            .content p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .slidebar {
+                width: 220px;
+            }
+            
+            .toggle-btn {
+                width: auto;
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .Menu li {
+                padding: 12px 20px;
+            }
+            
+            .Menu a {
+                font-size: 16px;
+            }
+            
+            .content {
+                padding: 15px;
+                margin-top: 60px;
+            }
+        }
+        /* Update slidebar styles to work with theme switching */
+.slidebar {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+    color: white;
+    height: 100vh;
+    width: 280px;
+    padding: 30px 0;
+    position: fixed;
+    top: 0;
+    left: -280px;
+    overflow-y: auto;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+    transition: left 0.4s ease-in-out;
+    z-index: 99;
+}
+
+.dark-mode .slidebar {
+    background: linear-gradient(135deg, #2c3e50, #1a1a1a);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.7);
+}
+
+.Menu li {
+    list-style: none;
+    padding: 15px 30px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid transparent;
+}
+
+.Menu li:hover, .Menu li.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 4px solid #fdbb2d;
+}
+
+.dark-mode .Menu li:hover, .dark-mode .Menu li.active {
+    background: rgba(243, 104, 104, 0.05);
+}
+
+.Menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px; 
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.Menu li:hover a {
+    transform: translateX(5px);
+}
+
+.fa-solid {
+    width: 30px;
+    font-size: 20px;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.Menu li:hover .fa-solid {
+    color: #fdbb2d;
+}
+
+.icons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+.fa-brands {
+    color: white;
+    font-size: 22px;
+    margin: 0 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fa-brands:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 100%);
+    box-shadow: 0 5px 15px rgba(178, 31, 31, 0.4);
+}
+
+.dark-mode .fa-brands:hover {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 101;
+}
+
+.close-btn:hover {
+    color: #fdbb2d;
+    transform: rotate(90deg);
+}
+
+/* Toggle button styling */
+.toggle-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 0 50px 50px 0;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 20px;
+    left: 0;
+    z-index: 98;
+}
+
+.dark-mode .toggle-btn {
+    background: var(--dark);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn i {
+    margin-right: 10px;
+    font-size: 20px;
+}
+.menu-icon img{
+    width: 80px;
+    height: 80px;
+}
+
+  
+    .glassy-button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+      color: #181e70;
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .glassy-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 24px rgba(0, 255, 255, 0.5);
+    }
+
+    .glassy-button:active {
+      transform: scale(0.95);
+    }
     </style>
 </head>
 <body>
+    
+    
+    <header>
+        <button class="toggle-btn" id="toggleBtn">
+        <i class="fas fa-bars"></i> Menu
+    </button>
 
-<!-- Unified Offcanvas Sidebar -->
-<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="sidebarLabel">Samadhan Setu</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body d-flex flex-column p-0">
-        <ul class="slide-menu flex-grow-1">
-            <!-- Main Nav Links -->
-            <li><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home fa-fw"></i> HOME</a></li>
-            <li><a href="#" class="nav-link" data-section="reports"><i class="fas fa-file-alt fa-fw"></i> MY REPORTS</a></li>
-            <li><a href="#" class="nav-link" data-section="map"><i class="fas fa-map-marked-alt fa-fw"></i> VIEW MAP</a></li>
-            <li><a href="#" class="nav-link" data-section="leaderboard"><i class="fas fa-trophy fa-fw"></i> LEADERBOARD</a></li>
-            <li><a href="#" class="nav-link" data-section="rewards"><i class="fas fa-gift fa-fw"></i> REWARDS</a></li>
-            <li><a href="#" class="nav-link" data-section="blogs"><i class="fas fa-blog fa-fw"></i> BLOGS</a></li>
-            <li><a href="#" class="nav-link" data-section="ngos"><i class="fas fa-hand-holding-heart fa-fw"></i> NGOs</a></li>
+    <div class="slidebar" id="sidebar">
+        <div class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </div>
+        <h1>Samadhan Setu</h1>
+        <ul class="Menu">
+            <li class="active"><a href="#"><i class="fa-solid fa-user"></i>Emergency/Scheduled Alerts</a></li>
+            <li><a href="#"><i class="fa-solid fa-bell"></i>Notifications</a></li>
+            <li><a href="#"><i class="fa-solid fa-check"></i>Verified NGOs Partner</a></li>
             
-            <li><hr class="text-white-50 mx-3"></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
             
-            <!-- Actions moved to sidebar -->
-            <li><a href="#" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fas fa-plus-circle fa-fw"></i> REPORT ISSUE</a></li>
-            <li><a href="#" id="sidebarThemeToggle"><i class="fas fa-moon fa-fw"></i> TOGGLE THEME</a></li>
-
-            <li><hr class="text-white-50 mx-3"></li>
-
-            <!-- Secondary Links -->
-            <li><a href="#"><i class="fa-solid fa-user fa-fw"></i>Emergency Alerts</a></li>
-            <li><a href="#"><i class="fa-solid fa-bell fa-fw"></i>Notifications</a></li>
-            <li><a href="#"><i class="fa-solid fa-check fa-fw"></i>Verified NGOs Partner</a></li>
-            <li><a href="#"><i class="fa-solid fa-gear fa-fw"></i>Settings</a></li>
-            <li><a href="#"><i class="fa-solid fa-envelope fa-fw"></i>Email & SMS Support</a></li>
-            <li><a href="#"><i class="fa-solid fa-circle-question fa-fw"></i>Help & Support</a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i>Email & SMS Support</a></li>
+            <li><a href="#"><i class="fa-solid fa-circle-question"></i>Help & Support</a></li>
         </ul>
-        <div class="sidebar-socials p-4">
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#"><i class="fa-brands fa-github"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <div class="icons">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-twitter"></i>
         </div>
     </div>
-</div>
 
-<!-- Header -->
-<header class="sticky-top">
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <!-- Burger Menu Toggle for Sidebar -->
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
-                <i class="fas fa-bars text-white"></i>
-            </button>
+    <div class="overlay" id="overlay"></div>
 
-            <!-- Logo -->
-            <a class="navbar-brand text-white" href="#">
-                <img src="https://i.ibb.co/qZzvg53/Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview.png" alt="Logo">
-                <span class="d-none d-md-inline">Samadhan Setu</span>
-            </a>
-            
-            <!-- Main Nav for Desktop -->
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> HOME</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" data-section="reports"><i class="fas fa-file-alt"></i> MY REPORTS</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" data-section="map"><i class="fas fa-map-marked-alt"></i> VIEW MAP</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" data-section="leaderboard"><i class="fas fa-trophy"></i> LEADERBOARD</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" data-section="rewards"><i class="fas fa-gift"></i> REWARDS</a></li>
-                </ul>
+        <div class="header-content">
+            <div class="logo-container">
+                <img src="https://i.ibb.co/qZzvg53/Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview.png" alt="Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview" border="0">
+                <div class="Logo"><h2>Samadhan setu</h2></div>
             </div>
-
-            <!-- Header Actions -->
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> HOME</a></li>
+                    <li><a href="#" class="nav-link" data-section="reports"><i class="fas fa-file-alt"></i> MY REPORTS</a></li>
+                    
+                    <li><a href="#" class="nav-link" data-section="map"><i class="fas fa-map-marked-alt"></i> VIEW MAP</a></li>
+                    <li><a href="#" class="nav-link" data-section="leaderboard"><i class="fas fa-trophy"></i> LEADERBOARD</a></li>
+                    <li><a href="#" class="nav-link" data-section="rewards"><i class="fas fa-gift"></i> REWARDS</a></li>
+                </ul>
+            </nav>
+            
             <div class="header-actions">
-                <button class="btn-report" data-bs-toggle="modal" data-bs-target="#reportModal">
+                <button class="btn-report" id="reportIssueBtn">
                     <i class="fas fa-plus-circle"></i> <span>Report Issue</span>
                 </button>
-                <div class="location-selector d-none d-lg-flex">
+                <div class="location-selector">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Bhopal, MP</span>
                 </div>
                 
-                <div class="dropdown language-selector">
-                    <button class="btn dropdown-toggle d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="Indian Flag" class="language-flag">
-                        <span>EN</span>
+                <div class="language-selector" id="languageSelector">
+                    <button class="language-btn" id="languageBtn">
+                        <i class="fas fa-globe"></i> <span>English</span> <i class="fas fa-caret-down"></i>
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">English</a></li>
-                        <li><a class="dropdown-item" href="#">हिन्दी</a></li>
-                        <li><a class="dropdown-item" href="#">मराठी</a></li>
-                    </ul>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <a href="#" class="lang-option" data-lang="en">English</a>
+                        <a href="#" class="lang-option" data-lang="hi">हिन्दी</a>
+                        <a href="#" class="lang-option" data-lang="mr">मराठी</a>
+                    </div>
                 </div>
 
-                <button class="theme-toggle" id="themeToggle"> <i class="fas fa-moon"></i> </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
                 
-                <div class="dropdown">
-                    <button class="btn border-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="profile-img">
+                <div class="user-profile">
+                    <button class="profile-btn">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="profile-img">
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-user fa-fw me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog fa-fw me-2"></i>Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-award fa-fw me-2"></i>Achievements</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-history fa-fw me-2"></i>Activity</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Logout</a></li>
+                    
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-award"></i> Achievements</a>
+                        <a href="#"><i class="fas fa-history"></i> Activity</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard">
+        <div class="container">
+            <section id="dashboard" class="section active">
+                <div class="welcome-banner">
+                    <div class="user-info">
+                        <h1>Welcome back, Ayush!</h1>
+                        <p>You've made a positive impact in your community with 12 resolved issues</p>
+                    </div>
+                    
+                    <div class="user-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">8</div>
+                            <div class="stat-label">Active Reports</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">12</div>
+                            <div class="stat-label">Resolved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">350</div>
+                            <div class="stat-label">Points</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
+                <div class="menu-grid">
+                    <div class="menu-card" id="reportIssueCard">
+                        <div class="menu-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h3>Report New Issue</h3>
+                        <p>Submit a new civic issue in your area</p>
+                    </div>
+                    
+                    <div class="menu-card" data-section="reports">
+                        <div class="menu-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <h3>My Reports</h3>
+                        <p>View and track your submitted reports</p>
+                    </div>
+                    
+                    <div class="menu-card" data-section="map">
+                        <div class="menu-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h3>View Issues Map</h3>
+                        <p>See all reported issues in your city</p>
+                    </div>
+                    
+                    <div class="menu-card" data-section="rewards">
+                        <div class="menu-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Earn Rewards</h3>
+                        <p>Check your progress and claim rewards</p>
+                    </div>
+                </div>
+                
+                <div class="gamification-section">
+                    <h2 class="section-title"><i class="fas fa-medal"></i> Your Achievements</h2>
+                    <div class="badges-container">
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="badge-name">First Report</div>
+                            <div class="badge-desc">Submitted your first issue</div>
+                        </div>
+                        
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="badge-name">Problem Solver</div>
+                            <div class="badge-desc">5 issues resolved</div>
+                        </div>
+                        
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="badge-name">Photo Expert</div>
+                            <div class="badge-desc">Added photos to 10 reports</div>
+                        </div>
+                        
+                        <div class="badge locked">
+                            <div class="badge-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="badge-name">Community Hero</div>
+                            <div class="badge-desc">20 issues resolved</div>
+                        </div>
+                        
+                        <div class="badge locked">
+                            <div class="badge-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="badge-name">Neighborhood Guardian</div>
+                            <div class="badge-desc">Keep area clean for 30 days</div>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="section-title"><i class="fa-regular fa-square-plus"></i>Civic Connect</h2>
+                <div class="menu-grid">
+                    <div class="menu-card" >
+                        <div class="menu-icon">
+                            <a href="#"><img src="https://i.ibb.co/3yQZ5j98/Whats-App-Image-2025-09-16-at-13-14-21-8745e89b-removebg-preview.png" alt="Whats-App-Image-2025-09-16-at-13-14-21-8745e89b-removebg-preview" border="0"></a>
+                        </div>
+                        <h2>Eco voice</h2>
+                        <button class="glassy-button" onclick="window.open('ecovoice.html', '_blank')">➟</button>
+                    </div>
+                    
+                    <div class="menu-card" >
+                        <div class="menu-icon">
+                            <a href="https://imgbb.com/"><img src="https://i.ibb.co/nNpdRP6v/Whats-App-Image-2025-09-16-at-13-22-17-5aef518f-removebg-preview.png" alt="Whats-App-Image-2025-09-16-at-13-22-17-5aef518f-removebg-preview" border="0"></a>
+                        </div>
+                        <h2>Nature Heroes</h2>
+                        <button class="glassy-button">➟</button>
+                        
+                    </div>
+
+                    <div class="menu-card" >
+                        <div class="menu-icon">
+                         <a href="https://imgbb.com/"><img src="https://i.ibb.co/LXm82Bh2/Whats-App-Image-2025-09-16-at-13-24-30-4af26fe5-removebg-preview.png" alt="Whats-App-Image-2025-09-16-at-13-24-30-4af26fe5-removebg-preview" border="0"></a>
+                        </div>
+                        <h2>Relief fund & Donation</h2>
+                        <button class="glassy-button">➟</button>
+                        
+                    </div>
+                </div>
+                
+                <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
+                <div class="recent-activity">
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New Report Submitted</div>
+                                <div class="activity-desc">Pothole on Hoshangabad Road near Habibganj</div>
+                                <div class="activity-time">2 hours ago</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Issue Resolved</div>
+                                <div class="activity-desc">Broken streetlight in MP Nagar has been fixed</div>
+                                <div class="activity-time">1 day ago</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Earned Badge</div>
+                                <div class="activity-desc">You unlocked the "Problem Solver" achievement</div>
+                                <div class="activity-time">2 days ago</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New Comment</div>
+                                <div class="activity-desc">Official commented on your garbage collection report</div>
+                                <div class="activity-time">3 days ago</div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<main class="dashboard">
-    <div class="container">
-         <section id="dashboard" class="section active">
-            <div class="welcome-banner">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 mb-4 mb-lg-0">
-                        <h1>Welcome back, Ayush!</h1>
-                        <p>You've made a positive impact in your community with 12 resolved issues.</p>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="d-flex justify-content-center justify-content-lg-end gap-3">
-                            <div class="stat-item">
-                                <div class="stat-value">8</div>
-                                <div class="stat-label">Active</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">12</div>
-                                <div class="stat-label">Resolved</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">350</div>
-                                <div class="stat-label">Points</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
             
-            <h2 class="section-title"><i class="fas fa-bolt"></i> Quick Actions</h2>
-            <div class="row g-4 mb-5">
-                <div class="col-md-6 col-lg-3">
-                    <div class="menu-card d-flex flex-column justify-content-center" data-bs-toggle="modal" data-bs-target="#reportModal">
-                        <div class="menu-icon fs-1 text-primary mb-2"><i class="fas fa-plus-circle"></i></div>
-                        <h3>Report New Issue</h3>
-                        <p class="text-secondary small">Submit a new civic issue in your area</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                     <div class="menu-card d-flex flex-column justify-content-center" data-section-link="reports">
-                        <div class="menu-icon fs-1 text-primary mb-2"><i class="fas fa-list"></i></div>
-                        <h3>My Reports</h3>
-                        <p class="text-secondary small">View and track your submitted reports</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="menu-card d-flex flex-column justify-content-center" data-section-link="map">
-                        <div class="menu-icon fs-1 text-primary mb-2"><i class="fas fa-map-marked-alt"></i></div>
-                        <h3>View Issues Map</h3>
-                        <p class="text-secondary small">See all reported issues in your city</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="menu-card d-flex flex-column justify-content-center" data-section-link="rewards">
-                        <div class="menu-icon fs-1 text-primary mb-2"><i class="fas fa-trophy"></i></div>
-                        <h3>Earn Rewards</h3>
-                        <p class="text-secondary small">Check your progress and claim rewards</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gamification-section">
-                <h2 class="section-title"><i class="fas fa-medal"></i> Your Achievements</h2>
-                <div class="badges-container">
-                    <div class="badge">
-                        <div class="badge-icon"><i class="fas fa-star"></i></div>
-                        <div class="badge-name">First Report</div>
-                        <div class="badge-desc">Submitted your first issue</div>
-                    </div>
-                    <div class="badge">
-                        <div class="badge-icon"><i class="fas fa-check-double"></i></div>
-                        <div class="badge-name">Problem Solver</div>
-                        <div class="badge-desc">5 issues resolved</div>
-                    </div>
-                    <div class="badge">
-                        <div class="badge-icon"><i class="fas fa-camera"></i></div>
-                        <div class="badge-name">Photo Expert</div>
-                        <div class="badge-desc">Added photos to 10 reports</div>
-                    </div>
-                    <div class="badge locked">
-                        <div class="badge-icon"><i class="fas fa-users"></i></div>
-                        <div class="badge-name">Community Hero</div>
-                        <div class="badge-desc">20 issues resolved</div>
-                    </div>
-                    <div class="badge locked">
-                        <div class="badge-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="badge-name">Neighborhood Guardian</div>
-                        <div class="badge-desc">Keep area clean for 30 days</div>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 class="section-title"><i class="fa-regular fa-square-plus"></i>Civic Connect</h2>
-            <div class="row g-4 mb-5">
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <div class="menu-icon"><a href="#"><img src="https://i.ibb.co/3yQZ5j98/Whats-App-Image-2025-09-16-at-13-14-21-8745e89b-removebg-preview.png" alt="Eco Voice"></a></div>
-                        <h2 class="fs-5 mt-2">Eco voice</h2>
-                        <button class="glassy-button mt-2" onclick="window.open('ecovoice.html', '_blank')">➟</button>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <div class="menu-icon"><a href="#"><img src="https://i.ibb.co/nNpdRP6v/Whats-App-Image-2025-09-16-at-13-22-17-5aef518f-removebg-preview.png" alt="Nature Heroes"></a></div>
-                        <h2 class="fs-5 mt-2">Nature Heroes</h2>
-                        <button class="glassy-button mt-2">➟</button>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="menu-card">
-                        <div class="menu-icon"><a href="#"><img src="https://i.ibb.co/LXm82Bh2/Whats-App-Image-2025-09-16-at-13-24-30-4af26fe5-removebg-preview.png" alt="Relief Fund"></a></div>
-                        <h2 class="fs-5 mt-2">Relief fund & Donation</h2>
-                        <button class="glassy-button mt-2">➟</button>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 class="section-title"><i class="fas fa-history"></i> Recent Activity</h2>
-            <div class="recent-activity">
-                <ul class="list-unstyled mb-0">
-                    <li class="activity-item">
-                        <div class="activity-icon"><i class="fas fa-plus"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">New Report Submitted</div>
-                            <div class="small text-secondary">Pothole on Hoshangabad Road near Habibganj</div>
-                            <div class="small text-secondary">2 hours ago</div>
+            <section id="reports" class="section">
+                <h2 class="section-title"><i class="fas fa-file-alt"></i> My Reports</h2>
+                
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-image">
+                            <img src="data:image/jpeg;base64,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" alt="Pothole report">
                         </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon"><i class="fas fa-check-circle"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">Issue Resolved</div>
-                            <div class="small text-secondary">Broken streetlight in MP Nagar has been fixed</div>
-                            <div class="small text-secondary">1 day ago</div>
-                        </div>
-                    </li>
-                     <li class="activity-item">
-                        <div class="activity-icon"><i class="fas fa-trophy"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">Earned Badge</div>
-                            <div class="small text-secondary">You unlocked the "Problem Solver" achievement</div>
-                            <div class="small text-secondary">2 days ago</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon"><i class="fas fa-comment"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">New Comment</div>
-                            <div class="small text-secondary">Official commented on your garbage collection report</div>
-                            <div class="small text-secondary">3 days ago</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-        
-        <section id="reports" class="section">
-            <h2 class="section-title"><i class="fas fa-file-alt"></i> My Reports</h2>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="report-card card">
-                        <div class="report-image"><img src="https://i.postimg.cc/tCN51b3d/pothole.jpg" class="card-img-top" alt="Pothole report"></div>
-                        <div class="card-body">
+                        <div class="report-content">
                             <span class="report-status status-new">New</span>
-                            <h3 class="card-title fs-5">Large Pothole on Hoshangabad Road</h3>
-                            <p class="card-text small text-secondary">Deep pothole near Habibganj area, causing traffic issues during peak hours.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between small text-secondary">
-                            <span><i class="fas fa-calendar"></i> 2 hours ago</span>
-                            <span><i class="fas fa-comments"></i> 3</span>
+                            <h3 class="report-title">Large Pothole on Hoshangabad Road</h3>
+                            <p>Deep pothole near Habibganj area, causing traffic issues during peak hours.</p>
+                            <div class="report-meta">
+                                <span><i class="fas fa-calendar"></i> 2 hours ago</span>
+                                <span><i class="fas fa-comments"></i> 3</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="report-card card">
-                        <div class="report-image"><img src="https://i.postimg.cc/k4Sc06wG/streetlight.jpg" class="card-img-top" alt="Streetlight report"></div>
-                        <div class="card-body">
+                    
+                    <div class="report-card">
+                        <div class="report-image">
+                            <img src="data:image/jpeg;base64,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" alt="Streetlight report">
+                        </div>
+                        <div class="report-content">
                             <span class="report-status status-progress">In Progress</span>
-                            <h3 class="card-title fs-5">Broken Streetlight in MP Nagar</h3>
-                            <p class="card-text small text-secondary">Streetlight has been out for three days, making the area dark and unsafe at night.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between small text-secondary">
-                            <span><i class="fas fa-calendar"></i> 2 days ago</span>
-                            <span><i class="fas fa-comments"></i> 5</span>
+                            <h3 class="report-title">Broken Streetlight in MP Nagar</h3>
+                            <p>Streetlight has been out for three days, making the area dark and unsafe at night.</p>
+                            <div class="report-meta">
+                                <span><i class="fas fa-calendar"></i> 2 days ago</span>
+                                <span><i class="fas fa-comments"></i> 5</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="report-card card">
-                        <div class="report-image"><img src="https://i.postimg.cc/7Z0wR3k2/graffiti.jpg" class="card-img-top" alt="Graffiti report"></div>
-                        <div class="card-body">
+                    
+                    <div class="report-card">
+                        <div class="report-image">
+                            <img src="https://thfvnext.bing.com/th/id/OIP.-Edu2LivIFOGAdcZoTqBnQHaE3?w=250&h=180&c=7&r=0&o=5&cb=thfvnext&pid=1.7" alt="Graffiti report">
+                        </div>
+                        <div class="report-content">
                             <span class="report-status status-resolved">Resolved</span>
-                            <h3 class="card-title fs-5">Graffiti in TT Nagar Park</h3>
-                            <p class="card-text small text-secondary">Extensive graffiti on walls and playground equipment in TT Nagar Park.</p>
-                        </div>
-                        <div class="card-footer d-flex justify-content-between small text-secondary">
-                            <span><i class="fas fa-calendar"></i> 1 week ago</span>
-                            <span><i class="fas fa-comments"></i> 8</span>
+                            <h3 class="report-title">Graffiti in TT Nagar Park</h3>
+                            <p>Extensive graffiti on walls and playground equipment in TT Nagar Park.</p>
+                            <div class="report-meta">
+                                <span><i class="fas fa-calendar"></i> 1 week ago</span>
+                                <span><i class="fas fa-comments"></i> 8</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <section id="map" class="section">
+                <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Issues Map</h2>
+                
+                <div class="map-container">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Interactive Issues Map</h3>
+                        <p>View all reported issues in your area on an interactive map</p>
+                        <p>Click on markers to see details and status of each issue</p>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3 class="section-title"><i class="fas fa-info-circle"></i> Map Legend</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #ffeaa7; color: #d35400;">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">New Issues</div>
+                                <div class="activity-desc">Recently reported issues that are awaiting review</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #81ecec; color: #00cec9;">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">In Progress</div>
+                                <div class="activity-desc">Issues that are currently being addressed</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #55efc4; color: #00b894;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Resolved</div>
+                                <div class="activity-desc">Issues that have been successfully resolved</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            
+            <section id="leaderboard" class="section">
+                <h2 class="section-title"><i class="fas fa-trophy"></i> Community Leaderboard</h2>
+                
+                <div class="leaderboard-container">
+                    <h3>Top Contributors in Bhopal</h3>
+                    <ul class="leaderboard-list">
+                        <li class="leaderboard-item">
+                            <div class="leaderboard-rank">1</div>
+                            <div class="leaderboard-user">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMyNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <div>
+                                    <div class="activity-title">Amit Sharma</div>
+                                    <div class="activity-desc">45 issues resolved</div>
+                                </div>
+                            </div>
+                            <div class="leaderboard-points">1240 pts</div>
+                        </li>
+                        
+                        <li class="leaderboard-item">
+                            <div class="leaderboard-rank">2</div>
+                            <div class="leaderboard-user">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNlNzRjM2MiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <div>
+                                    <div class="activity-title">Priya Patel</div>
+                                    <div class="activity-desc">38 issues resolved</div>
+                                </div>
+                            </div>
+                            <div class="leaderboard-points">980 pts</div>
+                        </li>
+                        
+                        <li class="leaderboard-item">
+                            <div class="leaderboard-rank">3</div>
+                            <div class="leaderboard-user">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMzNDk4ZGIiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <div>
+                                    <div class="activity-title">Rajesh Kumar</div>
+                                    <div class="activity-desc">12 issues resolved</div>
+                                </div>
+                            </div>
+                            <div class="leaderboard-points">350 pts</div>
+                        </li>
+                        
+                        <li class="leaderboard-item">
+                            <div class="leaderboard-rank">4</div>
+                            <div class="leaderboard-user">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <div>
+                                    <div class="activity-title">Sneha Gupta</div>
+                                    <div class="activity-desc">10 issues resolved</div>
+                                </div>
+                            </div>
+                            <div class="leaderboard-points">290 pts</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="rewards" class="section">
+                <h2 class="section-title"><i class="fas fa-gift"></i> Rewards & Recognition</h2>
+                
+                <div class="gamification-section">
+                    <h3 class="section-title"><i class="fas fa-medal"></i> Your Badges</h3>
+                    <div class="badges-container">
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="badge-name">First Report</div>
+                            <div class="badge-desc">Submitted your first issue</div>
+                        </div>
+                        
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                            <div class="badge-name">Problem Solver</div>
+                            <div class="badge-desc">5 issues resolved</div>
+                        </div>
+                        
+                        <div class="badge">
+                            <div class="badge-icon">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="badge-name">Photo Expert</div>
+                            <div class="badge-desc">Added photos to 10 reports</div>
+                        </div>
+                        
+                        <div class="badge locked">
+                            <div class="badge-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="badge-name">Community Hero</div>
+                            <div class="badge-desc">20 issues resolved</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3 class="section-title"><i class="fas fa-gift"></i> Available Rewards</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #f39c12; color: white;">
+                                <i class="fas fa-ticket-alt"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Movie Tickets (100 points)</div>
+                                <div class="activity-desc">Redeem your points for movie tickets at popular cinemas</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #3498db; color: white;">
+                                <i class="fas fa-mug-hot"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Coffee Voucher (50 points)</div>
+                                <div class="activity-desc">Enjoy a free coffee at participating cafes</div>
+                            </div>
+                        </li>
+                        
+                        <li class="activity-item">
+                            <div class="activity-icon" style="background: #2ecc71; color: white;">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-title">Shopping Discount (200 points)</div>
+                                <div class="activity-desc">Get discounts at local stores and markets</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="chatbot"> <i class="fas fa-comments"></i> </div>
+    <footer><div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Samadhan Setu</h3>
+          <p>Empowering communities to work with local governments for better neighborhoods.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Home</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Report Issue</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Issues Map</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Dashboard</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> About Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Help Center</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> FAQ</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Community Guidelines</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Privacy Policy</a></li>
+            <li><a href="#"><i class="ri-arrow-right-line"></i> Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><i class="fas fa-envelope"></i> support@citizenconnect.org</li>
+            <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Civic Center, City Hall</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <p>&copy; 2023 Samadhan Setu. All rights reserved.</p>
+      </div>
+    </div></footer>
+    
+
+    <script>
         
-        <section id="map" class="section">
-            <h2 class="section-title"><i class="fas fa-map-marked-alt"></i> Issues Map of Bhopal</h2>
-            <!-- This div will hold the Leaflet map -->
-            <div id="leaflet-map"></div>
-            <div class="recent-activity mt-4">
-                <h3 class="section-title"><i class="fas fa-info-circle"></i> Map Legend</h3>
-                <ul class="list-unstyled mb-0">
-                    <li class="activity-item">
-                        <div class="activity-icon" style="background: #ffeaa7; color: #d35400;"><i class="fas fa-exclamation-circle"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">New Issues</div>
-                            <div class="small text-secondary">Recently reported issues that are awaiting review</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon" style="background: #81ecec; color: #00cec9;"><i class="fas fa-tools"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">In Progress</div>
-                            <div class="small text-secondary">Issues that are currently being addressed</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon" style="background: #55efc4; color: #00b894;"><i class="fas fa-check-circle"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">Resolved</div>
-                            <div class="small text-secondary">Issues that have been successfully resolved</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="leaderboard" class="section">
-            <h2 class="section-title"><i class="fas fa-trophy"></i> Community Leaderboard</h2>
-            <div class="leaderboard-container">
-                <h3>Top Contributors in Bhopal</h3>
-                <ul class="leaderboard-list">
-                    <li class="leaderboard-item">
-                        <div class="leaderboard-rank">1</div>
-                        <div class="d-flex align-items-center gap-3">
-                            <img src="https://i.pravatar.cc/40?u=amit" alt="User" class="leaderboard-avatar">
-                            <div>
-                                <div class="fw-bold">Amit Sharma</div>
-                                <div class="small text-secondary">45 issues resolved</div>
-                            </div>
-                        </div>
-                        <div class="leaderboard-points">1240 pts</div>
-                    </li>
-                    <li class="leaderboard-item">
-                        <div class="leaderboard-rank">2</div>
-                         <div class="d-flex align-items-center gap-3">
-                            <img src="https://i.pravatar.cc/40?u=priya" alt="User" class="leaderboard-avatar">
-                            <div>
-                                <div class="fw-bold">Priya Patel</div>
-                                <div class="small text-secondary">38 issues resolved</div>
-                            </div>
-                        </div>
-                        <div class="leaderboard-points">980 pts</div>
-                    </li>
-                     <li class="leaderboard-item">
-                        <div class="leaderboard-rank">3</div>
-                         <div class="d-flex align-items-center gap-3">
-                             <img src="https://i.pravatar.cc/40?u=ayush" alt="User" class="leaderboard-avatar">
-                            <div>
-                                <div class="fw-bold">Ayush (You)</div>
-                                <div class="small text-secondary">12 issues resolved</div>
-                            </div>
-                        </div>
-                        <div class="leaderboard-points">350 pts</div>
-                    </li>
-                </ul>
-            </div>
-        </section>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
         
-        <section id="rewards" class="section">
-            <h2 class="section-title"><i class="fas fa-gift"></i> Rewards & Recognition</h2>
-            <div class="gamification-section">
-                <h3 class="section-title"><i class="fas fa-medal"></i> Your Badges</h3>
-                <div class="badges-container">
-                    <div class="badge"> <div class="badge-icon"><i class="fas fa-star"></i></div> <div class="badge-name">First Report</div> <div class="badge-desc">Submitted your first issue</div> </div>
-                    <div class="badge"> <div class="badge-icon"><i class="fas fa-check-double"></i></div> <div class="badge-name">Problem Solver</div> <div class="badge-desc">5 issues resolved</div> </div>
-                    <div class="badge locked"> <div class="badge-icon"><i class="fas fa-users"></i></div> <div class="badge-name">Community Hero</div> <div class="badge-desc">20 issues resolved</div> </div>
-                </div>
-            </div>
-            <div class="recent-activity">
-                <h3 class="section-title"><i class="fas fa-gift"></i> Available Rewards</h3>
-                 <ul class="list-unstyled mb-0">
-                    <li class="activity-item">
-                        <div class="activity-icon" style="background: #f39c12; color: white;"><i class="fas fa-ticket-alt"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">Movie Tickets (100 points)</div>
-                            <div class="small text-secondary">Redeem your points for movie tickets</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon" style="background: #3498db; color: white;"><i class="fas fa-mug-hot"></i></div>
-                        <div class="activity-content">
-                            <div class="fw-bold">Coffee Voucher (50 points)</div>
-                            <div class="small text-secondary">Enjoy a free coffee at participating cafes</div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- NEW SECTION: Blogs -->
-        <section id="blogs" class="section">
-            <h2 class="section-title"><i class="fas fa-blog"></i> Community Blogs</h2>
-            <div class="p-4 rounded" style="background-color: var(--section-alt-bg);">
-                <h3>Latest Posts</h3>
-                <p>Our blog section is coming soon! Stay tuned for updates, success stories, and tips on how to make your community a better place.</p>
-                <!-- Blog posts would be dynamically loaded here -->
-            </div>
-        </section>
-
-        <!-- NEW SECTION: NGOs -->
-        <section id="ngos" class="section">
-            <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> Partner NGOs</h2>
-            <div class="p-4 rounded" style="background-color: var(--section-alt-bg);">
-                 <h3>Connect with Local NGOs</h3>
-                <p>Find and connect with verified NGOs working on various causes in Bhopal. This feature is under development.</p>
-                <!-- A list of NGOs would appear here -->
-            </div>
-        </section>
-    </div>
-</main>
-
-<div class="chatbot"> <i class="fas fa-comments"></i> </div>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row g-4 mb-4">
-            <div class="col-lg-3 col-md-6">
-                <h3>Samadhan Setu</h3>
-                <p>Empowering communities for better neighborhoods.</p>
-                <div class="social-links d-flex gap-3">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#"><i class="ri-arrow-right-line"></i> Home</a></li>
-                    <li><a href="#"><i class="ri-arrow-right-line"></i> Report Issue</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3>Resources</h3>
-                <ul>
-                    <li><a href="#"><i class="ri-arrow-right-line"></i> Help Center</a></li>
-                    <li><a href="#"><i class="ri-arrow-right-line"></i> Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <h3>Contact Us</h3>
-                <ul>
-                    <li><i class="fas fa-envelope me-2"></i> support@samadhansetu.org</li>
-                    <li><i class="fas fa-phone me-2"></i> +91 123-456-7890</li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2025 Samadhan Setu. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
-
-<!-- Report Issue Modal -->
-<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="reportModalLabel">Report a New Issue</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="reportIssueForm">
-                    <div class="mb-3">
-                        <label for="issueType" class="form-label">Type of Issue</label>
-                        <select class="form-select" id="issueType" required><option selected disabled value="">Choose...</option><option>Pothole</option><option>Broken Streetlight</option><option>Garbage</option><option>Other</option></select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="issueLocation" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="issueLocation" placeholder="e.g., Near Main Market, Sector 5" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="issueDescription" class="form-label">Description</label>
-                        <textarea class="form-control" id="issueDescription" rows="3" required></textarea>
-                    </div>
-                     <div class="mb-3">
-                        <label for="issuePhoto" class="form-label">Upload Photo (Optional)</label>
-                        <input class="form-control" type="file" id="issuePhoto" accept="image/*">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer border-0">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="reportIssueForm" class="btn btn-primary">Submit Report</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<!-- Leaflet JS for Interactive Map -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const headerThemeToggle = document.getElementById('themeToggle');
-    const sidebarThemeToggle = document.getElementById('sidebarThemeToggle');
-    const htmlElement = document.documentElement;
-    let mapInitialized = false; // Flag to check if map is already initialized
-
-    // --- THEME ---
-    const setTheme = (theme) => {
-        htmlElement.setAttribute('data-bs-theme', theme);
-        const isDark = theme === 'dark';
-        const headerIcon = headerThemeToggle ? headerThemeToggle.querySelector('i') : null;
-        if (headerIcon) {
-            headerIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
         }
-        const sidebarIcon = sidebarThemeToggle ? sidebarThemeToggle.querySelector('i') : null;
-        if (sidebarIcon) {
-            sidebarIcon.className = isDark ? 'fas fa-sun fa-fw' : 'fas fa-moon fa-fw';
-        }
-        localStorage.setItem('theme', theme);
-    };
-
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setTheme(savedTheme);
-
-    const handleThemeToggle = (e) => {
-        if (e.currentTarget.tagName === 'A') e.preventDefault();
-        const currentTheme = htmlElement.getAttribute('data-bs-theme');
-        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-    };
-
-    if (headerThemeToggle) headerThemeToggle.addEventListener('click', handleThemeToggle);
-    if (sidebarThemeToggle) sidebarThemeToggle.addEventListener('click', handleThemeToggle);
-
-    // --- LEAFLET MAP INITIALIZATION ---
-    const initializeMap = () => {
-        if (mapInitialized) return; // Don't re-initialize
-
-        const map = L.map('leaflet-map').setView([23.2599, 77.4126], 13); // Centered on Bhopal
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-
-        // Sample issue data
-        const issues = [
-            { lat: 23.254, lng: 77.422, status: 'new', title: 'Large Pothole', desc: 'Hoshangabad Road' },
-            { lat: 23.245, lng: 77.435, status: 'progress', title: 'Broken Streetlight', desc: 'MP Nagar' },
-            { lat: 23.265, lng: 77.401, status: 'resolved', title: 'Graffiti Cleaned', desc: 'TT Nagar Park' },
-            { lat: 23.275, lng: 77.442, status: 'new', title: 'Garbage Dump', desc: 'Near Ashoka Garden' },
-            { lat: 23.230, lng: 77.390, status: 'progress', title: 'Water Pipe Leakage', desc: 'Arera Colony' }
-        ];
-
-        // Custom icon definitions
-        const iconBase = L.Icon.extend({
-            options: {
-                iconSize: [32, 32],
-                iconAnchor: [16, 32],
-                popupAnchor: [0, -32]
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+                updateMenuTheme();
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+                updateMenuTheme();
             }
         });
 
-        const newIcon = new iconBase({ iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png' });
-        const progressIcon = new iconBase({ iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png' });
-        const resolvedIcon = new iconBase({ iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png' });
+        // Dropdown functionality
+        const profileBtn = document.querySelector('.profile-btn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const languageSelector = document.getElementById('languageSelector');
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
         
-        const statusIcons = {
-            new: newIcon,
-            progress: progressIcon,
-            resolved: resolvedIcon
-        };
-
-        // Add markers to map
-        issues.forEach(issue => {
-            L.marker([issue.lat, issue.lng], { icon: statusIcons[issue.status] })
-             .addTo(map)
-             .bindPopup(`<b>${issue.title}</b><br>${issue.desc}`);
-        });
-
-        mapInitialized = true;
-    };
-
-
-    // --- SECTION NAVIGATION ---
-    const allNavLinks = document.querySelectorAll('.nav-link[data-section], .menu-card[data-section-link]');
-    const sections = document.querySelectorAll('.section');
-    const sidebarElement = document.getElementById('sidebar');
-    const sidebar = bootstrap.Offcanvas.getInstance(sidebarElement) || new bootstrap.Offcanvas(sidebarElement);
-
-    const showSection = (sectionId) => {
-        sections.forEach(section => section.classList.remove('active'));
-        const sectionToShow = document.getElementById(sectionId);
-        if (sectionToShow) {
-            sectionToShow.classList.add('active');
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (languageDropdown) languageDropdown.classList.remove('show');
+                if (languageSelector) languageSelector.classList.remove('open');
+                profileDropdown.classList.toggle('show');
+            });
+        }
+        
+        if (languageBtn && languageDropdown) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (profileDropdown) profileDropdown.classList.remove('show');
+                languageDropdown.classList.toggle('show');
+                languageSelector.classList.toggle('open');
+            });
         }
 
-        allNavLinks.forEach(link => {
-            const linkTarget = link.getAttribute('data-section') || link.getAttribute('data-section-link');
-            link.classList.toggle('active', linkTarget === sectionId);
+        // Close dropdowns when clicking outside
+        window.addEventListener('click', () => {
+            if (profileDropdown) profileDropdown.classList.remove('show');
+            if (languageDropdown) languageDropdown.classList.remove('show');
+            if (languageSelector) languageSelector.classList.remove('open');
+        });
+        
+        // Handle language selection
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedLangText = e.target.textContent;
+                languageBtn.querySelector('span').textContent = selectedLangText;
+                alert(`Language changed to ${selectedLangText}`);
+            });
         });
 
-        // Initialize map only when its section is shown
-        if (sectionId === 'map') {
-            // Delay map initialization slightly to ensure the container is visible and has dimensions
-            setTimeout(initializeMap, 100); 
+        
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    alert('Logging out...');
+                }
+            });
         }
+        
+        // Chatbot functionality
+        const chatbot = document.querySelector('.chatbot');
+        if (chatbot) {
+            chatbot.addEventListener('click', () => {
+                alert('Chatbot support is coming soon!');
+            });
+        }
+        
+        // Section navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuCards = document.querySelectorAll('.menu-card[data-section]');
+        const sections = document.querySelectorAll('.section');
+        
+        function showSection(sectionId) {
+            sections.forEach(section => section.classList.remove('active'));
+            const sectionToShow = document.getElementById(sectionId);
+            if(sectionToShow) {
+                sectionToShow.classList.add('active');
+            }
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-section') === sectionId) {
+                    link.classList.add('active');
+                }
+            });
+            window.scrollTo(0, 0);
+        }
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                showSection(link.getAttribute('data-section'));
+            });
+        });
+        
+        menuCards.forEach(card => {
+            card.addEventListener('click', () => {
+                showSection(card.getAttribute('data-section'));
+            });
+        });
 
-        window.scrollTo(0, 0);
-        sidebar.hide();
-    };
+        // Modal functionality
+        const reportModal = document.getElementById('reportModal');
+        const reportIssueBtn = document.getElementById('reportIssueBtn');
+        const reportIssueCard = document.getElementById('reportIssueCard');
+        const closeModalBtn = reportModal ? reportModal.querySelector('.close-btn') : null;
+        const reportForm = document.getElementById('reportIssueForm');
 
-    allNavLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const sectionId = link.getAttribute('data-section') || link.getAttribute('data-section-link');
-            if (sectionId) {
-                showSection(sectionId);
+        if (reportModal && reportIssueBtn && closeModalBtn) {
+            const openModal = () => reportModal.classList.add('show');
+            const closeModal = () => reportModal.classList.remove('show');
+
+            reportIssueBtn.addEventListener('click', openModal);
+            if (reportIssueCard) reportIssueCard.addEventListener('click', openModal);
+            closeModalBtn.addEventListener('click', closeModal);
+
+            reportModal.addEventListener('click', (e) => {
+                if (e.target === reportModal) closeModal();
+            });
+
+            if (reportForm) {
+                reportForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Issue reported successfully!');
+                    reportForm.reset();
+                    closeModal();
+                });
+            }
+        }
+        
+        // Sidebar functionality
+        const toggleBtn = document.getElementById('toggleBtn');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('closeBtn');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+        
+        // Toggle sidebar function
+        function openSidebar() {
+            if (sidebar && overlay) {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                body.classList.add('menu-open');
+                if (toggleBtn) toggleBtn.style.left = "280px";
+            }
+        }
+        
+        function closeSidebar() {
+            if (sidebar && overlay) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                if (toggleBtn) toggleBtn.style.left = "0";
+            }
+        }
+        
+        // Add click event to toggle button
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', openSidebar);
+        }
+        
+        // Add click event to close button
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeSidebar);
+        }
+        
+        // Add click event to overlay
+        if (overlay) {
+            overlay.addEventListener('click', closeSidebar);
+        }
+        
+        // Add click event to menu items
+        const menuItems = document.querySelectorAll('.Menu li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active class from all items
+                menuItems.forEach(i => i.classList.remove('active'));
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                closeSidebar(); // Close sidebar after selecting an item
+            });
+        });
+        
+        // Add click event to social icons
+        const socialIcons = document.querySelectorAll('.fa-brands');
+        socialIcons.forEach(icon => {
+            icon.addEventListener('click', function() {
+                const platform = this.classList[1].split('-')[1];
+                alert(`Redirecting to our ${platform} page!`);
+            });
+        });
+        
+        // Close sidebar when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeSidebar();
             }
         });
+        
+        // Update menu theme based on current theme
+        function updateMenuTheme() {
+            const slidebar = document.getElementById('sidebar');
+            if (!slidebar) return;
+            
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            if (isDarkMode) {
+                slidebar.style.background = "linear-gradient(135deg, #2c3e50, #1a1a1a)";
+            } else {
+                slidebar.style.background = "linear-gradient(135deg, #1a2a6c, #b21f1f)";
+            }
+        }
+        
+        // Call on page load to set initial menu theme
+        updateMenuTheme();
     });
 
-    const sidebarReportButton = document.querySelector('#sidebar a[data-bs-target="#reportModal"]');
-    if(sidebarReportButton){
-        sidebarReportButton.addEventListener('click', () => {
-            sidebar.hide();
-        });
-    }
-
-    // --- FORM SUBMISSION ---
-    const reportForm = document.getElementById('reportIssueForm');
-    if (reportForm) {
-        reportForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Issue reported successfully!');
-            const reportModalEl = document.getElementById('reportModal');
-            const reportModal = bootstrap.Modal.getInstance(reportModalEl);
-            reportModal.hide();
-            reportForm.reset();
-        });
-    }
-});
-</script>
-
+    </script>
 </body>
 </html>
+
