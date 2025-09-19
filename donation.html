@@ -690,6 +690,10 @@
         .language-dropdown a:hover {
             background: var(--section-alt-bg);
         }
+        .dark-mode .impact-value {
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
@@ -707,7 +711,7 @@
                 
                <div class="language-selector" id="languageSelector">
                     <button class="language-btn" id="languageBtn">
-                        <i class="fas fa-globe"></i> <span>English</span> <i class="fas fa-caret-down"></i>
+                        <i class="fas fa-globe"></i> <span id="currentLang">English</span> <i class="fas fa-caret-down"></i>
                     </button>
                     <div class="language-dropdown" id="languageDropdown">
                         <a href="#" class="lang-option" data-lang="en">English</a>
@@ -733,27 +737,27 @@
         <div class="container">
             <div class="welcome-banner">
                 <div class="user-info">
-                    <h1>Relief Fund & Donation</h1>
-                    <p>Support natural causes and help communities in need through your contributions</p>
+                    <h1 data-i18n="reliefFundTitle">Relief Fund & Donation</h1>
+                    <p data-i18n="reliefFundDesc">Support natural causes and help communities in need through your contributions</p>
                 </div>
                 
                 <div class="user-stats">
                     <div class="stat-item">
                         <div class="stat-value">₹12,500</div>
-                        <div class="stat-label">Total Donated</div>
+                        <div class="stat-label" data-i18n="totalDonated">Total Donated</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">8</div>
-                        <div class="stat-label">Causes Supported</div>
+                        <div class="stat-label" data-i18n="causesSupported">Causes Supported</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value">350</div>
-                        <div class="stat-label">Impact Points</div>
+                        <div class="stat-label" data-i18n="impactPoints">Impact Points</div>
                     </div>
                 </div>
             </div>
             
-            <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> Active Causes</h2>
+            <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> <span data-i18n="activeCauses">Active Causes</span></h2>
             <div class="causes-grid">
                 <div class="cause-card">
                     <div class="cause-image">
@@ -763,14 +767,14 @@
                         </div>
                     </div>
                     <div class="cause-content">
-                        <h3 class="cause-title">Flood Relief in Assam</h3>
-                        <p class="cause-description">Support communities affected by recent floods with essential supplies and rehabilitation.</p>
+                        <h3 class="cause-title" data-i18n="floodReliefTitle">Flood Relief in Assam</h3>
+                        <p class="cause-description" data-i18n="floodReliefDesc">Support communities affected by recent floods with essential supplies and rehabilitation.</p>
                         <div class="cause-meta">
-                            <span class="cause-raised">₹3.2L raised</span>
-                            <span class="cause-goal">of ₹5L goal</span>
+                            <span class="cause-raised">₹3.2L <span data-i18n="raised">raised</span></span>
+                            <span class="cause-goal"><span data-i18n="of">of</span> ₹5L <span data-i18n="goal">goal</span></span>
                         </div>
                         <button class="btn-donate" data-cause="Flood Relief in Assam">
-                            <i class="fas fa-donate"></i> Donate Now
+                            <i class="fas fa-donate"></i> <span data-i18n="donateNow">Donate Now</span>
                         </button>
                     </div>
                 </div>
@@ -783,107 +787,107 @@
                         </div>
                     </div>
                     <div class="cause-content">
-                        <h3 class="cause-title">Wildfire Recovery in Uttarakhand</h3>
-                        <p class="cause-description">Help rebuild communities and restore forests affected by devastating wildfires.</p>
+                        <h3 class="cause-title" data-i18n="wildfireTitle">Wildfire Recovery in Uttarakhand</h3>
+                        <p class="cause-description" data-i18n="wildfireDesc">Help rebuild communities and restore forests affected by devastating wildfires.</p>
                         <div class="cause-meta">
-                            <span class="cause-raised">₹1.8L raised</span>
-                            <span class="cause-goal">of ₹4.5L goal</span>
+                            <span class="cause-raised">₹1.8L <span data-i18n="raised">raised</span></span>
+                            <span class="cause-goal"><span data-i18n="of">of</span> ₹4.5L <span data-i18n="goal">goal</span></span>
                         </div>
                         <button class="btn-donate" data-cause="Wildfire Recovery in Uttarakhand">
-                            <i class="fas fa-donate"></i> Donate Now
+                            <i class="fas fa-donate"></i> <span data-i18n="donateNow">Donate Now</span>
                         </button>
                     </div>
                 </div>
                 
                 <div class="cause-card">
                     <div class="cause-image">
-                        <img src="data:image/webp;base64,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" alt="Drought Assistance">
+                        <img src="data:image/webp;base64,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" alt="Drought Assistance">
                         <div class="cause-progress">
                             <div class="progress-bar" style="width: 25%"></div>
                         </div>
                     </div>
                     <div class="cause-content">
-                        <h3 class="cause-title">Drought Assistance in Rajasthan</h3>
-                        <p class="cause-description">Provide water resources and support to communities facing severe water scarcity.</p>
+                        <h3 class="cause-title" data-i18n="droughtTitle">Drought Assistance in Rajasthan</h3>
+                        <p class="cause-description" data-i18n="droughtDesc">Provide water resources and support to communities facing severe water scarcity.</p>
                         <div class="cause-meta">
-                            <span class="cause-raised">₹75k raised</span>
-                            <span class="cause-goal">of ₹3L goal</span>
+                            <span class="cause-raised">₹75k <span data-i18n="raised">raised</span></span>
+                            <span class="cause-goal"><span data-i18n="of">of</span> ₹3L <span data-i18n="goal">goal</span></span>
                         </div>
                         <button class="btn-donate" data-cause="Drought Assistance in Rajasthan">
-                            <i class="fas fa-donate"></i> Donate Now
+                            <i class="fas fa-donate"></i> <span data-i18n="donateNow">Donate Now</span>
                         </button>
                     </div>
                 </div>
             </div>
             
             <div class="donation-form" id="donationForm">
-                <h2 class="section-title"><i class="fas fa-credit-card"></i> Make a Donation</h2>
+                <h2 class="section-title"><i class="fas fa-credit-card"></i> <span data-i18n="makeDonation">Make a Donation</span></h2>
                 
                 <form id="donateForm">
                     <div class="form-group">
-                        <label for="causeSelect">Select Cause</label>
+                        <label for="causeSelect" data-i18n="selectCause">Select Cause</label>
                         <select id="causeSelect" required>
-                            <option value="">-- Select a cause --</option>
-                            <option value="Flood Relief in Assam">Flood Relief in Assam</option>
-                            <option value="Wildfire Recovery in Uttarakhand">Wildfire Recovery in Uttarakhand</option>
-                            <option value="Drought Assistance in Rajasthan">Drought Assistance in Rajasthan</option>
-                            <option value="General Relief Fund">General Relief Fund</option>
+                            <option value="" data-i18n="selectCauseOption">-- Select a cause --</option>
+                            <option value="Flood Relief in Assam" data-i18n="floodReliefOption">Flood Relief in Assam</option>
+                            <option value="Wildfire Recovery in Uttarakhand" data-i18n="wildfireOption">Wildfire Recovery in Uttarakhand</option>
+                            <option value="Drought Assistance in Rajasthan" data-i18n="droughtOption">Drought Assistance in Rajasthan</option>
+                            <option value="General Relief Fund" data-i18n="generalFundOption">General Relief Fund</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label>Donation Amount (₹)</label>
+                        <label data-i18n="donationAmount">Donation Amount (₹)</label>
                         <div class="amount-options">
                             <div class="amount-option" data-amount="100">₹100</div>
                             <div class="amount-option" data-amount="500">₹500</div>
                             <div class="amount-option" data-amount="1000">₹1000</div>
                             <div class="amount-option" data-amount="2000">₹2000</div>
-                            <div class="amount-option" id="customOption">Custom</div>
+                            <div class="amount-option" id="customOption" data-i18n="custom">Custom</div>
                         </div>
                         <div class="custom-amount" id="customAmount">
-                            <input type="number" id="customAmountInput" placeholder="Enter amount" min="10">
+                            <input type="number" id="customAmountInput" placeholder="Enter amount" min="10" data-i18n-placeholder="enterAmount">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="donorName">Your Name</label>
+                        <label for="donorName" data-i18n="yourName">Your Name</label>
                         <input type="text" id="donorName" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="donorEmail">Email Address</label>
+                        <label for="donorEmail" data-i18n="emailAddress">Email Address</label>
                         <input type="email" id="donorEmail" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="paymentMethod">Payment Method</label>
+                        <label for="paymentMethod" data-i18n="paymentMethod">Payment Method</label>
                         <select id="paymentMethod" required>
-                            <option value="">-- Select payment method --</option>
-                            <option value="credit_card">Credit Card</option>
-                            <option value="debit_card">Debit Card</option>
-                            <option value="upi">UPI</option>
-                            <option value="net_banking">Net Banking</option>
+                            <option value="" data-i18n="selectPayment">-- Select payment method --</option>
+                            <option value="credit_card" data-i18n="creditCard">Credit Card</option>
+                            <option value="debit_card" data-i18n="debitCard">Debit Card</option>
+                            <option value="upi" data-i18n="upi">UPI</option>
+                            <option value="net_banking" data-i18n="netBanking">Net Banking</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Message (Optional)</label>
-                        <textarea id="message" rows="3" placeholder="Add a message of support"></textarea>
+                        <label for="message" data-i18n="messageOptional">Message (Optional)</label>
+                        <textarea id="message" rows="3" placeholder="Add a message of support" data-i18n-placeholder="addMessage"></textarea>
                     </div>
                     
                     <button type="submit" class="btn-submit">
-                        <i class="fas fa-check-circle"></i> Confirm Donation
+                        <i class="fas fa-check-circle"></i> <span data-i18n="confirmDonation">Confirm Donation</span>
                     </button>
                 </form>
             </div>
             
             <div class="donation-history">
-                <h2 class="section-title"><i class="fas fa-history"></i> Your Donation History</h2>
+                <h2 class="section-title"><i class="fas fa-history"></i> <span data-i18n="donationHistory">Your Donation History</span></h2>
                 
                 <ul class="history-list">
                     <li class="history-item">
                         <div>
-                            <div class="history-cause">Flood Relief in Assam</div>
+                            <div class="history-cause" data-i18n="floodReliefOption">Flood Relief in Assam</div>
                             <div class="history-date">August 15, 2023</div>
                         </div>
                         <div class="history-amount">₹2,000</div>
@@ -891,7 +895,7 @@
                     
                     <li class="history-item">
                         <div>
-                            <div class="history-cause">Wildfire Recovery in Uttarakhand</div>
+                            <div class="history-cause" data-i18n="wildfireOption">Wildfire Recovery in Uttarakhand</div>
                             <div class="history-date">July 28, 2023</div>
                         </div>
                         <div class="history-amount">₹1,000</div>
@@ -899,7 +903,7 @@
                     
                     <li class="history-item">
                         <div>
-                            <div class="history-cause">General Relief Fund</div>
+                            <div class="history-cause" data-i18n="generalFundOption">General Relief Fund</div>
                             <div class="history-date">June 10, 2023</div>
                         </div>
                         <div class="history-amount">₹500</div>
@@ -907,7 +911,7 @@
                     
                     <li class="history-item">
                         <div>
-                            <div class="history-cause">Drought Assistance in Rajasthan</div>
+                            <div class="history-cause" data-i18n="droughtOption">Drought Assistance in Rajasthan</div>
                             <div class="history-date">May 5, 2023</div>
                         </div>
                         <div class="history-amount">₹2,500</div>
@@ -916,27 +920,27 @@
             </div>
             
             <div class="impact-section">
-                <h2 class="section-title"><i class="fas fa-chart-line"></i> Your Impact</h2>
+                <h2 class="section-title"><i class="fas fa-chart-line"></i> <span data-i18n="yourImpact">Your Impact</span></h2>
                 
                 <div class="impact-stats">
                     <div class="impact-stat">
                         <div class="impact-value">125</div>
-                        <div class="impact-label">Meals Provided</div>
+                        <div class="impact-label" data-i18n="mealsProvided">Meals Provided</div>
                     </div>
                     
                     <div class="impact-stat">
                         <div class="impact-value">35</div>
-                        <div class="impact-label">Emergency Kits</div>
+                        <div class="impact-label" data-i18n="emergencyKits">Emergency Kits</div>
                     </div>
                     
                     <div class="impact-stat">
                         <div class="impact-value">8</div>
-                        <div class="impact-label">Families Supported</div>
+                        <div class="impact-label" data-i18n="familiesSupported">Families Supported</div>
                     </div>
                     
                     <div class="impact-stat">
                         <div class="impact-value">5</div>
-                        <div class="impact-label">Communities Helped</div>
+                        <div class="impact-label" data-i18n="communitiesHelped">Communities Helped</div>
                     </div>
                 </div>
             </div>
@@ -948,7 +952,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Samadhan Setu</h3>
-                    <p>Empowering communities to work with local governments for better neighborhoods.</p>
+                    <p data-i18n="footerDesc">Empowering communities to work with local governments for better neighborhoods.</p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -958,29 +962,29 @@
                 </div>
 
                 <div class="footer-column">
-                    <h3>Quick Links</h3>
+                    <h3 data-i18n="quickLinks">Quick Links</h3>
                     <ul>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Home</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Report Issue</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Issues Map</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Dashboard</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> About Us</a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="home">Home</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="reportIssue">Report Issue</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="issuesMap">Issues Map</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="dashboard">Dashboard</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="aboutUs">About Us</span></a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h3>Resources</h3>
+                    <h3 data-i18n="resources">Resources</h3>
                     <ul>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Help Center</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> FAQ</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Community Guidelines</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Privacy Policy</a></li>
-                        <li><a href="#"><i class="ri-arrow-right-line"></i> Terms of Service</a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="helpCenter">Help Center</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="faq">FAQ</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="communityGuidelines">Community Guidelines</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="privacyPolicy">Privacy Policy</span></a></li>
+                        <li><a href="#"><i class="ri-arrow-right-line"></i> <span data-i18n="termsOfService">Terms of Service</span></a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
+                    <h3 data-i18n="contactUs">Contact Us</h3>
                     <ul>
                         <li><i class="fas fa-envelope"></i> support@samadhansetu.org</li>
                         <li><i class="fas fa-phone"></i> +91 98765 43210</li>
@@ -990,12 +994,229 @@
             </div>
 
             <div class="copyright">
-                <p>&copy; 2023 Samadhan Setu. All rights reserved.</p>
+                <p>&copy; 2023 Samadhan Setu. <span data-i18n="allRightsReserved">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Language translations
+        const translations = {
+            en: {
+                // Header
+                "reliefFundTitle": "Relief Fund & Donation",
+                "reliefFundDesc": "Support natural causes and help communities in need through your contributions",
+                "totalDonated": "Total Donated",
+                "causesSupported": "Causes Supported",
+                "impactPoints": "Impact Points",
+                
+                // Causes
+                "activeCauses": "Active Causes",
+                "floodReliefTitle": "Flood Relief in Assam",
+                "floodReliefDesc": "Support communities affected by recent floods with essential supplies and rehabilitation.",
+                "wildfireTitle": "Wildfire Recovery in Uttarakhand",
+                "wildfireDesc": "Help rebuild communities and restore forests affected by devastating wildfires.",
+                "droughtTitle": "Drought Assistance in Rajasthan",
+                "droughtDesc": "Provide water resources and support to communities facing severe water scarcity.",
+                "raised": "raised",
+                "of": "of",
+                "goal": "goal",
+                "donateNow": "Donate Now",
+                
+                // Donation Form
+                "makeDonation": "Make a Donation",
+                "selectCause": "Select Cause",
+                "selectCauseOption": "-- Select a cause --",
+                "floodReliefOption": "Flood Relief in Assam",
+                "wildfireOption": "Wildfire Recovery in Uttarakhand",
+                "droughtOption": "Drought Assistance in Rajasthan",
+                "generalFundOption": "General Relief Fund",
+                "donationAmount": "Donation Amount (₹)",
+                "custom": "Custom",
+                "enterAmount": "Enter amount",
+                "yourName": "Your Name",
+                "emailAddress": "Email Address",
+                "paymentMethod": "Payment Method",
+                "selectPayment": "-- Select payment method --",
+                "creditCard": "Credit Card",
+                "debitCard": "Debit Card",
+                "upi": "UPI",
+                "netBanking": "Net Banking",
+                "messageOptional": "Message (Optional)",
+                "addMessage": "Add a message of support",
+                "confirmDonation": "Confirm Donation",
+                
+                // History
+                "donationHistory": "Your Donation History",
+                
+                // Impact
+                "yourImpact": "Your Impact",
+                "mealsProvided": "Meals Provided",
+                "emergencyKits": "Emergency Kits",
+                "familiesSupported": "Families Supported",
+                "communitiesHelped": "Communities Helped",
+                
+                // Footer
+                "footerDesc": "Empowering communities to work with local governments for better neighborhoods.",
+                "quickLinks": "Quick Links",
+                "home": "Home",
+                "reportIssue": "Report Issue",
+                "issuesMap": "Issues Map",
+                "dashboard": "Dashboard",
+                "aboutUs": "About Us",
+                "resources": "Resources",
+                "helpCenter": "Help Center",
+                "faq": "FAQ",
+                "communityGuidelines": "Community Guidelines",
+                "privacyPolicy": "Privacy Policy",
+                "termsOfService": "Terms of Service",
+                "contactUs": "Contact Us",
+                "allRightsReserved": "All rights reserved."
+            },
+            hi: {
+                // Header
+                "reliefFundTitle": "राहत कोष और दान",
+                "reliefFundDesc": "प्राकृतिक आपदाओं में सहायता करें और जरूरतमंद समुदायों की मदद करें",
+                "totalDonated": "कुल दान राशि",
+                "causesSupported": "समर्थित कारण",
+                "impactPoints": "प्रभाव अंक",
+                
+                // Causes
+                "activeCauses": "सक्रिय कारण",
+                "floodReliefTitle": "असम में बाढ़ राहत",
+                "floodReliefDesc": "हाल की बाढ़ से प्रभावित समुदायों को आवश्यक आपूर्ति और पुनर्वास के साथ सहायता करें।",
+                "wildfireTitle": "उत्तराखंड में जंगल की आग राहत",
+                "wildfireDesc": "विनाशकारी जंगल की आग से प्रभावित समुदायों के पुनर्निर्माण और जंगलों की बहाली में मदद करें।",
+                "droughtTitle": "राजस्थान में सूखा सहायता",
+                "droughtDesc": "गंभीर जल संकट का सामना कर रहे समुदायों को जल संसाधन और सहायता प्रदान करें।",
+                "raised": "एकत्र",
+                "of": "का",
+                "goal": "लक्ष्य",
+                "donateNow": "अभी दान करें",
+                
+                // Donation Form
+                "makeDonation": "दान करें",
+                "selectCause": "कारण चुनें",
+                "selectCauseOption": "-- एक कारण चुनें --",
+                "floodReliefOption": "असम में बाढ़ राहत",
+                "wildfireOption": "उत्तराखंड में जंगल की आग राहत",
+                "droughtOption": "राजस्थान में सूखा सहायता",
+                "generalFundOption": "सामान्य राहत कोष",
+                "donationAmount": "दान राशि (₹)",
+                "custom": "अनुकूलित",
+                "enterAmount": "राशि दर्ज करें",
+                "yourName": "आपका नाम",
+                "emailAddress": "ईमेल पता",
+                "paymentMethod": "भुगतान विधि",
+                "selectPayment": "-- भुगतान विधि चुनें --",
+                "creditCard": "क्रेडिट कार्ड",
+                "debitCard": "डेबिट कार्ड",
+                "upi": "यूपीआई",
+                "netBanking": "नेट बैंकिंग",
+                "messageOptional": "संदेश (वैकल्पिक)",
+                "addMessage": "समर्थन का संदेश जोड़ें",
+                "confirmDonation": "दान की पुष्टि करें",
+                
+                // History
+                "donationHistory": "आपका दान इतिहास",
+                
+                // Impact
+                "yourImpact": "आपका प्रभाव",
+                "mealsProvided": "भोजन प्रदान किए",
+                "emergencyKits": "आपातकालीन किट",
+                "familiesSupported": "परिवारों को समर्थन",
+                "communitiesHelped": "समुदायों की मदद",
+                
+                // Footer
+                "footerDesc": "बेहतर पड़ोस के लिए स्थानीय सरकारों के साथ काम करने के लिए समुदायों को सशक्त बनाना।",
+                "quickLinks": "त्वरित लिंक",
+                "home": "होम",
+                "reportIssue": "समस्या रिपोर्ट करें",
+                "issuesMap": "समस्याओं का नक्शा",
+                "dashboard": "डैशबोर्ड",
+                "aboutUs": "हमारे बारे में",
+                "resources": "संसाधन",
+                "helpCenter": "सहायता केंद्र",
+                "faq": "सामान्य प्रश्न",
+                "communityGuidelines": "समुदाय दिशानिर्देश",
+                "privacyPolicy": "गोपनीयता नीति",
+                "termsOfService": "सेवा की शर्तें",
+                "contactUs": "संपर्क करें",
+                "allRightsReserved": "सर्वाधिकार सुरक्षित।"
+            },
+            mr: {
+                // Header
+                "reliefFundTitle": "रिलीफ फंड आणि दान",
+                "reliefFundDesc": "नैसर्गिक कारणांना आधार द्या आणि आपल्या योगदानाद्वारे गरजू समुदायांना मदत करा",
+                "totalDonated": "एकूण दान केले",
+                "causesSupported": "समर्थित कारणे",
+                "impactPoints": "प्रभाव गुण",
+                
+                // Causes
+                "activeCauses": "सक्रिय कारणे",
+                "floodReliefTitle": "आसाममधील पूर आपत्ती",
+                "floodReliefDesc": "अलीकडील पुरामुळे प्रभावित समुदायांना आवश्यक पुरवठा आणि पुनर्वसनासह मदत करा.",
+                "wildfireTitle": "उत्तराखंडमधील वन्य आग पुनर्प्राप्ती",
+                "wildfireDesc": "विध्वंसक वन्य आगीने प्रभावित झालेल्या समुदायांचे पुनर्बांधणी आणि जंगले पुनर्संचयित करण्यास मदत करा.",
+                "droughtTitle": "राजस्थानमधील दुष्काळ सहाय्य",
+                "droughtDesc": "गंभीर पाणीटंचाईचा सामना करणाऱ्या समुदायांना पाणी संसाधने आणि समर्थन प्रदान करा.",
+                "raised": "गोळा केले",
+                "of": "पैकी",
+                "goal": "लक्ष्य",
+                "donateNow": "आत्ता दान करा",
+                
+                // Donation Form
+                "makeDonation": "दान करा",
+                "selectCause": "कारण निवडा",
+                "selectCauseOption": "-- एक कारण निवडा --",
+                "floodReliefOption": "आसाममधील पूर आपत्ती",
+                "wildfireOption": "उत्तराखंडमधील वन्य आग पुनर्प्राप्ती",
+                "droughtOption": "राजस्थानमधील दुष्काळ सहाय्य",
+                "generalFundOption": "सामान्य रिलीफ फंड",
+                "donationAmount": "दान रक्कम (₹)",
+                "custom": "सानुकूल",
+                "enterAmount": "रक्कम प्रविष्ट करा",
+                "yourName": "तुमचे नाव",
+                "emailAddress": "ईमेल पत्ता",
+                "paymentMethod": "पेमेंट पद्धत",
+                "selectPayment": "-- पेमेंट पद्धत निवडा --",
+                "creditCard": "क्रेडिट कार्ड",
+                "debitCard": "डेबिट कार्ड",
+                "upi": "यूपीआय",
+                "netBanking": "नेट बँकिंग",
+                "messageOptional": "संदेश (पर्यायी)",
+                "addMessage": "समर्थनाचा संदेश जोडा",
+                "confirmDonation": "दानाची पुष्टी करा",
+                
+                // History
+                "donationHistory": "तुमचा दान इतिहास",
+                
+                // Impact
+                "yourImpact": "तुमचा प्रभाव",
+                "mealsProvided": "जेवणे पुरवली",
+                "emergencyKits": "आणीबाणी किट",
+                "familiesSupported": "कुटुंबांना समर्थन",
+                "communitiesHelped": "समुदायांना मदत",
+                
+                // Footer
+                "footerDesc": "चांगल्या शेजारीसाठी स्थानिक सरकारांसोबत काम करण्यासाठी समुदायांना सक्षम करणे.",
+                "quickLinks": "द्रुत दुवे",
+                "home": "मुख्यपृष्ठ",
+                "reportIssue": "समस्या नोंदवा",
+                "issuesMap": "समस्यांचा नकाशा",
+                "dashboard": "डॅशबोर्ड",
+                "aboutUs": "आमच्याबद्दल",
+                "resources": "संसाधने",
+                "helpCenter": "मदत केंद्र",
+                "faq": "सामान्य प्रश्न",
+                "communityGuidelines": "समुदाय मार्गदर्शक तत्त्वे",
+                "privacyPolicy": "गोपनीयता धोरण",
+                "termsOfService": "सेवा अटी",
+                "contactUs": "आमच्याशी संपर्क साधा",
+                "allRightsReserved": "सर्व हक्क राखीव."
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function() {
             // Theme toggle functionality
             const themeToggle = document.getElementById('themeToggle');
@@ -1096,49 +1317,88 @@
                 amountOptions.forEach(opt => opt.classList.remove('selected'));
                 customAmount.classList.remove('show');
             });
-        });
-         const profileBtn = document.querySelector('.profile-btn');
-        const profileDropdown = document.getElementById('profileDropdown');
-        const languageSelector = document.getElementById('languageSelector');
-        const languageBtn = document.getElementById('languageBtn');
-        const languageDropdown = document.getElementById('languageDropdown');
-        
-        if (profileBtn && profileDropdown) {
-            profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (languageDropdown) languageDropdown.classList.remove('show');
-                if (languageSelector) languageSelector.classList.remove('open');
-                profileDropdown.classList.toggle('show');
-            });
-        }
-        
-        if (languageBtn && languageDropdown) {
+
+            // Language selection functionality
+            const languageSelector = document.getElementById('languageSelector');
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
+            const currentLangElement = document.getElementById('currentLang');
+            const langOptions = document.querySelectorAll('.lang-option');
+            
+            // Set initial language from localStorage or default to English
+            let currentLang = localStorage.getItem('language') || 'en';
+            currentLangElement.textContent = currentLang === 'en' ? 'English' : 
+                                            currentLang === 'hi' ? 'हिन्दी' : 'मराठी';
+            
+            // Apply translations for current language
+            applyTranslations(currentLang);
+            
+            // Toggle language dropdown
             languageBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (profileDropdown) profileDropdown.classList.remove('show');
                 languageDropdown.classList.toggle('show');
                 languageSelector.classList.toggle('open');
             });
-        }
-
-        // Close dropdowns when clicking outside
-        window.addEventListener('click', () => {
-            if (profileDropdown) profileDropdown.classList.remove('show');
-            if (languageDropdown) languageDropdown.classList.remove('show');
-            if (languageSelector) languageSelector.classList.remove('open');
-        });
-        
-        // Handle language selection
-        const langOptions = document.querySelectorAll('.lang-option');
-        langOptions.forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const selectedLangText = e.target.textContent;
-                languageBtn.querySelector('span').textContent = selectedLangText;
-                alert(`Language changed to ${selectedLangText}`);
+            
+            // Handle language selection
+            langOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLang = e.target.getAttribute('data-lang');
+                    
+                    // Update current language
+                    currentLang = selectedLang;
+                    localStorage.setItem('language', selectedLang);
+                    
+                    // Update language button text
+                    currentLangElement.textContent = selectedLang === 'en' ? 'English' : 
+                                                    selectedLang === 'hi' ? 'हिन्दी' : 'मराठी';
+                    
+                    // Apply translations
+                    applyTranslations(selectedLang);
+                    
+                    // Close dropdown
+                    languageDropdown.classList.remove('show');
+                    languageSelector.classList.remove('open');
+                });
             });
+            
+            // Close dropdown when clicking outside
+            window.addEventListener('click', () => {
+                languageDropdown.classList.remove('show');
+                languageSelector.classList.remove('open');
+            });
+            
+            // Function to apply translations
+            function applyTranslations(lang) {
+                const elements = document.querySelectorAll('[data-i18n]');
+                
+                elements.forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.textContent = translations[lang][key];
+                    }
+                });
+                
+                // Handle placeholder translations
+                const placeholderElements = document.querySelectorAll('[data-i18n-placeholder]');
+                placeholderElements.forEach(element => {
+                    const key = element.getAttribute('data-i18n-placeholder');
+                    if (translations[lang] && translations[lang][key]) {
+                        element.setAttribute('placeholder', translations[lang][key]);
+                    }
+                });
+                
+                // Update select options
+                const selectOptions = document.querySelectorAll('option[data-i18n]');
+                selectOptions.forEach(option => {
+                    const key = option.getAttribute('data-i18n');
+                    if (translations[lang] && translations[lang][key]) {
+                        option.textContent = translations[lang][key];
+                    }
+                });
+            }
         });
-
     </script>
 </body>
 </html>

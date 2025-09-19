@@ -28,7 +28,7 @@
 
         .dark-mode {
             --bg-color: #1a1a1a;
-            --text-color: #e6e6e6;
+            --text-color: #ffffff;
             --card-bg: #2d2d2d;
             --header-bg: linear-gradient(135deg, #1a2a6c, #000);
             --footer-bg: #000;
@@ -100,8 +100,11 @@
         }
 
         .stats-card .label {
-            color: #6c757d;
+            color: #333;
             font-size: 0.9rem;
+        }
+        .dark-mode .stats-card .label{
+            color: rgb(255, 255, 255);
         }
 
         /* Priority Badges */
@@ -154,6 +157,12 @@
         .issues-table tr:hover {
             background-color: var(--table-hover);
         }
+          .dark-mode .issues-table th {
+            background-color: var(--primary);
+            color: rgb(0, 0, 0);
+            font-weight: 600;
+        }
+          
 
         /* Action Buttons */
         .btn-action {
@@ -320,6 +329,8 @@
             align-items: center;
             justify-content: center;
         }
+        
+       
 
         /* Language specific styles */
         .hindi-lang, .tamil-lang, .telugu-lang, .malayalam-lang {
@@ -425,6 +436,7 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(26, 42, 108, 0.3), transparent);
             transition: all 0.5s ease;
+            z-index: 1;
         }
 
         .Menu li:hover:before {
@@ -446,6 +458,8 @@
             display: flex;
             align-items: center;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
 
         .Menu li:hover a {
@@ -582,6 +596,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
         }
         .selector-button:hover{
             background-color: #046bbe;
@@ -669,6 +685,12 @@
             background-color: var(--primary);
             border-color: var(--primary);
         }
+        .dark-mode .card-title{
+            color: rgb(255, 255, 255);
+        }
+        .dark-mode .card-text{
+            color: rgb(255, 255, 255);
+        }
     </style>
 </head>
 <body>
@@ -678,11 +700,11 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="logo">
                     <img src="https://i.ibb.co/qZzvg53/Whats-App-Image-2025-09-09-at-08-13-15-f871567f-removebg-preview.png" alt="Samadhan Setu Logo">
-                    <span>Samadhan Setu - City Officials Portal</span>
+                    <span data-translate="portal_title">Samadhan Setu - City Officials Portal</span>
                 </div>
                 <div class="d-flex align-items-center">
                     <div class="language-selector">
-                        <button class="selector-button"><i class="fas fa-globe"></i> Language</button>
+                        <button class="selector-button"><i class="fas fa-globe"></i> <span data-translate="language">Language</span></button>
                         <div class="language-list">
                             <a href="#" data-lang="en">English</a>
                             <a href="#" data-lang="hi">हिन्दी (Hindi)</a>
@@ -709,7 +731,7 @@
                         <i class="fas fa-exclamation-circle"></i>
                     </div>
                     <div class="count">142</div>
-                    <div class="label">Total Reports</div>
+                    <div class="label" data-translate="total_reports">Total Reports</div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -718,7 +740,7 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="count">38</div>
-                    <div class="label">Pending Resolution</div>
+                    <div class="label" data-translate="pending_resolution">Pending Resolution</div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -727,7 +749,7 @@
                         <i class="fas fa-flag"></i>
                     </div>
                     <div class="count">12</div>
-                    <div class="label">High Priority Issues</div>
+                    <div class="label" data-translate="high_priority">High Priority Issues</div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -736,7 +758,7 @@
                         <i class="fas fa-check-circle"></i>
                     </div>
                     <div class="count">94</div>
-                    <div class="label">Resolved Issues</div>
+                    <div class="label" data-translate="resolved_issues">Resolved Issues</div>
                 </div>
             </div>
         </div>
@@ -745,22 +767,22 @@
         <ul class="nav nav-tabs mb-4" id="officialTabs" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="issues-tab" data-bs-toggle="tab" data-bs-target="#issues" type="button" role="tab" aria-controls="issues" aria-selected="true">
-                    <i class="fas fa-list me-2"></i>All Issues
+                    <i class="fas fa-list me-2"></i><span data-translate="all_issues">All Issues</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab" aria-controls="map" aria-selected="false">
-                    <i class="fas fa-map-marked-alt me-2"></i>Map View
+                    <i class="fas fa-map-marked-alt me-2"></i><span data-translate="map_view">Map View</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="analytics-tab" data-bs-toggle="tab" data-bs-target="#analytics" type="button" role="tab" aria-controls="analytics" aria-selected="false">
-                    <i class="fas fa-chart-bar me-2"></i>Analytics
+                    <i class="fas fa-chart-bar me-2"></i><span data-translate="analytics">Analytics</span>
                 </button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="departments-tab" data-bs-toggle="tab" data-bs-target="#departments" type="button" role="tab" aria-controls="departments" aria-selected="false">
-                    <i class="fas fa-building me-2"></i>Departments
+                    <i class="fas fa-building me-2"></i><span data-translate="departments">Departments</span>
                 </button>
             </li>
         </ul>
@@ -771,27 +793,27 @@
             <div class="tab-pane fade show active" id="issues" role="tabpanel" aria-labelledby="issues-tab">
                 <div class="dashboard-section">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="section-title">Report Management</h3>
+                        <h3 class="section-title" data-translate="report_management">Report Management</h3>
                         <div class="d-flex">
                             <div class="dropdown me-2">
                                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-filter me-1"></i> Filter
+                                    <i class="fas fa-filter me-1"></i> <span data-translate="filter">Filter</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                    <li><a class="dropdown-item" href="#">All Issues</a></li>
-                                    <li><a class="dropdown-item" href="#">High Priority</a></li>
-                                    <li><a class="dropdown-item" href="#">Pending Resolution</a></li>
-                                    <li><a class="dropdown-item" href="#">Resolved</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="all_issues">All Issues</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="high_priority">High Priority</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="pending_resolution">Pending Resolution</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="resolved">Resolved</a></li>
                                 </ul>
                             </div>
                             <div class="dropdown">
                                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-sort me-1"></i> Sort
+                                    <i class="fas fa-sort me-1"></i> <span data-translate="sort">Sort</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                                    <li><a class="dropdown-item" href="#">Newest First</a></li>
-                                    <li><a class="dropdown-item" href="#">Oldest First</a></li>
-                                    <li><a class="dropdown-item" href="#">Priority</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="newest_first">Newest First</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="oldest_first">Oldest First</a></li>
+                                    <li><a class="dropdown-item" href="#" data-translate="priority">Priority</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -801,44 +823,44 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Issue Type</th>
-                                    <th>Location</th>
-                                    <th>Reported On</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
+                                    <th data-translate="id">ID</th>
+                                    <th data-translate="issue_type">Issue Type</th>
+                                    <th data-translate="location">Location</th>
+                                    <th data-translate="reported_on">Reported On</th>
+                                    <th data-translate="priority">Priority</th>
+                                    <th data-translate="status">Status</th>
+                                    <th data-translate="actions">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>#1247</td>
-                                    <td>Pothole</td>
-                                    <td>Hoshangabad Road</td>
-                                    <td>2 hours ago</td>
-                                    <td><span class="badge priority-high">High</span></td>
-                                    <td><span class="badge status-new">New</span></td>
+                                    <td data-translate="pothole">Pothole</td>
+                                    <td data-translate="hoshangabad_road">Hoshangabad Road</td>
+                                    <td>2 <span data-translate="hours_ago">hours ago</span></td>
+                                    <td><span class="badge priority-high" data-translate="high">High</span></td>
+                                    <td><span class="badge status-new" data-translate="new">New</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" title="View Details">
+                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" data-translate="" title="">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-action btn-success" data-bs-toggle="tooltip" title="Assign">
+                                        <button class="btn btn-sm btn-action btn-success" data-bs-toggle="tooltip" data-translate="" title="Assign">
                                             <i class="fas fa-user-check"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>#1246</td>
-                                    <td>Garbage Accumulation</td>
-                                    <td>MP Nagar Zone 2</td>
-                                    <td>5 hours ago</td>
-                                    <td><span class="badge priority-medium">Medium</span></td>
-                                    <td><span class="badge status-progress">In Progress</span></td>
+                                    <td data-translate="garbage">Garbage Accumulation</td>
+                                    <td data-translate="mp_nagar">MP Nagar Zone 2</td>
+                                    <td>5 <span data-translate="hours_ago">hours ago</span></td>
+                                    <td><span class="badge priority-medium" data-translate="medium">Medium</span></td>
+                                    <td><span class="badge status-progress" data-translate="in_progress">In Progress</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" title="View Details">
+                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" data-translate="" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-action btn-info" data-bs-toggle="tooltip" title="Update Status">
+                                        <button class="btn btn-sm btn-action btn-info" data-bs-toggle="tooltip" data-translate="" title="Update Status">
                                             <i class="fas fa-sync"></i>
                                         </button>
                                     </td>
@@ -848,13 +870,13 @@
                                     <td>Broken Water Pipe</td>
                                     <td>Bairagarh</td>
                                     <td>1 day ago</td>
-                                    <td><span class="badge priority-high">High</span></td>
-                                    <td><span class="badge status-progress">In Progress</span></td>
+                                    <td><span class="badge priority-high" data-translate="high">High</span></td>
+                                    <td><span class="badge status-progress" data-translate="in_progress">In Progress</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" title="View Details">
+                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" data-translate="" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-action btn-info" data-bs-toggle="tooltip" title="Update Status">
+                                        <button class="btn btn-sm btn-action btn-info" data-bs-toggle="tooltip" data-translate="" title="Update Status">
                                             <i class="fas fa-sync"></i>
                                         </button>
                                     </td>
@@ -864,10 +886,10 @@
                                     <td>Streetlight Not Working</td>
                                     <td>TT Nagar</td>
                                     <td>2 days ago</td>
-                                    <td><span class="badge priority-medium">Medium</span></td>
-                                    <td><span class="badge status-resolved">Resolved</span></td>
+                                    <td><span class="badge priority-medium" data-translate="medium">Medium</span></td>
+                                    <td><span class="badge status-resolved" data-translate="resolved">Resolved</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" title="View Details">
+                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" data-translate="" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         <button class="btn btn-sm btn-action btn-secondary" data-bs-toggle="tooltip" title="View History">
@@ -881,9 +903,9 @@
                                     <td>New Market</td>
                                     <td>3 days ago</td>
                                     <td><span class="badge priority-low">Low</span></td>
-                                    <td><span class="badge status-resolved">Resolved</span></td>
+                                    <td><span class="badge status-resolved" data-translate="resolved">Resolved</span></td>
                                     <td>
-                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" title="View Details">
+                                        <button class="btn btn-sm btn-action btn-primary" data-bs-toggle="tooltip" data-translate="" title="View Details">
                                             <i class="fas fa-eye"></i>
                                         </button>
                                         <button class="btn btn-sm btn-action btn-secondary" data-bs-toggle="tooltip" title="View History">
@@ -898,13 +920,13 @@
                     <nav aria-label="Page navigation" class="mt-4">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true" data-translate="previous">Previous</a>
                             </li>
                             <li class="page-item active"><a class="page-link" href="#">1</a></li>
                             <li class="page-item"><a class="page-link" href="#">2</a></li>
                             <li class="page-item"><a class="page-link" href="#">3</a></li>
                             <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                                <a class="page-link" href="#" data-translate="next">Next</a>
                             </li>
                         </ul>
                     </nav>
@@ -914,7 +936,7 @@
             <!-- Map Tab -->
             <div class="tab-pane fade" id="map" role="tabpanel" aria-labelledby="map-tab">
                 <div class="dashboard-section">
-                    <h3 class="section-title">Issue Map View</h3>
+                    <h3 class="section-title" data-translate="map_view">Issue Map View</h3>
                     <div class="map-container mb-4" id="issueMap">
                         <!-- Map will be loaded here -->
                         <div style="width: 100%; height: 100%; background-color: var(--bg-color); display: flex; align-items: center; justify-content: center; color: #6c757d;">
@@ -927,7 +949,7 @@
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header bg-primary text-white">
-                                    <i class="fas fa-filter me-2"></i> Map Filters
+                                    <i class="fas fa-filter me-2"></i> <span data-translate="filter">Map Filters</span>
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
@@ -971,19 +993,19 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="fas fa-map-marker-alt text-danger me-2"></i>
-                                        <span>High Priority Issues</span>
+                                        <span data-translate="high_priority">High Priority Issues</span>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="fas fa-map-marker-alt text-warning me-2"></i>
-                                        <span>Medium Priority Issues</span>
+                                        <span data-translate="medium_priority">Medium Priority Issues</span>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="fas fa-map-marker-alt text-success me-2"></i>
-                                        <span>Low Priority Issues</span>
+                                        <span data-translate="low_priority">Low Priority Issues</span>
                                     </div>
                                     <div class="d-flex align-items-center mb-2">
                                         <i class="fas fa-check-circle text-primary me-2"></i>
-                                        <span>Resolved Issues</span>
+                                        <span data-translate="resolved_issues">Resolved Issues</span>
                                     </div>
                                     <hr>
                                     <p class="small text-muted">
@@ -999,7 +1021,7 @@
             <!-- Analytics Tab -->
             <div class="tab-pane fade" id="analytics" role="tabpanel" aria-labelledby="analytics-tab">
                 <div class="dashboard-section">
-                    <h3 class="section-title">Reports Analytics</h3>
+                    <h3 class="section-title" data-translate="analytics">Reports Analytics</h3>
                     
                     <div class="row mb-4">
                         <div class="col-md-6">
@@ -1060,7 +1082,7 @@
             <!-- Departments Tab -->
             <div class="tab-pane fade" id="departments" role="tabpanel" aria-labelledby="departments-tab">
                 <div class="dashboard-section">
-                    <h3 class="section-title">Department Management</h3>
+                    <h3 class="section-title" data-translate="departments">Department Management</h3>
                     
                     <div class="row mb-4">
                         <div class="col-md-4">
@@ -1160,25 +1182,25 @@
     </div>
     
     <button class="toggle-btn" id="toggleBtn">
-        <i class="fas fa-bars"></i> Menu
+        <i class="fas fa-bars"></i> <span data-translate="menu">Menu</span>
     </button>
 
     <div class="slidebar" id="sidebar">
         <div class="close-btn" id="closeBtn">
             <i class="fas fa-times"></i>
         </div>
-        <h1>Samadhan Setu</h1>
+        <h1 data-translate="portal_title">Samadhan Setu</h1>
         <ul class="Menu">
-            <li class="active"><a href="#"><i class="fa-solid fa-user"></i>User Profile</a></li>
-            <li><a href="#"><i class="fa-solid fa-envelope"></i>Messages</a></li>
-            <li><a href="#"><i class="fa-solid fa-exclamation-circle"></i>Reports</a></li>
-            <li><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
-            <li><a href="#"><i class="fa-solid fa-circle-question"></i>Help & Support</a></li>
-            <li><a href="#"><i class="fa-solid fa-sign-out-alt"></i>Log out</a></li>
+            <li class="active"><a href="#"><i class="fa-solid fa-user"></i><span data-translate="profile">User Profile</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-envelope"></i><span data-translate="messages">Messages</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-exclamation-circle"></i><span data-translate="reports">Reports</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i><span data-translate="settings">Settings</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-circle-question"></i><span data-translate="help_support">Help & Support</span></a></li>
+            <li><a href="#"><i class="fa-solid fa-sign-out-alt"></i><span data-translate="logout">Log out</span></a></li>
         </ul>
         <div class="icons">
             <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-instagram"></i>
             <i class="fa-brands fa-twitter"></i>
         </div>
     </div>
@@ -1190,12 +1212,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p>&copy; 2023 Samadhan Setu - City Grievance Portal. All rights reserved.</p>
+                    <p>&copy; 2023 <span data-translate="portal_footer">Samadhan Setu - City Grievance Portal</span>. <span data-translate="all_rights">All rights reserved</span>.</p>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <a href="" class="text-light me-3">Privacy Policy</a>
-                    <a href="#" class="text-light me-3">Terms of Service</a>
-                    <a href="#" class="text-light">Contact Us</a>
+                    <a href="#" class="text-light me-3" data-translate="privacy_policy">Privacy Policy</a>
+                    <a href="#" class="text-light me-3" data-translate="terms">Terms of Service</a>
+                    <a href="#" class="text-light" data-translate="contact">Contact Us</a>
                 </div>
             </div>
         </div>
@@ -1215,6 +1237,10 @@
                 "profile": "Profile",
                 "settings": "Settings",
                 "logout": "Logout",
+                "messages": "Messages",
+                "reports": "Reports",
+                "help_support": "Help & Support",
+                "menu": "Menu",
                 
                 // Dashboard
                 "total_reports": "Total Reports",
@@ -1236,6 +1262,8 @@
                 "oldest_first": "Oldest First",
                 "priority": "Priority",
                 "resolved": "Resolved",
+                "medium_priority": "Medium Priority Issues",
+                "low_priority": "Low Priority Issues",
                 
                 // Table
                 "id": "ID",
@@ -1276,6 +1304,10 @@
                 "profile": "प्रोफाइल",
                 "settings": "सेटिंग्स",
                 "logout": "लॉगआउट",
+                "messages": "संदेश",
+                "reports": "रिपोर्ट",
+                "help_support": "सहायता और समर्थन",
+                "menu": "मेनू",
                 
                 // Dashboard
                 "total_reports": "कुल रिपोर्ट्स",
@@ -1297,6 +1329,8 @@
                 "oldest_first": "सबसे पुराना पहले",
                 "priority": "प्राथमिकता",
                 "resolved": "हल",
+                "medium_priority": "मध्यम प्राथमिकता के मुद्दे",
+                "low_priority": "कम प्राथमिकता के मुद्दे",
                 
                 // Table
                 "id": "आईडी",
@@ -1337,6 +1371,10 @@
                 "profile": "சுயவிவரம்",
                 "settings": "அமைப்புகள்",
                 "logout": "வெளியேறு",
+                "messages": "செய்திகள்",
+                "reports": "அறிக்கைகள்",
+                "help_support": "உதவி மற்றும் ஆதரவு",
+                "menu": "பட்டியல்",
                 
                 // Dashboard
                 "total_reports": "மொத்த அறிக்கைகள்",
@@ -1358,6 +1396,8 @@
                 "oldest_first": "பழையது முதலில்",
                 "priority": "முன்னுரிமை",
                 "resolved": "தீர்க்கப்பட்டது",
+                "medium_priority": "நடுத்தர முன்னுரிமை சிக்கல்கள்",
+                "low_priority": "குறைந்த முன்னுரிமை சிக்கல்கள்",
                 
                 // Table
                 "id": "ஐடி",
@@ -1398,6 +1438,10 @@
                 "profile": "ప్రొఫైల్",
                 "settings": "సెట్టింగులు",
                 "logout": "లాగ్అవుట్",
+                "messages": "సందేశాలు",
+                "reports": "నివేదికలు",
+                "help_support": "సహాయం మరియు మద్దతు",
+                "menu": "మెను",
                 
                 // Dashboard
                 "total_reports": "మొత్తం నివేదికలు",
@@ -1419,6 +1463,8 @@
                 "oldest_first": "సబ్బాతి మొదట",
                 "priority": "ప్రయోరిటీ",
                 "resolved": "పరిష్కరించబడింది",
+                "medium_priority": "మీడియం ప్రయోరిటీ Issues",
+                "low_priority": "లో ప్రయోరిటీ Issues",
                 
                 // Table
                 "id": "ID",
@@ -1445,7 +1491,7 @@
                 "next": "తదుపరి",
                 
                 // Footer
-                "portal_footer": "సమాధాన్ సేతు - సिटీ గ్రీవెన్స్ పోర్టల్",
+                "portal_footer": "సమాధాన్ సేతు - సిటీ గ్రీవెన్స్ పోర్టల్",
                 "all_rights": "అన్ని హక్కులు ప్రత్యేకించబడినవి",
                 "privacy_policy": "గోప్యతా విధానం",
                 "terms": "సేవా నిబంధనలు",
@@ -1459,6 +1505,10 @@
                 "profile": "പ്രൊഫൈല്‍",
                 "settings": "ക്രമീകരണങ്ങള്‍",
                 "logout": "ലോഗൗട്ട്",
+                "messages": "സന്ദേശങ്ങൾ",
+                "reports": "റിപ്പോർട്ടുകൾ",
+                "help_support": "സഹായവും പിന്തുണയും",
+                "menu": "മെനു",
                 
                 // Dashboard
                 "total_reports": "ആകെ റിപ്പോര്‍ട്ടുകള്‍",
@@ -1479,7 +1529,9 @@
                 "newest_first": "പുതിയത് ആദ്യം",
                 "oldest_first": "പഴയത് ആദ്യം",
                 "priority": "മുൻഗണന",
-                "resolved": "പरിഹരിച്ചു",
+                "resolved": "പരിഹരിച്ചു",
+                "medium_priority": "ഇടത്തരം മുൻഗണന പ്രശ്നങ്ങൾ",
+                "low_priority": "കുറഞ്ഞ മുൻഗണന പ്രശ്നങ്ങൾ",
                 
                 // Table
                 "id": "ഐഡി",
@@ -1506,7 +1558,7 @@
                 "next": "അടുത്ത",
                 
                 // Footer
-                "portal_footer": "സमാധാന്‍ സേതു - സിറ്റി ഗ്രീവൻസ് പോർട്ടൽ",
+                "portal_footer": "സമാധാന്‍ സേതു - സിറ്റി ഗ്രീവൻസ് പോർട്ടൽ",
                 "all_rights": "എല്ലാ അവകാശങ്ങളും നിക്ഷിപ്തം",
                 "privacy_policy": "സ്വകാര്യതാ നയം",
                 "terms": "സേവന നിബന്ധനകൾ",
@@ -1649,9 +1701,9 @@
             const selectorButton = document.querySelector('.selector-button');
             if (selectorButton) {
                 const globeIcon = selectorButton.querySelector('i');
-                const span = document.createElement('span');
-                if (selectorButton.childNodes.length > 1) {
-                    selectorButton.replaceChild(document.createTextNode(translations[lang]['language'] || 'Language'), selectorButton.childNodes[1]);
+                const span = selectorButton.querySelector('span');
+                if (span) {
+                    span.textContent = translations[lang]['language'] || 'Language';
                 } else {
                     selectorButton.appendChild(document.createTextNode(translations[lang]['language'] || 'Language'));
                 }
