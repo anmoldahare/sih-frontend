@@ -564,7 +564,7 @@
                 or_separator: "Or continue with",
                 no_account: "Don't have an account?",
                 sign_up_link: "Sign up",
-                login_success: "Login successful! (This is just a demo)"
+                login_success: "Login successful! Redirecting..."
             },
             hi: {
                 app_name: "समाधान सेतु",
@@ -581,14 +581,14 @@
                 or_separator: "या के साथ जारी रखें",
                 no_account: "खाता नहीं है?",
                 sign_up_link: "साइन अप करें",
-                login_success: "लॉगिन सफल! (यह सिर्फ एक डेमो है)"
+                login_success: "लॉगिन सफल! पुनर्निर्देशित कर रहे हैं..."
             },
             te: {
                 app_name: "సమాధానం సేతు",
                 sign_in_message: "మీ ఖాతాకు ప్రవేశించడానికి సైన్ ఇన్ చేయండి",
                 email_label: "ఇమెయిల్ చిరునామా",
-                email_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
-                email_error: "దయచేసి సరైన ఇమెయిల్ చిరునామాను నమోదు చేయండి",
+                email_placeholder: "మీ ఇमెయిల్ నమోదు చేయండి",
+                email_error: "దయచేసి సరైన ఇమెయిల్ చిరునామాను नమోदు చేయండి",
                 password_label: "పాస్వర్డ్",
                 password_placeholder: "మీ పాస్వర్డ్ నమోదు చేయండి",
                 password_error: "పాస్వర్డ్ కనీసం 8 అక్షరాలుగా ఉండాలి",
@@ -598,7 +598,7 @@
                 or_separator: "లేదా కొనసాగించండి",
                 no_account: "ఖాతా లేదా?",
                 sign_up_link: "సైన్ అప్",
-                login_success: "లాగిన్ విజయవంతమైంది! (ఇది కేవలం డెమో)"
+                login_success: "లాగిన్ విజయవంతమైంది! దారిమార్పు చేస్తున్నారు..."
             },
             ta: {
                 app_name: "சமாதானம் சேது",
@@ -615,7 +615,7 @@
                 or_separator: "அல்லது தொடரவும்",
                 no_account: "கணக்கு இல்லையா?",
                 sign_up_link: "பதிவு செய்யவும்",
-                login_success: "உள்நுழைவு வெற்றிகரமாக உள்ளது! (இது ஒரு டெமோ மட்டுமே)"
+                login_success: "உள்நுழைவு வெற்றிகரமாக உள்ளது! திருப்பி விடப்படுகிறது..."
             },
             ml: {
                 app_name: "സമാധാനം സേതു",
@@ -632,7 +632,7 @@
                 or_separator: "അല്ലെങ്കിൽ തുടരുക",
                 no_account: "അക്കൗണ്ട് ഇല്ലേ?",
                 sign_up_link: "സൈൻ അപ്പ്",
-                login_success: "ലോഗിൻ വിജയകരമാണ്! (ഇത് ഒരു ഡെമോ മാത്രമാണ്)"
+                login_success: "ലോഗിൻ വിജയകരമാണ്! തിരിച്ചുവിടുന്നു..."
             }
         };
 
@@ -720,12 +720,15 @@
             if (isValid) {
                 // Simulate form submission
                 const submitBtn = loginForm.querySelector('button');
+                const originalText = submitBtn.textContent;
                 submitBtn.innerHTML = translations[currentLang].sign_in_button + '...';
                 submitBtn.disabled = true;
                 
                 setTimeout(() => {
                     alert(translations[currentLang].login_success);
-                    submitBtn.innerHTML = translations[currentLang].sign_in_button;
+                    // Redirect to the city official page after successful login
+                    window.open('http://127.0.0.1:5500/sih-frontend/cityofficial.html', '_blank');
+                    submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                     loginForm.reset();
                 }, 1500);

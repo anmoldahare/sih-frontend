@@ -854,12 +854,16 @@
             align-self: flex-start;
             background: white;
             border: 1px solid #e0e0e0;
+            
+        }
+        .dark-mode .bot-message{
+            background: black;
         }
         
         .user-message {
             align-self: flex-end;
             background: #3498db;
-            color: white;
+            color: rgb(0, 0, 0);
         }
         
         .chatbot-input {
@@ -1582,7 +1586,10 @@
     .glassy-button:active {
       transform: scale(0.95);
     }
-    
+    .map-placeholder img{
+        width: 2000px;
+        height: 600px;
+    }
     </style>
 </head>
 <body>
@@ -1916,6 +1923,7 @@
                     <div class="map-placeholder">
                         <i class="fas fa-map-marked-alt"></i>
                         <h3>Interactive Issues Map</h3>
+                        <span> <img src="https://i.ibb.co/nNr0Q0SM/Screenshot-2025-09-10-224636.png" alt=""></span>
                         <p>View all reported issues in your area on an interactive map</p>
                         <p>Click on markers to see details and status of each issue</p>
                     </div>
@@ -1967,7 +1975,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">1</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMyNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Amit Sharma</div>
                                     <div class="activity-desc">45 issues resolved</div>
@@ -1979,7 +1987,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">2</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNlNzRjM2MiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Priya Patel</div>
                                     <div class="activity-desc">38 issues resolved</div>
@@ -1991,7 +1999,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">3</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMzNDk4ZGIiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Rajesh Kumar</div>
                                     <div class="activity-desc">12 issues resolved</div>
@@ -2003,7 +2011,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">4</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Sneha Gupta</div>
                                     <div class="activity-desc">10 issues resolved</div>
