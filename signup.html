@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up | Your Website</title>
+    <title>Sign Up | Samadhan Setu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -504,6 +504,7 @@
         .language-option.active {
             background-color: rgba(52, 152, 219, 0.15);
             font-weight: 600;
+            color: var(--primary-color);
         }
 
         .language-flag {
@@ -703,11 +704,12 @@
             <!-- Step 3: Terms and Finish -->
             <div class="form-step" id="step3-form">
                 <div class="form-group">
-                    <label for="birthdate" data-translate="birthdate_label">Date of Birth</label>
+                    <label for="birthdate" data-translate="birthdate_label">Date of Birth *</label>
                     <div class="input-with-icon">
                         <i class="fas fa-calendar"></i>
-                        <input type="date" id="birthdate" class="form-control">
+                        <input type="date" id="birthdate" class="form-control" required>
                     </div>
+                    <div class="error-message" id="birthdateError" data-translate="birthdate_error">Please enter your date of birth</div>
                 </div>
 
                 <div class="form-group">
@@ -733,7 +735,7 @@
 
                 <div class="btn-group">
                     <button type="button" class="btn btn-outline" id="backToStep2" data-translate="back_button">Back</button>
-                    <button onclick="(window.location.href='http://127.0.0.1:5500/sih-frontend/citizen.html','_blank')"; type="submit" class="btn" id="submitForm" data-translate="create_account_button">Create Account</button>
+                    <button type="submit" class="btn" id="submitForm" data-translate="create_account_button">Create Account</button>
                 </div>
             </div>
         </form>
@@ -757,7 +759,7 @@
         </div>
 
         <div class="login-link">
-            <span data-translate="has_account">Already have an account?</span> <a href="http://127.0.0.1:5500/sih-frontend/login.html" target="blank" data-translate="login_link">Log in</a>
+            <span data-translate="has_account">Already have an account?</span> <a href="login.html" target="_blank" data-translate="login_link">Log in</a>
         </div>
     </div>
 
@@ -787,7 +789,8 @@
                 username_error: "Username must be at least 3 characters",
                 phone_label: "Phone Number (Optional)",
                 phone_placeholder: "Enter your phone number",
-                birthdate_label: "Date of Birth",
+                birthdate_label: "Date of Birth *",
+                birthdate_error: "Please enter your date of birth",
                 how_heard_label: "How did you hear about us?",
                 select_option: "Select an option",
                 search_engine: "Search Engine",
@@ -830,7 +833,8 @@
                 username_error: "उपयोगकर्ता नाम कम से कम 3 वर्णों का होना चाहिए",
                 phone_label: "फोन नंबर (वैकल्पिक)",
                 phone_placeholder: "अपना फोन नंबर दर्ज करें",
-                birthdate_label: "जन्म तिथि",
+                birthdate_label: "जन्म तिथि *",
+                birthdate_error: "कृपया अपनी जन्म तिथि दर्ज करें",
                 how_heard_label: "आपने हमारे बारे में कैसे सुना?",
                 select_option: "एक विकल्प चुनें",
                 search_engine: "सर्च इंजन",
@@ -860,7 +864,7 @@
                 email_placeholder: "మీ ఇమెయిల్ నమోదు చేయండి",
                 email_error: "దయచేసి సరైన ఇమెయిల్ చిరునామాను నమోదు చేయండి",
                 password_label: "పాస్వర్డ్",
-                password_placeholder: "పాస్వర్డ్ సృష్టించండి",
+                password_placeholder: "పాస్వर్డ్ సృష్టించండి",
                 password_error: "పాస్వర్డ్ కనీసం 8 అక్షరాలతో అక్షరాలు మరియు సంఖ్యలతో ఉండాలి",
                 confirm_password_label: "పాస్వర్డ్ నిర్ధారించండి",
                 confirm_password_placeholder: "మీ పాస్వర్డ్ నిర్ధారించండి",
@@ -873,7 +877,8 @@
                 username_error: "వినియోగదారు పేరు కనీసం 3 అక్షరాలు ఉండాలి",
                 phone_label: "ఫోన్ నంబర్ (ఐచ్ఛికం)",
                 phone_placeholder: "మీ ఫోన్ నంబర్ నమోదు చేయండి",
-                birthdate_label: "పుట్టిన తేదీ",
+                birthdate_label: "పుట్టిన తేదీ *",
+                birthdate_error: "దయచేసి మీ పుట్టిన తేదీని నమోదు చేయండి",
                 how_heard_label: "మీరు మా గురించి ఎలా విన్నారు?",
                 select_option: "ఒక ఎంపికను ఎంచుకోండి",
                 search_engine: "శోధన ఇంజిన్",
@@ -916,7 +921,8 @@
                 username_error: "பயனர்பெயர் குறைந்தது 3 எழுத்துகளாக இருக்க வேண்டும்",
                 phone_label: "தொலைபேசி எண் (விருப்பத்தேர்வு)",
                 phone_placeholder: "உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்",
-                birthdate_label: "பிறந்த தேதி",
+                birthdate_label: "பிறந்த தேதி *",
+                birthdate_error: "தயவு செய்து உங்கள் பிறந்த தேதியை உள்ளிடவும்",
                 how_heard_label: "எங்களைப் பற்றி எப்படி அறிந்தீர்கள்?",
                 select_option: "ஒரு விருப்பத்தைத் தேர்ந்தெடுக்கவும்",
                 search_engine: "தேடுபொறி",
@@ -959,7 +965,8 @@
                 username_error: "ഉപയോക്തൃനാമം കുറഞ്ഞത് 3 അക്ഷരങ്ങൾ ആയിരിക്കണം",
                 phone_label: "ഫോൺ നമ്പർ (ഓപ്ഷണൽ)",
                 phone_placeholder: "നിങ്ങളുടെ ഫോൺ നമ്പർ നൽകുക",
-                birthdate_label: "ജനന തീയതി",
+                birthdate_label: "ജനന തീയതി *",
+                birthdate_error: "ദയവായി നിങ്ങളുടെ ജനന തീയതി നൽകുക",
                 how_heard_label: "ഞങ്ങളെക്കുറിച്ച് നിങ്ങൾക്ക് എങ്ങനെ അറിഞ്ഞു?",
                 select_option: "ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക",
                 search_engine: "സെർച്ച് എഞ്ചിൻ",
@@ -970,7 +977,7 @@
                 terms_text: "സേവന നിബന്ധനകളും സ്വകാര്യതാ നയവും ഞാൻ അംഗീകരിക്കുന്നു",
                 terms_link: "സേവന നിബന്ധനകൾ",
                 privacy_link: "സ്വകാര്യതാ നയം",
-                terms_error: "നിബന്ധനകളും വ്യവസ്ഥകളും നിങ്ങൾ അംഗീകരിക്കണം",
+                terms_error: "നിബന്ധനകളും വ്യവസ്ഥകും നിങ്ങൾ അംഗീകരിക്കണം",
                 next_button: "അടുത്തത്",
                 back_button: "പുറകെ",
                 create_account_button: "അക്കൗണ്ട് സൃഷ്ടിക്കുക",
@@ -1170,16 +1177,63 @@
             return isValid;
         }
 
-        // Form Submission
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+        // Date of Birth validation
+        function validateStep3() {
+            let isValid = true;
+            
+            // Date of Birth validation
+            const birthdate = document.getElementById('birthdate').value;
+            if (!birthdate) {
+                document.getElementById('birthdateError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('birthdateError').style.display = 'none';
+            }
             
             // Terms validation
             if (!document.getElementById('terms').checked) {
                 document.getElementById('termsError').style.display = 'block';
-                return;
+                isValid = false;
             } else {
                 document.getElementById('termsError').style.display = 'none';
+            }
+            
+            return isValid;
+        }
+
+        // Form Submission
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validate all steps before submission
+            if (!validateStep1() || !validateStep2() || !validateStep3()) {
+                // If validation fails, show the appropriate step
+                if (!validateStep1()) {
+                    step1Form.classList.add('active');
+                    step2Form.classList.remove('active');
+                    step3Form.classList.remove('active');
+                    step1.classList.add('active');
+                    step2.classList.remove('active');
+                    step3.classList.remove('active');
+                    progressBar.style.setProperty('--progress-width', '0%');
+                } else if (!validateStep2()) {
+                    step1Form.classList.remove('active');
+                    step2Form.classList.add('active');
+                    step3Form.classList.remove('active');
+                    step1.classList.add('active');
+                    step2.classList.add('active');
+                    step3.classList.remove('active');
+                    progressBar.style.setProperty('--progress-width', '50%');
+                } else {
+                    step1Form.classList.remove('active');
+                    step2Form.classList.remove('active');
+                    step3Form.classList.add('active');
+                    step1.classList.add('active');
+                    step2.classList.add('active');
+                    step3.classList.add('active');
+                    progressBar.style.setProperty('--progress-width', '100%');
+                }
+                return;
             }
             
             // Simulate form submission

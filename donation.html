@@ -693,6 +693,61 @@
         .dark-mode .impact-value {
             color: white;
         }
+        .profile-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .profile-img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+        }
+        
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            display: none;
+            z-index: 101;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+        
+        .profile-dropdown.show {
+            display: block;
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        .profile-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .profile-dropdown a:hover {
+            background: var(--section-alt-bg);
+        }
+        
+        .profile-dropdown a i {
+            width: 20px;
+            text-align: center;
+        }
         
     </style>
 </head>
@@ -728,6 +783,13 @@
                     <button class="profile-btn">
                         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="profile-img">
                     </button>
+                     <div class="profile-dropdown" id="profileDropdown">
+                        <a href="#"><i class="fas fa-user"></i> Profile</a>
+                        <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                        <a href="#"><i class="fas fa-award"></i> Achievements</a>
+                        <a href="#"><i class="fas fa-history"></i> Activity</a>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -768,7 +830,7 @@
                     </div>
                     <div class="cause-content">
                         <h3 class="cause-title" data-i18n="floodReliefTitle">Flood Relief in Assam</h3>
-                        <p class="cause-description" data-i18n="floodReliefDesc">Support communities affected by recent floods with essential supplies and rehabilitation.</p>
+                        <p class="cause-description" data-i18n="">Support communities affected by recent floods with essential supplies. </p>
                         <div class="cause-meta">
                             <span class="cause-raised">₹3.2L <span data-i18n="raised">raised</span></span>
                             <span class="cause-goal"><span data-i18n="of">of</span> ₹5L <span data-i18n="goal">goal</span></span>
@@ -994,7 +1056,7 @@
             </div>
 
             <div class="copyright">
-                <p>&copy; 2023 Samadhan Setu. <span data-i18n="allRightsReserved">All rights reserved.</span></p>
+                <p>&copy; 2025 Samadhan Setu. <span data-i18n="allRightsReserved">All rights reserved.</span></p>
             </div>
         </div>
     </footer>
@@ -1399,6 +1461,71 @@
                 });
             }
         });
+         // Dropdown functionality
+        const profileBtn = document.querySelector('.profile-btn');
+        const profileDropdown = document.getElementById('profileDropdown');
+        const languageSelector = document.getElementById('languageSelector');
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+        
+        if (profileBtn && profileDropdown) {
+            profileBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (languageDropdown) languageDropdown.classList.remove('show');
+                if (languageSelector) languageSelector.classList.remove('open');
+                profileDropdown.classList.toggle('show');
+            });
+        }
+        
+        if (languageBtn && languageDropdown) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (profileDropdown) profileDropdown.classList.remove('show');
+                languageDropdown.classList.toggle('show');
+                languageSelector.classList.toggle('open');
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        window.addEventListener('click', () => {
+            if (profileDropdown) profileDropdown.classList.remove('show');
+            if (languageDropdown) languageDropdown.classList.remove('show');
+            if (languageSelector) languageSelector.classList.remove('open');
+        });
+        
+        // Handle language selection
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach(option => {
+            option.addEventListener('click', (e) => {
+                e.preventDefault();
+                const selectedLangText = e.target.textContent;
+                languageBtn.querySelector('span').textContent = selectedLangText;
+                alert(`Language changed to ${selectedLangText}`);
+            });
+        });
+
+        
+        // Logout functionality
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (confirm('Are you sure you want to logout?')) {
+                    alert('Logging out...');
+                }
+            });
+        }
+        
+        if (languageBtn && languageDropdown) {
+            languageBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (profileDropdown) profileDropdown.classList.remove('show');
+                languageDropdown.classList.toggle('show');
+                languageSelector.classList.toggle('open');
+            });
+        }
+        
+
     </script>
 </body>
 </html>
