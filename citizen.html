@@ -783,178 +783,6 @@
         .chatbot:hover {
             transform: scale(1.1);
         }
-         .chatbot-container {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 350px;
-            height: 450px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .chatbot-container.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .chatbot-header {
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .chatbot-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .chatbot-title img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-        
-        .chatbot-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-        
-        .chatbot-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: #f9f9f9;
-        }
-        
-        .message {
-            max-width: 80%;
-            padding: 10px 15px;
-            border-radius: 18px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .bot-message {
-            align-self: flex-start;
-            background: white;
-            border: 1px solid #e0e0e0;
-            
-        }
-        .dark-mode .bot-message{
-            background: black;
-        }
-        
-        .user-message {
-            align-self: flex-end;
-            background: #3498db;
-            color: rgb(0, 0, 0);
-        }
-        
-        .chatbot-input {
-            display: flex;
-            padding: 15px;
-            border-top: 1px solid #e0e0e0;
-            background: white;
-        }
-        
-        .chatbot-input input {
-            flex: 1;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-        }
-        
-        .chatbot-input button {
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            margin-left: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px 15px;
-            background: white;
-            border-top: 1px solid #e0e0e0;
-        }
-        
-        .quick-reply {
-            background: #f0f0f0;
-            border: none;
-            border-radius: 15px;
-            padding: 8px 12px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .quick-reply:hover {
-            background: #e0e0e0;
-        }
-        
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #888;
-            font-style: italic;
-        }
-        
-        .typing-dot {
-            width: 6px;
-            height: 6px;
-            background: #888;
-            border-radius: 50%;
-            animation: typingAnimation 1.4s infinite;
-        }
-        
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typingAnimation {
-            0%, 60%, 100% {
-                transform: translateY(0);
-            }
-            30% {
-                transform: translateY(-5px);
-            }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
         
         .container {
             width: 100%;
@@ -1586,10 +1414,6 @@
     .glassy-button:active {
       transform: scale(0.95);
     }
-    .map-placeholder img{
-        width: 2000px;
-        height: 600px;
-    }
     </style>
 </head>
 <body>
@@ -1617,7 +1441,7 @@
         </ul>
         <div class="icons">
             <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-github"></i>
             <i class="fa-brands fa-twitter"></i>
         </div>
     </div>
@@ -1801,7 +1625,7 @@
                             <a href="https://imgbb.com/"><img src="https://i.ibb.co/nNpdRP6v/Whats-App-Image-2025-09-16-at-13-22-17-5aef518f-removebg-preview.png" alt="Whats-App-Image-2025-09-16-at-13-22-17-5aef518f-removebg-preview" border="0"></a>
                         </div>
                         <h2>Nature Heroes</h2>
-                        <button class="glassy-button" onclick="window.open('natureheros.html', '_blank')">➟</button>
+                        <button class="glassy-button">➟</button>
                         
                     </div>
 
@@ -1810,7 +1634,7 @@
                          <a href="https://imgbb.com/"><img src="https://i.ibb.co/LXm82Bh2/Whats-App-Image-2025-09-16-at-13-24-30-4af26fe5-removebg-preview.png" alt="Whats-App-Image-2025-09-16-at-13-24-30-4af26fe5-removebg-preview" border="0"></a>
                         </div>
                         <h2>Relief fund & Donation</h2>
-                        <button class="glassy-button"onclick="window.open('donation.html', '_blank')">➟</button>
+                        <button class="glassy-button">➟</button>
                         
                     </div>
                 </div>
@@ -1923,7 +1747,6 @@
                     <div class="map-placeholder">
                         <i class="fas fa-map-marked-alt"></i>
                         <h3>Interactive Issues Map</h3>
-                        <span> <img src="https://i.ibb.co/nNr0Q0SM/Screenshot-2025-09-10-224636.png" alt=""></span>
                         <p>View all reported issues in your area on an interactive map</p>
                         <p>Click on markers to see details and status of each issue</p>
                     </div>
@@ -1975,7 +1798,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">1</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMyNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Amit Sharma</div>
                                     <div class="activity-desc">45 issues resolved</div>
@@ -1987,7 +1810,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">2</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNlNzRjM2MiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Priya Patel</div>
                                     <div class="activity-desc">38 issues resolved</div>
@@ -1999,7 +1822,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">3</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMzNDk4ZGIiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Rajesh Kumar</div>
                                     <div class="activity-desc">12 issues resolved</div>
@@ -2011,7 +1834,7 @@
                         <li class="leaderboard-item">
                             <div class="leaderboard-rank">4</div>
                             <div class="leaderboard-user">
-                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2ZDlkZGYiLz4KPHBhdGggZD0iTTE2IDE3LjVDMTkuNTk4NiAxNy41IDIyLjUgMTQuNTk4NiAyMi41IDExQzIyLjUgNy40MDEzNyAxOS41OTg2IDQuNSAxNiA0LjVDMTIuNDAxNCA0LjUgOS41IDcuNDAxMzcgOS41IDExQzkuNSAxNC41OTg2IDEyLjQwMTQgMTcuNSAxNiAxNy41WiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTE2IDIwLjVDOS42NjQgMjAuNSA0LjUgMjUuNjY0IDQuNSAzMkgyNy41QzI3LjUgMjUuNjY0IDIyLjMzNiAyMC41IDE2IDIwLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K" alt="User" class="leaderboard-avatar">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz4KPHBhdGggZD0iTTIwIDIxQzIzLjMxMzcgMjEgMjYgMTguMzEzNyAyNiAxNUMzNiAxMS42ODYzIDIzLjMxMzcgOSAyMCA5QzE2LjY4NjMgOSAxNCAxMS42ODYzIDE0IDE1QzE0IDE4LjMxMzcgMTYuNjg2MyAyMSAyMCAyMVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0yMCAyNEMxMy4zNzMgMjQgOCAyOS4zNzMgOCAzNkgyNkMyNiAyOS4zNzMgMjAuNjI3IDI0IDIwIDI0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="User" class="leaderboard-avatar">
                                 <div>
                                     <div class="activity-title">Sneha Gupta</div>
                                     <div class="activity-desc">10 issues resolved</div>
@@ -2100,37 +1923,8 @@
             </section>
         </div>
     </main>
-     <div class="chatbot-container" id="chatbotContainer">
-        <div class="chatbot-header">
-            <div class="chatbot-title">
-                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxNSIgcj0iMTUiIGZpbGw9IiMzNDk4ZGIiLz4KPHBhdGggZD0iTTE1IDE3QzE3LjIwOTEgMTcgMTkgMTUuMjA5MSAxOSAxM0MxOSAxMC43OTA5IDE3LjIwOTEgOSAxNSA5QzEyLjc5MDkgOSAxMSAxMC43OTA5IDExIDEzQzExIDE1LjIwOTEgMTIuNzkwOSAxNyAxNSAxN1oiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0xNSAxOEMxMS4xMzEgMTggOCAyMC4xMzEgOCAyNEgyMkMyMiAyMC4xMzEgMTguODY5IDE4IDE1IDE4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+" alt="Chatbot">
-                <span>Samadhan Assistant</span>
-            </div>
-            <button class="chatbot-close" id="chatbotClose">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="message bot-message">
-                Hi there! 👋 I'm your Samadhan Setu assistant. How can I help you today?
-            </div>
-        </div>
-        <div class="quick-replies">
-            <button class="quick-reply" data-message="How do I report an issue?">Report an issue</button>
-            <button class="quick-reply" data-message="Check my report status">Report status</button>
-            <button class="quick-reply" data-message="What rewards can I earn?">Rewards info</button>
-        </div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbotInput" placeholder="Type your message here...">
-            <button id="chatbotSend">
-                <i class="fas fa-paper-plane"></i>
-            </button>
-        </div>
-    </div>
 
-    <div class="chatbot" id="chatbotIcon"> 
-    <i class="fas fa-comments"></i> 
-</div>
+    <div class="chatbot"> <i class="fas fa-comments"></i> </div>
     <footer><div class="container">
       <div class="footer-content">
         <div class="footer-column">
@@ -2267,11 +2061,13 @@
             });
         }
         
-       
-         // Chatbot functionality
-        
-
-
+        // Chatbot functionality
+        const chatbot = document.querySelector('.chatbot');
+        if (chatbot) {
+            chatbot.addEventListener('click', () => {
+                alert('Chatbot support is coming soon!');
+            });
+        }
         
         // Section navigation functionality
         const navLinks = document.querySelectorAll('.nav-link');
@@ -2422,127 +2218,7 @@
         // Call on page load to set initial menu theme
         updateMenuTheme();
     });
-     // Chatbot functionality
-     document.addEventListener('DOMContentLoaded', function() {
-            const chatbotIcon = document.getElementById('chatbotIcon');
-            const chatbotContainer = document.getElementById('chatbotContainer');
-            const chatbotClose = document.getElementById('chatbotClose');
-            const chatbotMessages = document.getElementById('chatbotMessages');
-            const chatbotInput = document.getElementById('chatbotInput');
-            const chatbotSend = document.getElementById('chatbotSend');
-            const quickReplies = document.querySelectorAll('.quick-reply');
-            
-            // Toggle chatbot visibility
-            chatbotIcon.addEventListener('click', function() {
-                chatbotContainer.classList.toggle('active');
-            });
-            
-            chatbotClose.addEventListener('click', function() {
-                chatbotContainer.classList.remove('active');
-            });
-            
-            // Send message function
-            function sendMessage() {
-                const message = chatbotInput.value.trim();
-                if (message) {
-                    addMessage(message, 'user');
-                    chatbotInput.value = '';
-                    
-                    // Show typing indicator
-                    const typingIndicator = document.createElement('div');
-                    typingIndicator.className = 'typing-indicator';
-                    typingIndicator.innerHTML = `
-                        <span>Samadhan Assistant is typing</span>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    `;
-                    chatbotMessages.appendChild(typingIndicator);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                    
-                    // Simulate bot response after a delay
-                    setTimeout(() => {
-                        chatbotMessages.removeChild(typingIndicator);
-                        respondToMessage(message);
-                    }, 1500);
-                }
-            }
-            
-            // Send message on button click
-            chatbotSend.addEventListener('click', sendMessage);
-            
-            // Send message on Enter key
-            chatbotInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-            
-            // Quick replies functionality
-            quickReplies.forEach(reply => {
-                reply.addEventListener('click', function() {
-                    const message = this.getAttribute('data-message');
-                    addMessage(message, 'user');
-                    
-                    // Show typing indicator
-                    const typingIndicator = document.createElement('div');
-                    typingIndicator.className = 'typing-indicator';
-                    typingIndicator.innerHTML = `
-                        <span>Samadhan Assistant is typing</span>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    `;
-                    chatbotMessages.appendChild(typingIndicator);
-                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                    
-                    // Simulate bot response after a delay
-                    setTimeout(() => {
-                        chatbotMessages.removeChild(typingIndicator);
-                        respondToMessage(message);
-                    }, 1500);
-                });
-            });
-            
-            // Add message to chat
-            function addMessage(text, sender) {
-                const messageElement = document.createElement('div');
-                messageElement.className = `message ${sender}-message`;
-                messageElement.textContent = text;
-                chatbotMessages.appendChild(messageElement);
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-            }
-            
-            // Bot response logic
-            function respondToMessage(message) {
-                let response = '';
-                
-                // Convert message to lowercase for easier matching
-                const lowerMessage = message.toLowerCase();
-                
-                if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
-                    response = "Hello! How can I assist you with Samadhan Setu today?";
-                } else if (lowerMessage.includes('report an issue') || lowerMessage.includes('how to report')) {
-                    response = "To report an issue, click on the 'Report Issue' button on the top right. You can select the issue type, add photos, and provide details about the problem.";
-                } else if (lowerMessage.includes('report status') || lowerMessage.includes('status')) {
-                    response = "You can check your report status in the 'My Reports' section. I can see you have 8 active reports and 12 resolved ones. Great work!";
-                } else if (lowerMessage.includes('reward') || lowerMessage.includes('point')) {
-                    response = "You earn points for each report you submit and when they get resolved. You currently have 350 points! You can redeem these for movie tickets, discounts, and more.";
-                } else if (lowerMessage.includes('thank')) {
-                    response = "You're welcome! Is there anything else I can help you with?";
-                } else if (lowerMessage.includes('bye') || lowerMessage.includes('goodbye')) {
-                    response = "Goodbye! Feel free to reach out if you need any more assistance with Samadhan Setu.";
-                } else {
-                    response = "I'm not sure I understand. You can ask me about reporting issues, checking report status, or earning rewards. How can I help you?";
-                }
-                
-                addMessage(response, 'bot');
-            }
-        });
-        
-        
 
     </script>
 </body>
 </html>
-
