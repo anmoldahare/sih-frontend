@@ -2204,410 +2204,410 @@
 
     <script>
         
-    // Wait for DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
-        }
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.body.classList.add('dark-mode');
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'dark');
-                updateMenuTheme();
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'light');
-                updateMenuTheme();
             }
-        });
-
-        // Dropdown functionality
-        const profileBtn = document.querySelector('.profile-btn');
-        const profileDropdown = document.getElementById('profileDropdown');
-        const languageSelector = document.getElementById('languageSelector');
-        const languageBtn = document.getElementById('languageBtn');
-        const languageDropdown = document.getElementById('languageDropdown');
-        
-        if (profileBtn && profileDropdown) {
-            profileBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (languageDropdown) languageDropdown.classList.remove('show');
-                if (languageSelector) languageSelector.classList.remove('open');
-                profileDropdown.classList.toggle('show');
-            });
-        }
-        
-        if (languageBtn && languageDropdown) {
-            languageBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (profileDropdown) profileDropdown.classList.remove('show');
-                languageDropdown.classList.toggle('show');
-                languageSelector.classList.toggle('open');
-            });
-        }
-
-        // Close dropdowns when clicking outside
-        window.addEventListener('click', () => {
-            if (profileDropdown) profileDropdown.classList.remove('show');
-            if (languageDropdown) languageDropdown.classList.remove('show');
-            if (languageSelector) languageSelector.classList.remove('open');
-        });
-        
-        // Handle language selection
-        const langOptions = document.querySelectorAll('.lang-option');
-        langOptions.forEach(option => {
-            option.addEventListener('click', (e) => {
-                e.preventDefault();
-                const selectedLangText = e.target.textContent;
-                languageBtn.querySelector('span').textContent = selectedLangText;
-                alert(`Language changed to ${selectedLangText}`);
-            });
-        });
-
-        
-        // Logout functionality
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (confirm('Are you sure you want to logout?')) {
-                    alert('Logging out...');
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    localStorage.setItem('theme', 'dark');
+                    updateMenuTheme();
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    localStorage.setItem('theme', 'light');
+                    updateMenuTheme();
                 }
             });
-        }
-        
-        // Chatbot functionality
-         // Chatbot functionality - Fixed version
-function initializeChatbot() {
-    const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    const chatbotClose = document.getElementById('chatbotClose');
-    const chatbotMessages = document.getElementById('chatbotMessages');
-    const chatbotInput = document.getElementById('chatbotInput');
-    const chatbotSend = document.getElementById('chatbotSend');
-    
-    // Check if all elements exist
-    if (!chatbotToggle || !chatbotWindow || !chatbotClose || !chatbotMessages || !chatbotInput || !chatbotSend) {
-        console.log('Chatbot elements not found');
-        return;
-    }
-    
-    // Predefined responses
-    const responses = {
-        'hello': 'Hello! How can I assist you with Samadhan Setu today?',
-        'hi': 'Hi there! How can I help you?',
-        'report': 'To report an issue, click on the "Report Issue" button in the header or on the dashboard. You can add photos and details about the problem.',
-        'status': 'To check the status of your reports, go to the "My Reports" section. You can see if they are new, in progress, or resolved.',
-        'rewards': 'You can earn points and rewards by reporting issues and helping your community. Check the "Rewards" section for available rewards and your current points.',
-        'points': 'You earn points when your reported issues are resolved. The more issues you report and help resolve, the more points you earn!',
-        'leaderboard': 'The leaderboard shows the top contributors in your area. You can see it in the "Leaderboard" section.',
-        'map': 'The issues map shows all reported problems in your area. You can view it in the "View Map" section.',
-        'help': 'I can help you with reporting issues, checking report status, rewards, and more. What specifically do you need help with?',
-        'thanks': 'You\'re welcome! Let me know if you need anything else.',
-        'thank you': 'You\'re welcome! Happy to help.',
-        'bye': 'Goodbye! Feel free to reach out if you need assistance.',
-        'support': 'Connecting you to our support team. Please wait while we connect you...'
-    };
-    
-    // Keywords for predefined responses
-    const keywords = {
-        'hello': ['hello', 'hey', 'hi'],
-        'hi': ['hello', 'hey', 'hi'],
-        'report': ['report', 'issue', 'problem', 'complaint'],
-        'status': ['status', 'progress', 'update'],
-        'rewards': ['reward', 'points', 'badge', 'achievement'],
-        'points': ['point', 'score', 'earn'],
-        'leaderboard': ['leaderboard', 'rank', 'top'],
-        'map': ['map', 'location', 'area'],
-        'help': ['help', 'assist', 'support'],
-        'thanks': ['thanks', 'thank'],
-        'thank you': ['thanks', 'thank'],
-        'bye': ['bye', 'goodbye', 'see you'],
-        'support': ['support', 'agent', 'human', 'person']
-    };
-    
-    // Toggle chatbot window
-    chatbotToggle.addEventListener('click', () => {
-        chatbotWindow.classList.toggle('active');
-        if (chatbotWindow.classList.contains('active')) {
-            chatbotInput.focus();
-        }
-    });
-    
-    // Close chatbot window
-    chatbotClose.addEventListener('click', () => {
-        chatbotWindow.classList.remove('active');
-    });
-    
-    // Send message function
-    function sendMessage() {
-        const message = chatbotInput.value.trim();
-        if (message === '') return;
-        
-        // Add user message
-        addMessage(message, 'user');
-        chatbotInput.value = '';
-        
-        // Show typing indicator
-        showTypingIndicator();
-        
-        // Process message after a short delay
-        setTimeout(() => {
-            // Remove typing indicator
-            removeTypingIndicator();
+
+            // Dropdown functionality
+            const profileBtn = document.querySelector('.profile-btn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            const languageSelector = document.getElementById('languageSelector');
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
             
-            // Get bot response
-            const response = getBotResponse(message);
-            
-            // Add bot response
-            addMessage(response, 'bot');
-            
-            // Scroll to bottom
-            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        }, 1000);
-    }
-    
-    // Send message on button click
-    chatbotSend.addEventListener('click', sendMessage);
-    
-    // Send message on Enter key
-    chatbotInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
-    
-    // Add message to chat
-    function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', sender);
-        messageDiv.textContent = text;
-        chatbotMessages.appendChild(messageDiv);
-        
-        // Scroll to bottom
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-    
-    // Show typing indicator
-    function showTypingIndicator() {
-        const typingDiv = document.createElement('div');
-        typingDiv.classList.add('typing-indicator');
-        typingDiv.id = 'typingIndicator';
-        typingDiv.innerHTML = `
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-            <div class="typing-dot"></div>
-        `;
-        chatbotMessages.appendChild(typingDiv);
-        
-        // Scroll to bottom
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-    
-    // Remove typing indicator
-    function removeTypingIndicator() {
-        const typingIndicator = document.getElementById('typingIndicator');
-        if (typingIndicator) {
-            typingIndicator.remove();
-        }
-    }
-    
-    // Get bot response based on user message
-    function getBotResponse(message) {
-        const lowerMessage = message.toLowerCase();
-        
-        // Check for exact matches first
-        if (responses[lowerMessage]) {
-            return responses[lowerMessage];
-        }
-        
-        // Check for keyword matches
-        for (const [key, words] of Object.entries(keywords)) {
-            for (const word of words) {
-                if (lowerMessage.includes(word)) {
-                    // If it's a support request, connect to support
-                    if (key === 'support') {
-                        // Simulate connecting to support
-                        setTimeout(() => {
-                            addMessage('Our support team will contact you shortly. Thank you for your patience.', 'bot');
-                            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-                        }, 2000);
-                        return responses[key];
-                    }
-                    return responses[key];
-                }
-            }
-        }
-        
-        // Default response for unrecognized queries
-        return "I'm not sure how to help with that. Let me connect you to our support team. Please wait...";
-    }
-    
-    console.log('Chatbot initialized successfully');
-}
-
-    // Your existing JavaScript code continues here...
-  
-        // Section navigation functionality
-        const navLinks = document.querySelectorAll('.nav-link');
-        const menuCards = document.querySelectorAll('.menu-card[data-section]');
-        const sections = document.querySelectorAll('.section');
-        
-        function showSection(sectionId) {
-            sections.forEach(section => section.classList.remove('active'));
-            const sectionToShow = document.getElementById(sectionId);
-            if(sectionToShow) {
-                sectionToShow.classList.add('active');
-            }
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-section') === sectionId) {
-                    link.classList.add('active');
-                }
-            });
-            window.scrollTo(0, 0);
-        }
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                showSection(link.getAttribute('data-section'));
-            });
-        });
-        
-        menuCards.forEach(card => {
-            card.addEventListener('click', () => {
-                showSection(card.getAttribute('data-section'));
-            });
-        });
-
-        // Modal functionality
-        const reportModal = document.getElementById('reportModal');
-        const reportIssueBtn = document.getElementById('reportIssueBtn');
-        const reportIssueCard = document.getElementById('reportIssueCard');
-        const closeModalBtn = reportModal ? reportModal.querySelector('.close-btn') : null;
-        const reportForm = document.getElementById('reportIssueForm');
-
-        if (reportModal && reportIssueBtn && closeModalBtn) {
-            const openModal = () => reportModal.classList.add('show');
-            const closeModal = () => reportModal.classList.remove('show');
-
-            reportIssueBtn.addEventListener('click', openModal);
-            if (reportIssueCard) reportIssueCard.addEventListener('click', openModal);
-            closeModalBtn.addEventListener('click', closeModal);
-
-            reportModal.addEventListener('click', (e) => {
-                if (e.target === reportModal) closeModal();
-            });
-
-            if (reportForm) {
-                reportForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('Issue reported successfully!');
-                    reportForm.reset();
-                    closeModal();
+            if (profileBtn && profileDropdown) {
+                profileBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (languageDropdown) languageDropdown.classList.remove('show');
+                    if (languageSelector) languageSelector.classList.remove('open');
+                    profileDropdown.classList.toggle('show');
                 });
             }
-        }
-        
-        // Sidebar functionality
-        const toggleBtn = document.getElementById('toggleBtn');
-        const sidebar = document.getElementById('sidebar');
-        const closeBtn = document.getElementById('closeBtn');
-        const overlay = document.getElementById('overlay');
-        const body = document.body;
-        
-        // Toggle sidebar function
-        function openSidebar() {
-            if (sidebar && overlay) {
-                sidebar.classList.add('active');
-                overlay.classList.add('active');
-                body.classList.add('menu-open');
-                if (toggleBtn) toggleBtn.style.left = "280px";
+            
+            if (languageBtn && languageDropdown) {
+                languageBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (profileDropdown) profileDropdown.classList.remove('show');
+                    languageDropdown.classList.toggle('show');
+                    languageSelector.classList.toggle('open');
+                });
             }
-        }
-        
-        function closeSidebar() {
-            if (sidebar && overlay) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                body.classList.remove('menu-open');
-                if (toggleBtn) toggleBtn.style.left = "0";
+
+            // Close dropdowns when clicking outside
+            window.addEventListener('click', () => {
+                if (profileDropdown) profileDropdown.classList.remove('show');
+                if (languageDropdown) languageDropdown.classList.remove('show');
+                if (languageSelector) languageSelector.classList.remove('open');
+            });
+            
+            // Handle language selection
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const selectedLangText = e.target.textContent;
+                    languageBtn.querySelector('span').textContent = selectedLangText;
+                    alert(`Language changed to ${selectedLangText}`);
+                });
+            });
+
+            
+            // Logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to logout?')) {
+                        alert('Logging out...');
+                    }
+                });
             }
-        }
-        
-        // Add click event to toggle button
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', openSidebar);
-        }
-        
-        // Add click event to close button
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeSidebar);
-        }
-        
-        // Add click event to overlay
-        if (overlay) {
-            overlay.addEventListener('click', closeSidebar);
-        }
-        
-        // Add click event to menu items
-        const menuItems = document.querySelectorAll('.Menu li');
-        menuItems.forEach(item => {
-            item.addEventListener('click', function() {
-                // Remove active class from all items
-                menuItems.forEach(i => i.classList.remove('active'));
+            
+            // Chatbot functionality - Fixed version
+            function initializeChatbot() {
+                const chatbotToggle = document.getElementById('chatbotToggle');
+                const chatbotWindow = document.getElementById('chatbotWindow');
+                const chatbotClose = document.getElementById('chatbotClose');
+                const chatbotMessages = document.getElementById('chatbotMessages');
+                const chatbotInput = document.getElementById('chatbotInput');
+                const chatbotSend = document.getElementById('chatbotSend');
                 
-                // Add active class to clicked item
-                this.classList.add('active');
-                closeSidebar(); // Close sidebar after selecting an item
-            });
-        });
-        
-        // Add click event to social icons
-        const socialIcons = document.querySelectorAll('.fa-brands');
-        socialIcons.forEach(icon => {
-            icon.addEventListener('click', function() {
-                const platform = this.classList[1].split('-')[1];
-                alert(`Redirecting to our ${platform} page!`);
-            });
-        });
-        
-        // Close sidebar when pressing Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeSidebar();
+                // Check if all elements exist
+                if (!chatbotToggle || !chatbotWindow || !chatbotClose || !chatbotMessages || !chatbotInput || !chatbotSend) {
+                    console.log('Chatbot elements not found');
+                    return;
+                }
+                
+                // Predefined responses
+                const responses = {
+                    'hello': 'Hello! How can I assist you with Samadhan Setu today?',
+                    'hi': 'Hi there! How can I help you?',
+                    'report': 'To report an issue, click on the "Report Issue" button in the header or on the dashboard. You can add photos and details about the problem.',
+                    'status': 'To check the status of your reports, go to the "My Reports" section. You can see if they are new, in progress, or resolved.',
+                    'rewards': 'You can earn points and rewards by reporting issues and helping your community. Check the "Rewards" section for available rewards and your current points.',
+                    'points': 'You earn points when your reported issues are resolved. The more issues you report and help resolve, the more points you earn!',
+                    'leaderboard': 'The leaderboard shows the top contributors in your area. You can see it in the "Leaderboard" section.',
+                    'map': 'The issues map shows all reported problems in your area. You can view it in the "View Map" section.',
+                    'help': 'I can help you with reporting issues, checking report status, rewards, and more. What specifically do you need help with?',
+                    'thanks': 'You\'re welcome! Let me know if you need anything else.',
+                    'thank you': 'You\'re welcome! Happy to help.',
+                    'bye': 'Goodbye! Feel free to reach out if you need assistance.',
+                    'support': 'Connecting you to our support team. Please wait while we connect you...'
+                };
+                
+                // Keywords for predefined responses
+                const keywords = {
+                    'hello': ['hello', 'hey', 'hi'],
+                    'hi': ['hello', 'hey', 'hi'],
+                    'report': ['report', 'issue', 'problem', 'complaint'],
+                    'status': ['status', 'progress', 'update'],
+                    'rewards': ['reward', 'points', 'badge', 'achievement'],
+                    'points': ['point', 'score', 'earn'],
+                    'leaderboard': ['leaderboard', 'rank', 'top'],
+                    'map': ['map', 'location', 'area'],
+                    'help': ['help', 'assist', 'support'],
+                    'thanks': ['thanks', 'thank'],
+                    'thank you': ['thanks', 'thank'],
+                    'bye': ['bye', 'goodbye', 'see you'],
+                    'support': ['support', 'agent', 'human', 'person']
+                };
+                
+                // Toggle chatbot window
+                chatbotToggle.addEventListener('click', () => {
+                    chatbotWindow.classList.toggle('active');
+                    if (chatbotWindow.classList.contains('active')) {
+                        chatbotInput.focus();
+                    }
+                });
+                
+                // Close chatbot window
+                chatbotClose.addEventListener('click', () => {
+                    chatbotWindow.classList.remove('active');
+                });
+                
+                // Send message function
+                function sendMessage() {
+                    const message = chatbotInput.value.trim();
+                    if (message === '') return;
+                    
+                    // Add user message
+                    addMessage(message, 'user');
+                    chatbotInput.value = '';
+                    
+                    // Show typing indicator
+                    showTypingIndicator();
+                    
+                    // Process message after a short delay
+                    setTimeout(() => {
+                        // Remove typing indicator
+                        removeTypingIndicator();
+                        
+                        // Get bot response
+                        const response = getBotResponse(message);
+                        
+                        // Add bot response
+                        addMessage(response, 'bot');
+                        
+                        // Scroll to bottom
+                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                    }, 1000);
+                }
+                
+                // Send message on button click
+                chatbotSend.addEventListener('click', sendMessage);
+                
+                // Send message on Enter key
+                chatbotInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+                
+                // Add message to chat
+                function addMessage(text, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.classList.add('message', sender);
+                    messageDiv.textContent = text;
+                    chatbotMessages.appendChild(messageDiv);
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+                
+                // Show typing indicator
+                function showTypingIndicator() {
+                    const typingDiv = document.createElement('div');
+                    typingDiv.classList.add('typing-indicator');
+                    typingDiv.id = 'typingIndicator';
+                    typingDiv.innerHTML = `
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    `;
+                    chatbotMessages.appendChild(typingDiv);
+                    
+                    // Scroll to bottom
+                    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                }
+                
+                // Remove typing indicator
+                function removeTypingIndicator() {
+                    const typingIndicator = document.getElementById('typingIndicator');
+                    if (typingIndicator) {
+                        typingIndicator.remove();
+                    }
+                }
+                
+                // Get bot response based on user message
+                function getBotResponse(message) {
+                    const lowerMessage = message.toLowerCase();
+                    
+                    // Check for exact matches first
+                    if (responses[lowerMessage]) {
+                        return responses[lowerMessage];
+                    }
+                    
+                    // Check for keyword matches
+                    for (const [key, words] of Object.entries(keywords)) {
+                        for (const word of words) {
+                            if (lowerMessage.includes(word)) {
+                                // If it's a support request, connect to support
+                                if (key === 'support') {
+                                    // Simulate connecting to support
+                                    setTimeout(() => {
+                                        addMessage('Our support team will contact you shortly. Thank you for your patience.', 'bot');
+                                        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                                    }, 2000);
+                                    return responses[key];
+                                }
+                                return responses[key];
+                            }
+                        }
+                    }
+                    
+                    // Default response for unrecognized queries
+                    return "I'm not sure how to help with that. Let me connect you to our support team. Please wait...";
+                }
+                
+                console.log('Chatbot initialized successfully');
             }
-        });
-        
-        // Update menu theme based on current theme
-        function updateMenuTheme() {
-            const slidebar = document.getElementById('sidebar');
-            if (!slidebar) return;
+
+            // Initialize the chatbot
+            initializeChatbot();
+
+            // Section navigation functionality
+            const navLinks = document.querySelectorAll('.nav-link');
+            const menuCards = document.querySelectorAll('.menu-card[data-section]');
+            const sections = document.querySelectorAll('.section');
             
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            
-            if (isDarkMode) {
-                slidebar.style.background = "linear-gradient(135deg, #2c3e50, #1a1a1a)";
-            } else {
-                slidebar.style.background = "linear-gradient(135deg, #1a2a6c, #b21f1f)";
+            function showSection(sectionId) {
+                sections.forEach(section => section.classList.remove('active'));
+                const sectionToShow = document.getElementById(sectionId);
+                if(sectionToShow) {
+                    sectionToShow.classList.add('active');
+                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === sectionId) {
+                        link.classList.add('active');
+                    }
+                });
+                window.scrollTo(0, 0);
             }
-        }
-        
-        // Call on page load to set initial menu theme
-        updateMenuTheme();
-    });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showSection(link.getAttribute('data-section'));
+                });
+            });
+            
+            menuCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    showSection(card.getAttribute('data-section'));
+                });
+            });
+
+            // Modal functionality
+            const reportModal = document.getElementById('reportModal');
+            const reportIssueBtn = document.getElementById('reportIssueBtn');
+            const reportIssueCard = document.getElementById('reportIssueCard');
+            const closeModalBtn = reportModal ? reportModal.querySelector('.close-btn') : null;
+            const reportForm = document.getElementById('reportIssueForm');
+
+            if (reportModal && reportIssueBtn && closeModalBtn) {
+                const openModal = () => reportModal.classList.add('show');
+                const closeModal = () => reportModal.classList.remove('show');
+
+                reportIssueBtn.addEventListener('click', openModal);
+                if (reportIssueCard) reportIssueCard.addEventListener('click', openModal);
+                closeModalBtn.addEventListener('click', closeModal);
+
+                reportModal.addEventListener('click', (e) => {
+                    if (e.target === reportModal) closeModal();
+                });
+
+                if (reportForm) {
+                    reportForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        alert('Issue reported successfully!');
+                        reportForm.reset();
+                        closeModal();
+                    });
+                }
+            }
+            
+            // Sidebar functionality
+            const toggleBtn = document.getElementById('toggleBtn');
+            const sidebar = document.getElementById('sidebar');
+            const closeBtn = document.getElementById('closeBtn');
+            const overlay = document.getElementById('overlay');
+            const body = document.body;
+            
+            // Toggle sidebar function
+            function openSidebar() {
+                if (sidebar && overlay) {
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                    body.classList.add('menu-open');
+                    if (toggleBtn) toggleBtn.style.left = "280px";
+                }
+            }
+            
+            function closeSidebar() {
+                if (sidebar && overlay) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    if (toggleBtn) toggleBtn.style.left = "0";
+                }
+            }
+            
+            // Add click event to toggle button
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', openSidebar);
+            }
+            
+            // Add click event to close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeSidebar);
+            }
+            
+            // Add click event to overlay
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+            
+            // Add click event to menu items
+            const menuItems = document.querySelectorAll('.Menu li');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    closeSidebar(); // Close sidebar after selecting an item
+                });
+            });
+            
+            // Add click event to social icons
+            const socialIcons = document.querySelectorAll('.fa-brands');
+            socialIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    const platform = this.classList[1].split('-')[1];
+                    alert(`Redirecting to our ${platform} page!`);
+                });
+            });
+            
+            // Close sidebar when pressing Escape key
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    closeSidebar();
+                }
+            });
+            
+            // Update menu theme based on current theme
+            function updateMenuTheme() {
+                const slidebar = document.getElementById('sidebar');
+                if (!slidebar) return;
+                
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                
+                if (isDarkMode) {
+                    slidebar.style.background = "linear-gradient(135deg, #2c3e50, #1a1a1a)";
+                } else {
+                    slidebar.style.background = "linear-gradient(135deg, #1a2a6c, #b21f1f)";
+                }
+            }
+            
+            // Call on page load to set initial menu theme
+            updateMenuTheme();
+        });
+
 
     </script>
 </body>
