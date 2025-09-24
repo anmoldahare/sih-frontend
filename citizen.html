@@ -761,10 +761,48 @@
             color: var(--primary);
         }
         
-        .chatbot {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 0.8rem 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        /* ... rest of your existing CSS ... */
+
+        /* Chatbot Styles */
+        .chatbot-container {
             position: fixed;
             bottom: 30px;
             right: 30px;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle {
             width: 60px;
             height: 60px;
             background: var(--primary);
@@ -776,12 +814,168 @@
             font-size: 1.5rem;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 99;
             transition: all 0.3s;
+            border: none;
         }
         
-        .chatbot:hover {
+        .chatbot-toggle:hover {
             transform: scale(1.1);
+        }
+        
+        .chatbot-window {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--section-alt-bg);
+        }
+        
+        .chatbot-window.active {
+            display: flex;
+            animation: fadeInUp 0.3s ease-out;
+        }
+        
+        .chatbot-header {
+            background: var(--primary);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .message.bot {
+            background: var(--section-alt-bg);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .message.user {
+            background: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid var(--section-alt-bg);
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--grey);
+            border-radius: 20px;
+            background: var(--section-alt-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 0 1rem;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .chatbot-input button:hover {
+            background: #2980b9;
+        }
+        
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--grey);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .chatbot-window {
+                width: 300px;
+                right: -20px;
+            }
+        }
+        
+        /* Your existing responsive styles remain unchanged */
+        @media (max-width: 1100px) {
+            nav ul {
+                gap: 0.5rem;
+            }
+            nav a {
+                font-size: 0.85rem;
+                padding: 0.4rem 0.6rem;
+            }
+            .btn-report, .language-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.85rem;
+            }
         }
         
         .container {
@@ -1924,7 +2118,39 @@
         </div>
     </main>
 
-    <div class="chatbot"> <i class="fas fa-comments"></i> </div>
+     <div class="chatbot-container">
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>Samadhan Setu Assistant</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot">
+                    Hello! I'm your Samadhan Setu assistant. How can I help you today?
+                </div>
+                <div class="message bot">
+                    You can ask me about:
+                    <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                        <li>Reporting issues</li>
+                        <li>Checking report status</li>
+                        <li>Rewards and points</li>
+                        <li>Community guidelines</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message here...">
+                <button id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     <footer><div class="container">
       <div class="footer-content">
         <div class="footer-column">
@@ -2062,13 +2288,177 @@
         }
         
         // Chatbot functionality
-        const chatbot = document.querySelector('.chatbot');
-        if (chatbot) {
-            chatbot.addEventListener('click', () => {
-                alert('Chatbot support is coming soon!');
-            });
+         // Chatbot functionality - Fixed version
+function initializeChatbot() {
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    
+    // Check if all elements exist
+    if (!chatbotToggle || !chatbotWindow || !chatbotClose || !chatbotMessages || !chatbotInput || !chatbotSend) {
+        console.log('Chatbot elements not found');
+        return;
+    }
+    
+    // Predefined responses
+    const responses = {
+        'hello': 'Hello! How can I assist you with Samadhan Setu today?',
+        'hi': 'Hi there! How can I help you?',
+        'report': 'To report an issue, click on the "Report Issue" button in the header or on the dashboard. You can add photos and details about the problem.',
+        'status': 'To check the status of your reports, go to the "My Reports" section. You can see if they are new, in progress, or resolved.',
+        'rewards': 'You can earn points and rewards by reporting issues and helping your community. Check the "Rewards" section for available rewards and your current points.',
+        'points': 'You earn points when your reported issues are resolved. The more issues you report and help resolve, the more points you earn!',
+        'leaderboard': 'The leaderboard shows the top contributors in your area. You can see it in the "Leaderboard" section.',
+        'map': 'The issues map shows all reported problems in your area. You can view it in the "View Map" section.',
+        'help': 'I can help you with reporting issues, checking report status, rewards, and more. What specifically do you need help with?',
+        'thanks': 'You\'re welcome! Let me know if you need anything else.',
+        'thank you': 'You\'re welcome! Happy to help.',
+        'bye': 'Goodbye! Feel free to reach out if you need assistance.',
+        'support': 'Connecting you to our support team. Please wait while we connect you...'
+    };
+    
+    // Keywords for predefined responses
+    const keywords = {
+        'hello': ['hello', 'hey', 'hi'],
+        'hi': ['hello', 'hey', 'hi'],
+        'report': ['report', 'issue', 'problem', 'complaint'],
+        'status': ['status', 'progress', 'update'],
+        'rewards': ['reward', 'points', 'badge', 'achievement'],
+        'points': ['point', 'score', 'earn'],
+        'leaderboard': ['leaderboard', 'rank', 'top'],
+        'map': ['map', 'location', 'area'],
+        'help': ['help', 'assist', 'support'],
+        'thanks': ['thanks', 'thank'],
+        'thank you': ['thanks', 'thank'],
+        'bye': ['bye', 'goodbye', 'see you'],
+        'support': ['support', 'agent', 'human', 'person']
+    };
+    
+    // Toggle chatbot window
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            chatbotInput.focus();
+        }
+    });
+    
+    // Close chatbot window
+    chatbotClose.addEventListener('click', () => {
+        chatbotWindow.classList.remove('active');
+    });
+    
+    // Send message function
+    function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (message === '') return;
+        
+        // Add user message
+        addMessage(message, 'user');
+        chatbotInput.value = '';
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Process message after a short delay
+        setTimeout(() => {
+            // Remove typing indicator
+            removeTypingIndicator();
+            
+            // Get bot response
+            const response = getBotResponse(message);
+            
+            // Add bot response
+            addMessage(response, 'bot');
+            
+            // Scroll to bottom
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }, 1000);
+    }
+    
+    // Send message on button click
+    chatbotSend.addEventListener('click', sendMessage);
+    
+    // Send message on Enter key
+    chatbotInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender);
+        messageDiv.textContent = text;
+        chatbotMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Show typing indicator
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.classList.add('typing-indicator');
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = `
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        `;
+        chatbotMessages.appendChild(typingDiv);
+        
+        // Scroll to bottom
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+    
+    // Remove typing indicator
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+    
+    // Get bot response based on user message
+    function getBotResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Check for exact matches first
+        if (responses[lowerMessage]) {
+            return responses[lowerMessage];
         }
         
+        // Check for keyword matches
+        for (const [key, words] of Object.entries(keywords)) {
+            for (const word of words) {
+                if (lowerMessage.includes(word)) {
+                    // If it's a support request, connect to support
+                    if (key === 'support') {
+                        // Simulate connecting to support
+                        setTimeout(() => {
+                            addMessage('Our support team will contact you shortly. Thank you for your patience.', 'bot');
+                            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                        }, 2000);
+                        return responses[key];
+                    }
+                    return responses[key];
+                }
+            }
+        }
+        
+        // Default response for unrecognized queries
+        return "I'm not sure how to help with that. Let me connect you to our support team. Please wait...";
+    }
+    
+    console.log('Chatbot initialized successfully');
+}
+
+    // Your existing JavaScript code continues here...
+  
         // Section navigation functionality
         const navLinks = document.querySelectorAll('.nav-link');
         const menuCards = document.querySelectorAll('.menu-card[data-section]');
